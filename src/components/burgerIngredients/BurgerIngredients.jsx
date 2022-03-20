@@ -1,5 +1,5 @@
 import React from "react";
-import burgerIngredientsStyles from './BurgerIngredients.module.css'
+import burgerIngredientsStyles from './burgerIngredients.module.css'
 import IngredientsList from "../ingredientsList/IngredientsList";
 import OrderTotal from "../orderTotal/OrderTotal";
 import {addScroll} from './../../utils/utils';

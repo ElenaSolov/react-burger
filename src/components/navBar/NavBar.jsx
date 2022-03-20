@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import NavItem from "../NavItem/NavItem";
+import NavItem from "../navItem/NavItem";
 import {BurgerIcon, ListIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import navBarStyles from './navBar.module.css'
 
