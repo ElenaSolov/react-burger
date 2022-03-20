@@ -5,8 +5,9 @@ import OrderTotal from "../orderTotal/OrderTotal";
 import {addScroll} from './../../utils/utils';
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
 import ConstructorEl from "../constructorEl/ConstructorEl";
+import {ReactComponent} from "*.svg";
 
-class BurgerIngredients {
+class BurgerIngredients extends ReactComponent {
     // useEffect(()=> {
     //     addScroll()
     // }, []);
