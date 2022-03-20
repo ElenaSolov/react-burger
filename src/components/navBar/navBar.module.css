@@ -1,0 +1,8 @@
+.navBar{
+
+}
+
+.navlist{
+    display: flex;
+    list-style-type: none;
+}
