@@ -1,0 +1,9 @@
+.navItem{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.inactive {
+    color: #8585AD;
+}
