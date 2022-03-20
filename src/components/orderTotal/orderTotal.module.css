@@ -1,0 +1,8 @@
+.orderTotal{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.priceIcon {
+    margin-left: 9.5px;
+}
