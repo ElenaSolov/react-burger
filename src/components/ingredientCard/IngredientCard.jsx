@@ -4,9 +4,9 @@ import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 
 class IngredientCard extends React.Component {
-    constructor({name, price, img}) {
+    constructor({name, price, img}, ...rest) {
         super();
-        this.state = {name, price, img}
+        this.state = {name, price, img};
     }
 
     render () {
