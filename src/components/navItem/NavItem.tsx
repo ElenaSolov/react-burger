@@ -7,7 +7,7 @@ class NavItem extends React.Component {
         this.props = props;
     }
     render() {
-        (
+        return (
             <a className={`${navItemStyles.navItem} mb-4 mt-4 mr-2 p-5`}>
                 {this.props.children}
                 <p className="text text_type_main-default ml-2">{this.props.text}</p>
@@ -15,3 +15,5 @@ class NavItem extends React.Component {
         );
     }
 }
+
+export default NavItem;

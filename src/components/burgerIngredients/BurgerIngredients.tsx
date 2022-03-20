@@ -1,18 +1,19 @@
-
+import React from "react";
 import burgerIngredientsStyles from './BurgerIngredients.module.css'
-import IngredientsList from "../IngredientsList/IngredientsList";
+import IngredientsList from "../ingredientsList/IngredientsList";
 import OrderTotal from "../orderTotal/OrderTotal";
 import {addScroll} from './../../utils/utils';
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
 import ConstructorEl from "../constructorEl/ConstructorEl";
-import {ReactComponent} from "*.svg";
 
-class BurgerIngredients extends ReactComponent {
+
+class BurgerIngredients extends React.Component {
     // useEffect(()=> {
     //     addScroll()
     // }, []);
 
-    render () {(
+    render () {
+        return (
         <main className={burgerIngredientsStyles.main}>
 
             <div className={burgerIngredientsStyles.container}>
