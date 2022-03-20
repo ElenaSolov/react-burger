@@ -1,0 +1,27 @@
+.ingredientsSection{
+    overflow-y: auto;
+    scrollbar-width: 8px;
+    scrollbar-color: #8585AD;
+}
+
+::-webkit-scrollbar {
+    width: 8px; /* ширина для вертикального скролла */
+    background-color: #2F2F37;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+    border: 3px solid #8585AD;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+}
+
+.header {
+    text-align: start;
+}
+
+.list{
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
+    padding: 0;
+}
