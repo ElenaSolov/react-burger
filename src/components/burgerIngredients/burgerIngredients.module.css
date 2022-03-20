@@ -1,0 +1,27 @@
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.container{
+    max-width: 1240px;
+    display: grid;
+    grid-template-areas:
+        'ingredients constructor';
+}
+.header{
+    text-align: start;
+}
+
+.ingredients {
+    grid-area: ingredients;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.constructor {
+    composes: ingredients;
+    grid-area: constructor;
+    width: 600px;
+}
