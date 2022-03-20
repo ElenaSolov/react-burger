@@ -7,7 +7,6 @@ import NavItem from "../navItem/NavItem";
 class AppHeader extends React.Component {
 
     render() {
-        console.log(this.props)
         return (
             <header className= {headerStyles.header}>
             <NavBar/>
