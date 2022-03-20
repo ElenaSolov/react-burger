@@ -8,10 +8,10 @@ import ConstructorEl from "../constructorEl/ConstructorEl";
 
 
 class BurgerIngredients extends React.Component {
-    // useEffect(()=> {
-    //     addScroll()
-    // }, []);
-
+    componentDidMount() {
+        addScroll();
+    }
+    
     render () {
         return (
         <main className={burgerIngredientsStyles.main}>

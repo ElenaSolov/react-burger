@@ -4,11 +4,8 @@ import ingredientsListStyles from './ingredientsList.module.css';
 import IngredientCard from "../ingredientCard/IngredientCard"
 
 class IngredientsList extends React.Component {
-    private buns: T[];
-    private mains: T[];
-    private sauces: T[];
-    constructor({props}: { props: any }) {
-        super(props);
+    constructor() {
+        super();
         this.buns = ingredients.filter(ingredient => ingredient['type'] === 'bun');
         this.mains = ingredients.filter(ingredient => ingredient['type'] === 'main');
         this.sauces = ingredients.filter(ingredient => ingredient['type'] === 'sauce');
