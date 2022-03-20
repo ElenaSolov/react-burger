@@ -3,6 +3,7 @@ import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-compon
 import img from './../../images/bun1.png';
 import constructorElStyles from './constructorEl.module.css';
 import {DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 class ConstructorEl extends React.Component {
     render () {
@@ -37,6 +38,13 @@ class ConstructorEl extends React.Component {
             </ul>
         )
     }
+}
+ConstructorEl.propTypes = {
+  type: PropTypes.string,
+  isLocked: PropTypes.bool,
+  text: PropTypes.string,
+  price: PropTypes.number,
+  img: PropTypes.string
 }
 
 export default ConstructorEl;
