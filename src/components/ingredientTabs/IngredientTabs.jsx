@@ -4,6 +4,15 @@ import ingredientTabsStyles from './ingredientTabs.module.css';
 import {addScroll, setTabsListeners} from "../../utils/utils";
 
 class IngredientTabs extends React.Component {
+  constructor (){
+    super();
+    this.state = {current: "Булки"}
+  }
+  
+  setCurrent(){
+    console.log(this);
+    this.setState('')
+  }
     // const [current, setCurrent] = React.useState('Булки');
     //
     // useEffect(()=> {
@@ -14,7 +23,7 @@ class IngredientTabs extends React.Component {
             <ul className={`${ingredientTabsStyles.tabs} mt-5`}>
                 <li>
                     <a href='#buns' className='tabLink'>
-                        <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>Булки</Tab>
+                        <Tab value="Булки" active={current === 'Булки'} onClick={this.setCurrent}>Булки</Tab>
                     </a>
                 </li>
                 <li>

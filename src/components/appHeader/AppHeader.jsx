@@ -1,11 +1,13 @@
 import React from 'react';
 import headerStyles from './appHeader.module.css'
-import NavBar from "../NavBar/NavBar";
+import NavBar from "../navBar/NavBar";
 import {Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import NavItem from "../NavItem/NavItem";
+import NavItem from "../navItem/NavItem";
 
 class AppHeader extends React.Component {
+
     render() {
+        console.log(this.props)
         return (
             <header className= {headerStyles.header}>
             <NavBar/>
