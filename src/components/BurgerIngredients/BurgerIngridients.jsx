@@ -2,12 +2,11 @@ import React, {useEffect} from 'react';
 
 import burgerIngredientsStyles from './BurgerIngredients.module.css'
 import IngredientsList from "../IngredientsList/IngredientsList";
-import OrderTotal from "../orderTotal/OrderTotal";
 import {addScroll} from './../../utils/utils';
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
-import ConstructorEl from "../constructorEl/ConstructorEl";
+import BurgerConstructor from "../burgerConstructor/BurgerConstructor";
 
-const BurgerIngredients = () => {
+const BurgerIngredients = ({icons, ingredients}) => {
   useEffect(()=> {
     addScroll()
   }, []);
@@ -19,14 +18,10 @@ const BurgerIngredients = () => {
         <section className={burgerIngredientsStyles.ingredients}>
           <h1 className={`${burgerIngredientsStyles.header} text text_type_main-large mt-10`}>Соберите бургер</h1>
           <IngredientTabs />
-          <IngredientsList></IngredientsList>
+          <IngredientsList icons={icons} ingredients={ingredients} />
         </section>
-        <section className={`${burgerIngredientsStyles.constructor} pl-4 pr-4 vScroll`}>
-          <div >
-            <ConstructorEl></ConstructorEl>
-          </div>
-          <OrderTotal />
-        </section>
+        <BurgerConstructor icons={icons}/>
+        
       </div>
     </main>
   );

@@ -5,3 +5,8 @@
     justify-content: space-between;
     width: 100%;
 }
+
+.navlist{
+    display: flex;
+    list-style-type: none;
+}
