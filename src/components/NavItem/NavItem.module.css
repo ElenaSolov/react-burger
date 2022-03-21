@@ -3,6 +3,9 @@
     align-items: center;
     cursor: pointer;
 }
+.navItem:hover{
+    color: #F2F2F3;
+}
 
 .inactive {
     color: #8585AD;
