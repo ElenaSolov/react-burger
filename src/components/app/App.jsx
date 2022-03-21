@@ -6,7 +6,6 @@ import * as icons from "@ya.praktikum/react-developer-burger-ui-components";
 import {ingredients} from './../../utils/data';
 
 function App() {
-    console.log(icons)
   return (
     <div className={appStyles.app}>
       <AppHeader icons = {icons}/>

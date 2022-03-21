@@ -2,8 +2,8 @@ import React from 'react';
 import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import img from './../../images/bun1.png';
 import constructorStyles from './burgerConstructor.module.css';
-// import {DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderTotal from "../orderTotal/OrderTotal";
+import PropTypes from 'prop-types';
 
 const BurgerConstructor = ({icons}) => {
  
@@ -41,4 +41,7 @@ const BurgerConstructor = ({icons}) => {
   );
 };
 
+BurgerConstructor.propTypes={
+  icons: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object]))
+}
 export default BurgerConstructor;

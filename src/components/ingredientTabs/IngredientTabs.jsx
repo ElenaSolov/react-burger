@@ -1,11 +1,10 @@
 import React, {useEffect} from 'react';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientTabsStyles from './ingredientTabs.module.css';
-import {addScroll, setTabsListeners} from "../../utils/utils";
+import {setTabsListeners} from "../../utils/utils";
 
 const IngredientTabs = () => {
     const [current, setCurrent] = React.useState('Булки');
-    console.log(22, current)
     useEffect(()=> {
         setTabsListeners()
     }, []);

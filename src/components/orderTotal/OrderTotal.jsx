@@ -1,9 +1,10 @@
 import React from 'react';
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
-import orderTotalStyles from './orderTotal.module.css'
+import orderTotalStyles from './orderTotal.module.css';
+import PropTypes from "prop-types";
 
 const OrderTotal = ({CurrencyIcon}) => {
-  // console.log(icons)
+
   return (
     <div className={`${orderTotalStyles.orderTotal} mt-10`}>
       <p className={`text text_type_digits-medium mr-10`}>0
@@ -17,5 +18,7 @@ const OrderTotal = ({CurrencyIcon}) => {
     </div>
   );
 };
-
+OrderTotal.propTypes = {
+  CurrencyIcon: PropTypes.func
+}
 export default OrderTotal;

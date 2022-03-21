@@ -1,6 +1,7 @@
 import React from 'react';
 import IngredientCard from "../IngredientCard/IngredientCard";
 import ingredientsListStyles from "./IngredientsList.module.css";
+import PropTypes from "prop-types";
 
 const IngredientsList = ({icons, ingredients}) => {
   
@@ -33,5 +34,21 @@ const IngredientsList = ({icons, ingredients}) => {
     </section>
   );
 };
-
+IngredientsList.propTypes = {
+  icons: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
+  ingredients: PropTypes.arrayOf(PropTypes.exact({
+    calories: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    fat:PropTypes.number,
+    image: PropTypes.string,
+    image_large: PropTypes.string,
+    image_mobile: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    proteins: PropTypes.number,
+    type: PropTypes.string,
+    __v: PropTypes.number,
+    _id: PropTypes.string,
+  }))
+}
 export default IngredientsList;

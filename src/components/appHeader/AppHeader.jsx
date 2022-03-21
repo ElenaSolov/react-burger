@@ -1,6 +1,7 @@
 import React from 'react';
 import headerStyles from './AppHeader.module.css'
 import NavItem from "../NavItem/NavItem";
+import PropTypes from 'prop-types';
 
 const AppHeader = ({icons}) => {
   
@@ -38,5 +39,7 @@ const AppHeader = ({icons}) => {
     </header>
   );
 };
-
+AppHeader.propTypes = {
+  icons: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object]))
+}
 export default AppHeader;
