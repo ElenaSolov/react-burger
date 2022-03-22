@@ -1,13 +1,17 @@
 //vertical scroll
-function setElementHeight(el){
+const body = document.querySelector('body');
+function setElementHeight(el, bottomEl){
+  const marginBottom = 40;
   const top = el.getBoundingClientRect().top;
-  el.style.maxHeight = (document.documentElement.clientHeight - top)+'px';
+  const bottomHeight = bottomEl ? (body.offsetHeight - bottomEl.getBoundingClientRect().top) : marginBottom;
+  el.style.maxHeight = Math.floor(document.documentElement.clientHeight - top -bottomHeight )+'px';
 }
 export function addScroll(){
- const scrollElements = document.querySelectorAll('.vScroll')
-  scrollElements.forEach(el => {
-    setElementHeight(el);
-  });
+ const ingredientsList = document.querySelector('.ingredientsScroll');
+    setElementHeight(ingredientsList, null);
+    const constructor = document.querySelector('.constructorScroll')
+    const bottomEl = document.querySelector('.bottom');
+  setElementHeight(constructor, bottomEl);
 }
 
 // smooth scroll

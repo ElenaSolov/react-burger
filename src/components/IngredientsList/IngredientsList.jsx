@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 const IngredientsList = ({icons, ingredients}) => {
   
   return (
-    <section className={`${ingredientsListStyles.ingredientsSection} vScroll`}>
+    <section className={`${ingredientsListStyles.ingredientsSection} ingredientsScroll`}>
       <h2 id='buns' className={`${ingredientsListStyles.header} mt-10`}>Булки</h2>
       <ul className={ingredientsListStyles.list}>
       {ingredients

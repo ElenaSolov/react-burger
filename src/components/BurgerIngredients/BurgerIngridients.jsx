@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 const BurgerIngredients = ({icons, ingredients}) => {
   useEffect(()=> {
     addScroll()
+    const body = document.querySelector('body');
   }, []);
   
   return (
@@ -20,7 +21,7 @@ const BurgerIngredients = ({icons, ingredients}) => {
           <IngredientTabs />
           <IngredientsList icons={icons} ingredients={ingredients} />
         </section>
-        <BurgerConstructor icons={icons}/>
+        <BurgerConstructor icons={icons} ingredients={ingredients}/>
         
       </div>
     </main>
