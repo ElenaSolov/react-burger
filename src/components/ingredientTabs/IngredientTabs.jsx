@@ -12,17 +12,17 @@ const IngredientTabs = () => {
     return (
         <ul className={`${ingredientTabsStyles.tabs} mt-5`}>
             <li>
-                <a href='#buns' className={`${ingredientTabsStyles.tabLink}`}>
+                <a href='#buns' className={`${ingredientTabsStyles.tabLink} tabLink`}>
                     <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>Булки</Tab>
                 </a>
             </li>
             <li>
-                <a href='#sauces' className={`${ingredientTabsStyles.tabLink}`}>
+                <a href='#sauces' className={`${ingredientTabsStyles.tabLink} tabLink`}>
                     <Tab value="Соусы" active={current === 'Соусы'} onClick={setCurrent}>Соусы</Tab>
                 </a>
             </li>
             <li>
-                <a href='#mains' className={`${ingredientTabsStyles.tabLink}`}>
+                <a href='#mains' className={`${ingredientTabsStyles.tabLink} tabLink`}>
                     <Tab value="Начинки" active={current === 'Начинки'} onClick={setCurrent}>Начинки</Tab>
                 </a>
             </li>
