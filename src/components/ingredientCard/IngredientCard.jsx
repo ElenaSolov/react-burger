@@ -1,5 +1,5 @@
 import React from 'react';
-import ingredientCardStyles from './IngredientCard.module.css';
+import ingredientCardStyles from './ingredientCard.module.css';
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import headerStyles from './AppHeader.module.css'
-import NavItem from "../NavItem/NavItem";
+import headerStyles from './appHeader.module.css'
+import NavItem from "../navItem/NavItem";
 import PropTypes from 'prop-types';
 
 const AppHeader = ({icons}) => {

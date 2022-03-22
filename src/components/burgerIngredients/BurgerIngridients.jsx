@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import burgerIngredientsStyles from './BurgerIngredients.module.css'
-import IngredientsList from "../IngredientsList/IngredientsList";
+import burgerIngredientsStyles from './burgerIngredients.module.css'
+import IngredientsList from "../ingredientsList/IngredientsList";
 import {addScroll} from './../../utils/utils';
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
 import BurgerConstructor from "../burgerConstructor/BurgerConstructor";

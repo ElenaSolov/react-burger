@@ -1,5 +1,5 @@
 import React from 'react';
-import navItemStyles from './NavItem.module.css';
+import navItemStyles from './navItem.module.css';
 import PropTypes from "prop-types";
 
 const NavItem = (props) => {

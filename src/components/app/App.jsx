@@ -1,7 +1,7 @@
 import React from 'react';
-import appStyles from './App.module.css';
+import appStyles from './app.module.css';
 import AppHeader from "../appHeader/AppHeader";
-import BurgerIngredients from "../BurgerIngredients/BurgerIngridients";
+import BurgerIngredients from "../burgerIngredients/BurgerIngridients";
 import * as icons from "@ya.praktikum/react-developer-burger-ui-components";
 import {ingredients} from './../../utils/data';
 

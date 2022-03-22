@@ -1,6 +1,6 @@
 import React from 'react';
-import IngredientCard from "../IngredientCard/IngredientCard";
-import ingredientsListStyles from "./IngredientsList.module.css";
+import IngredientCard from "../ingredientCard/IngredientCard";
+import ingredientsListStyles from "./ingredientsList.module.css";
 import PropTypes from "prop-types";
 
 const IngredientsList = ({icons, ingredients}) => {
