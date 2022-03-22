@@ -3,7 +3,6 @@ import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-compon
 import constructorStyles from './burgerConstructor.module.css';
 import OrderTotal from "../orderTotal/OrderTotal";
 import PropTypes from 'prop-types';
-import {addScroll} from '../../utils/utils'
 
 const BurgerConstructor = ({icons, ingredients}) => {
   
@@ -22,7 +21,7 @@ const BurgerConstructor = ({icons, ingredients}) => {
           />
         </li>
       <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
-      {ingredients.filter(ingredient=> ingredient.type != "bun").map(ingredient => {
+      {ingredients.filter(ingredient=> ingredient.type !== "bun").map(ingredient => {
         return (<li key = {`${ingredient._id}`} className={`${constructorStyles.item} ml-8 mr-4 mb-4`}>
           <ConstructorElement
             isLocked={false}
