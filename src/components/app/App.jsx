@@ -4,6 +4,7 @@ import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngridients";
 import * as icons from "@ya.praktikum/react-developer-burger-ui-components";
 import {ingredients} from './../../utils/data';
+import OrderAcceptedPopup from "../orderAcceptedPopup/OrderAcceptedPopup";
 
 function App() {
   return (

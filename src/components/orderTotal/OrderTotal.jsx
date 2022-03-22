@@ -4,7 +4,6 @@ import orderTotalStyles from './orderTotal.module.css';
 import PropTypes from "prop-types";
 
 const OrderTotal = ({CurrencyIcon}) => {
-
   return (
     <div className={`${orderTotalStyles.orderTotal} mt-10`}>
       <p className={`text text_type_digits-medium mr-10`}>0
