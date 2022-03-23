@@ -28,7 +28,7 @@ const IngredientsList = ({icons, ingredients}) => {
         {ingredients
           .filter(ingredient => ingredient['type'] === 'main')
           .map(ingredient => {
-          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={icons.CurrencyIcon}/>
+          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={icons.CurrencyIcon} />
         })}
       </ul>
     </section>

@@ -4,7 +4,7 @@ import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 
 const IngredientCard = ({data, CurrencyIcon}) => {
-  
+ 
   return (
     <li>
     <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>

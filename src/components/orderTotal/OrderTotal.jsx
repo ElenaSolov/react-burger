@@ -11,7 +11,7 @@ const OrderTotal = ({CurrencyIcon}) => {
         < CurrencyIcon type='primary'/>
         </span>
       </p>
-      <Button type="primary" size="medium">
+      <Button type="primary" size="medium" >
         Оформить заказ
       </Button>
     </div>
