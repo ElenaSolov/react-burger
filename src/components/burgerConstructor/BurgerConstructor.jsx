@@ -42,7 +42,7 @@ const BurgerConstructor = ({ingredients}) => {
               />
             </li>
           </ul>
-          <OrderTotal CurrencyIcon={CurrencyIcon} />
+          <OrderTotal />
         </section>)
       
     }

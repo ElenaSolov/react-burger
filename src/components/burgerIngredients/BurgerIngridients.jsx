@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 const BurgerIngredients = ({icons, ingredients}) => {
   useEffect(()=> {
     addScroll()
-    const body = document.querySelector('body');
   }, []);
   
   return (
