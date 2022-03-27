@@ -1,7 +1,6 @@
 import React from 'react';
 import headerStyles from './appHeader.module.css'
 import NavItem from "../navItem/NavItem";
-import PropTypes from 'prop-types';
 import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 const AppHeader = () => {
@@ -16,7 +15,7 @@ const AppHeader = () => {
               value="Конструктор"
               active={current === 'Конструктор'} onClick={setCurrent}
               text='Конструктор'
-              icon = {BurgerIcon}
+              Icon = {BurgerIcon}
               type={(current === 'Конструктор') ? 'primary' : 'secondary'}/>
           </li>
           <li>
@@ -24,7 +23,7 @@ const AppHeader = () => {
                active={current === 'Лента'}
                onClick={setCurrent}
                text='Лента заказов'
-               icon = {ListIcon}
+               Icon = {ListIcon}
                type={(current === 'Лента') ? 'primary' : 'secondary'}/>
           </li>
         </ul>
@@ -35,7 +34,7 @@ const AppHeader = () => {
         active={current === 'Кабинет'}
         onClick={setCurrent}
         text='Личный кабинет'
-        icon = {ProfileIcon}
+        Icon = {ProfileIcon}
         type={(current === 'Кабинет') ? 'primary' : 'secondary'}/>
     </header>
   );
