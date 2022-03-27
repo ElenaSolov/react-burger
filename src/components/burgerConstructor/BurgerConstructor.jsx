@@ -3,8 +3,9 @@ import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-compon
 import constructorStyles from './burgerConstructor.module.css';
 import OrderTotal from "../orderTotal/OrderTotal";
 import PropTypes from 'prop-types';
+import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-const BurgerConstructor = ({icons, ingredients}) => {
+const BurgerConstructor = ({ingredients}) => {
   
   const mainBun = ingredients.find(ingredient => ingredient.name === 'Краторная булка N-200i');
       return (
@@ -41,13 +42,12 @@ const BurgerConstructor = ({icons, ingredients}) => {
               />
             </li>
           </ul>
-          <OrderTotal CurrencyIcon={icons.CurrencyIcon} />
+          <OrderTotal CurrencyIcon={CurrencyIcon} />
         </section>)
       
     }
 
 BurgerConstructor.propTypes = {
-  icons: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
   ingredients: PropTypes.arrayOf(PropTypes.exact({
     calories: PropTypes.number,
     carbohydrates: PropTypes.number,

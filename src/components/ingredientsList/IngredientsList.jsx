@@ -2,8 +2,9 @@ import React from 'react';
 import IngredientCard from "../ingredientCard/IngredientCard";
 import ingredientsListStyles from "./ingredientsList.module.css";
 import PropTypes from "prop-types";
+import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-const IngredientsList = ({icons, ingredients}) => {
+const IngredientsList = ({ingredients}) => {
   
   return (
     <section className={`${ingredientsListStyles.ingredientsSection} ingredientsScroll`}>
@@ -12,7 +13,7 @@ const IngredientsList = ({icons, ingredients}) => {
       {ingredients
         .filter(ingredient => ingredient['type'] === 'bun')
         .map(ingredient => {
-          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={icons.CurrencyIcon} />
+          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={CurrencyIcon} />
       })}
       </ul>
       <h2 id='sauces' className={`${ingredientsListStyles.header} mt-10`}>Соусы</h2>
@@ -20,7 +21,7 @@ const IngredientsList = ({icons, ingredients}) => {
         {ingredients
           .filter(ingredient => ingredient['type'] === 'sauce')
           .map(ingredient => {
-          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={icons.CurrencyIcon} />
+          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={CurrencyIcon} />
         })}
       </ul>
       <h2 id='mains' className={`${ingredientsListStyles.header} mt-10`}>Начинки</h2>
@@ -28,14 +29,13 @@ const IngredientsList = ({icons, ingredients}) => {
         {ingredients
           .filter(ingredient => ingredient['type'] === 'main')
           .map(ingredient => {
-          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={icons.CurrencyIcon} />
+          return <IngredientCard key={ingredient._id} data={ingredient} CurrencyIcon={CurrencyIcon} />
         })}
       </ul>
     </section>
   );
 };
 IngredientsList.propTypes = {
-  icons: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object])),
   ingredients: PropTypes.arrayOf(PropTypes.exact({
     calories: PropTypes.number,
     carbohydrates: PropTypes.number,

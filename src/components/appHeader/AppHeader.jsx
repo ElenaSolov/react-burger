@@ -2,8 +2,9 @@ import React from 'react';
 import headerStyles from './appHeader.module.css'
 import NavItem from "../navItem/NavItem";
 import PropTypes from 'prop-types';
+import {BurgerIcon, ListIcon, Logo, ProfileIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-const AppHeader = ({icons}) => {
+const AppHeader = () => {
   
   const [current, setCurrent] = React.useState('Конструктор');
   return (
@@ -15,7 +16,7 @@ const AppHeader = ({icons}) => {
               value="Конструктор"
               active={current === 'Конструктор'} onClick={setCurrent}
               text='Конструктор'
-              icon = {icons.BurgerIcon}
+              icon = {BurgerIcon}
               type={(current === 'Конструктор') ? 'primary' : 'secondary'}/>
           </li>
           <li>
@@ -23,23 +24,21 @@ const AppHeader = ({icons}) => {
                active={current === 'Лента'}
                onClick={setCurrent}
                text='Лента заказов'
-               icon = {icons.ListIcon}
+               icon = {ListIcon}
                type={(current === 'Лента') ? 'primary' : 'secondary'}/>
           </li>
         </ul>
       </nav>
-      {icons.Logo()}
+      <Logo />
       <NavItem
         value="Кабинет"
         active={current === 'Кабинет'}
         onClick={setCurrent}
         text='Личный кабинет'
-        icon = {icons.ProfileIcon}
+        icon = {ProfileIcon}
         type={(current === 'Кабинет') ? 'primary' : 'secondary'}/>
     </header>
   );
 };
-AppHeader.propTypes = {
-  icons: PropTypes.objectOf(PropTypes.oneOfType([PropTypes.func, PropTypes.object]))
-}
+
 export default AppHeader;
