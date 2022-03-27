@@ -1,15 +1,4 @@
-.main {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 40px;
-}
-.container{
-    max-width: 1240px;
-    display: grid;
-    grid-template-areas:
-        'ingredients constructor';
-}
+
 .header{
     text-align: start;
 }

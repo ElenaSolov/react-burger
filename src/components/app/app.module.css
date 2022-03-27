@@ -8,6 +8,18 @@
   margin: 0 auto;
   color: #F2F2F3;
 }
+.main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.container{
+  max-width: 1240px;
+  display: grid;
+  grid-template-areas:
+        'ingredients constructor';
+}
 
 /*.App-logo {*/
 /*  height: 40vmin;*/
