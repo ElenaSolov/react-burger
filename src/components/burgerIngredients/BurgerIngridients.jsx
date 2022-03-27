@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import burgerIngredientsStyles from './burgerIngredients.module.css'
 import IngredientsList from "../ingredientsList/IngredientsList";
-import {addScroll} from './../../utils/utils';
+import {addScroll} from '../../utils/utils';
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
 import propTypesConfig from "../../utils/propTypesConfig";
 
