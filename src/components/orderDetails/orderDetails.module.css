@@ -1,0 +1,12 @@
+.orderNumber{
+    margin-top: 36px;
+}
+.img{
+    width: 120px;
+    height: 120px;
+    display: block;
+}
+.text{
+    color: #8585AD;
+    margin-bottom: 0;
+}

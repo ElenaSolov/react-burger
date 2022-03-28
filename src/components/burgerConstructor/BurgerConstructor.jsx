@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import constructorStyles from './burgerConstructor.module.css';
 import OrderTotal from "../orderTotal/OrderTotal";

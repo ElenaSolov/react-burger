@@ -26,7 +26,7 @@ function App() {
       :state.success
         ? (<div className={appStyles.app}>
         <AppHeader />
-        <main className={appStyles.main}>
+        <main className={appStyles.main} id='modals'>
           <div className={appStyles.container}>
             <BurgerIngredients ingredients={state.ingredients}/>
             <BurgerConstructor ingredients={state.ingredients}/>
