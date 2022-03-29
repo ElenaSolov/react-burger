@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ingredientCardStyles from './ingredientCard.module.css';
 import {Counter} from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import Modal from '../modals/modal/Modal';
+import IngredientDetails from '../ingredientDetails/IngredientDetails';
 
 const IngredientCard = ({data, CurrencyIcon}) => {
- 
+  const [open, setOpen] = useState(false);
+  const ingredientDetailsHeader = 'Детали ингредиента';
+
   return (
-    <li>
+    <li onClick={() => setOpen(true)}>
     <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>
       <Counter />
       <img className={`${ingredientCardStyles.img} ml-4 mr-4`} src={data.image} alt={data.name} />
@@ -18,6 +22,10 @@ const IngredientCard = ({data, CurrencyIcon}) => {
       </p>
       <p className='mt-4 text text_type_main-default'>{data.name}</p>
     </article>
+
+    {open&&<Modal isOpen={open} onClose={() => setOpen(false)} header={ingredientDetailsHeader}>
+            <IngredientDetails data={data} />
+          </Modal>}
     </li>
   );
 };

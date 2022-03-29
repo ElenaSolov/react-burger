@@ -11,7 +11,7 @@ return (
     <p className={'text text_type_main-medium mt-8'}>идентификатор заказа</p>
     <img className={`${orderDetailsStyles.img} mt-15`} src={img} alt='Заказ сделан' />
     <p className={'text text_type_main-default mt-15 '}>Ваш заказ начали готовить</p>
-    <p className={`${orderDetailsStyles.text} mt-2`}>Дождитесь готовности на орбитальной станции</p>
+    <p className={` mt-2 mb-30`}>Дождитесь готовности на орбитальной станции</p>
   </>
   )
 }
