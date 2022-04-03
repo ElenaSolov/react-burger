@@ -10,7 +10,7 @@ const IngredientCard = ({data, CurrencyIcon}) => {
   const ingredientDetailsHeader = 'Детали ингредиента';
 
   return (
-    <li onClick={() => setOpen(true)}>
+    <li onClick={() => !open&&setOpen(true)}>
     <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>
       <Counter />
       <img className={`${ingredientCardStyles.img} ml-4 mr-4`} src={data.image} alt={data.name} />

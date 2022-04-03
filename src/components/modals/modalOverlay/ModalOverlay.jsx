@@ -2,7 +2,6 @@ import React, {useEffect, useCallback} from 'react';
 import modalOverlayStyles from './modalOverlay.module.css';
 
 const ModalOverlay = ({children, onClick}) => {
-console.log(onClick)
   const closeByEsc = useCallback(evt => {
 
     if(evt.key === 'Escape') {
