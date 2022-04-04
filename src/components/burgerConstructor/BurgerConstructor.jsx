@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
 import constructorStyles from './burgerConstructor.module.css';
 import OrderTotal from "../orderTotal/OrderTotal";
 import propTypesConfig from "../../utils/propTypesConfig";
+import PropTypes from "prop-types";
 
 const BurgerConstructor = ({ingredients}) => {
   
@@ -46,5 +47,8 @@ const BurgerConstructor = ({ingredients}) => {
       
     }
 
-BurgerConstructor.propTypes = propTypesConfig;
+BurgerConstructor.propTypes = {
+    ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig))
+    };
+
 export default BurgerConstructor;

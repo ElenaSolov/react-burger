@@ -25,7 +25,7 @@ const ModalOverlay = ({children, onClick}) => {
  }
 
 return (
-    <div className={`${modalOverlayStyles.overlay} overlay`} onClick={closeByClick} onKeyPress={closeByEsc}>
+    <div className={`${modalOverlayStyles.overlay} overlay`} onClick={closeByClick} >
       {children}
     </div>
   );

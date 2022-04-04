@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
 const propTypesConfig = {
-  ingredients: PropTypes.arrayOf(PropTypes.exact({
     calories: PropTypes.number,
     carbohydrates: PropTypes.number,
     fat:PropTypes.number,
@@ -14,6 +13,6 @@ const propTypesConfig = {
     type: PropTypes.string,
     __v: PropTypes.number,
     _id: PropTypes.string,
-  }))
-}
+  }.isRequired
+ 
 export default propTypesConfig;
