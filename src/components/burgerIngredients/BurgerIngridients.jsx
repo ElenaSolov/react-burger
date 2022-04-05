@@ -1,21 +1,23 @@
-import React, {useEffect} from 'react';
-import burgerIngredientsStyles from './burgerIngredients.module.css'
+import React, { useEffect } from "react";
+import burgerIngredientsStyles from "./burgerIngredients.module.css";
 import IngredientsList from "../ingredientsList/IngredientsList";
-import {addScroll} from '../../utils/utils';
+import { addScroll } from "../../utils/utils";
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
 
-
-const BurgerIngredients = ({ingredients}) => {
-
-  useEffect(()=> {
-    addScroll()
+const BurgerIngredients = ({ ingredients }) => {
+  useEffect(() => {
+    addScroll();
   }, []);
-  
+
   return (
     <section className={burgerIngredientsStyles.ingredients}>
-      <h1 className={`${burgerIngredientsStyles.header} text text_type_main-large mt-10`}>Соберите бургер</h1>
+      <h1
+        className={`${burgerIngredientsStyles.header} text text_type_main-large mt-10`}
+      >
+        Соберите бургер
+      </h1>
       <IngredientTabs />
       <IngredientsList ingredients={ingredients} />
     </section>
@@ -23,7 +25,8 @@ const BurgerIngredients = ({ingredients}) => {
 };
 
 BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig))
-    };
+  ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired)
+    .isRequired,
+};
 
 export default BurgerIngredients;

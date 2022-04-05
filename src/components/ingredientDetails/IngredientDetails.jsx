@@ -1,37 +1,56 @@
-import React from 'react';
-import ingredientDetailsStyles from './ingredientDetails.module.css';
+import React from "react";
+import ingredientDetailsStyles from "./ingredientDetails.module.css";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
 
-const IngredientDetails = ({ingredient}) => {
-
-return (
+const IngredientDetails = ({ ingredient }) => {
+  return (
     <>
-        <img src={ingredient.image} className={ingredientDetailsStyles.img} alt={ingredient.name} />
-        <p className='text text_type_main-medium mt-4 mb-8'>{ingredient.name}</p>
-        <ul className={`${ingredientDetailsStyles.list} mb-15`}>
-          <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
-            <p className='text text_type_main-default text_color_inactive mb-2'>Калории,ккал</p>
-            <p className='text text_type_main-default text_color_inactive'>{ingredient.calories}</p>
-          </li>
-          <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
-            <p className='text text_type_main-default text_color_inactive mb-2'>Белки, г</p>
-            <p className='text text_type_main-default text_color_inactive'>{ingredient.proteins}</p>
-          </li>
-          <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
-            <p className='text text_type_main-default text_color_inactive mb-2'>Жиры, г</p>
-            <p className='text text_type_main-default text_color_inactive'>{ingredient.fat}</p>
-          </li>
-          <li className={`${ingredientDetailsStyles.listItem}`}>
-            <p className='text text_type_main-default text_color_inactive mb-2'>Углеводы, г</p>
-            <p className='text text_type_main-default text_color_inactive'>{ingredient.carbohydrates}</p>
-          </li>
-        </ul>
+      <img
+        src={ingredient.image}
+        className={ingredientDetailsStyles.img}
+        alt={ingredient.name}
+      />
+      <p className="text text_type_main-medium mt-4 mb-8">{ingredient.name}</p>
+      <ul className={`${ingredientDetailsStyles.list} mb-15`}>
+        <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
+          <p className="text text_type_main-default text_color_inactive mb-2">
+            Калории,ккал
+          </p>
+          <p className="text text_type_main-default text_color_inactive">
+            {ingredient.calories}
+          </p>
+        </li>
+        <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
+          <p className="text text_type_main-default text_color_inactive mb-2">
+            Белки, г
+          </p>
+          <p className="text text_type_main-default text_color_inactive">
+            {ingredient.proteins}
+          </p>
+        </li>
+        <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
+          <p className="text text_type_main-default text_color_inactive mb-2">
+            Жиры, г
+          </p>
+          <p className="text text_type_main-default text_color_inactive">
+            {ingredient.fat}
+          </p>
+        </li>
+        <li className={`${ingredientDetailsStyles.listItem}`}>
+          <p className="text text_type_main-default text_color_inactive mb-2">
+            Углеводы, г
+          </p>
+          <p className="text text_type_main-default text_color_inactive">
+            {ingredient.carbohydrates}
+          </p>
+        </li>
+      </ul>
     </>
-)
-}
+  );
+};
 IngredientDetails.propTypes = {
-    ingredient: PropTypes.shape(propTypesConfig)
+  ingredient: PropTypes.shape(propTypesConfig).isRequired,
 };
 
 export default IngredientDetails;
