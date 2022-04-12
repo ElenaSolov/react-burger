@@ -5,6 +5,8 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import Modal from "../modals/modal/Modal";
 import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../utils/api.js";
+import PropTypes from "prop-types";
+import propTypesConfig from "../../utils/propTypesConfig";
 
 const OrderTotal = ({ orderTotal }) => {
   const [open, setOpen] = React.useState(false);
@@ -37,6 +39,13 @@ const OrderTotal = ({ orderTotal }) => {
       )}
     </div>
   );
+};
+
+OrderTotal.propTypes = {
+  orderTotal: PropTypes.shape({
+    orderTotal: PropTypes.number.isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired),
+  }).isRequired,
 };
 
 export default OrderTotal;
