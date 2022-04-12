@@ -4,11 +4,15 @@ import constructorStyles from "./burgerConstructor.module.css";
 import OrderTotal from "../orderTotal/OrderTotal";
 import { IngredientsContext } from "../../services/appContext.js";
 
-const orderTotalInitialState = { orderTotal: 0 };
+const orderTotalInitialState = { orderTotal: 0, ingredients: [] };
+
 function reducer(state, action) {
   switch (action.type) {
     case "increase":
-      return { orderTotal: state.orderTotal + action.price };
+      return {
+        orderTotal: state.orderTotal + action.ingredient.price,
+        ingredients: [...state.ingredients, action.ingredient],
+      };
     case "decrease":
       return { orderTotal: state.orderTotal - action.price };
     case "reset":
@@ -24,7 +28,6 @@ const BurgerConstructor = () => {
     reducer,
     orderTotalInitialState
   );
-  console.log(orderTotal);
 
   const mainBun = ingredients.find(
     (ingredient) => ingredient.name === "Краторная булка N-200i"
@@ -32,14 +35,14 @@ const BurgerConstructor = () => {
   const restIngredients = ingredients.filter(
     (ingredient) => ingredient.type !== "bun"
   );
+
   React.useEffect(() => {
-    orderTotalDispatcher({ type: "increase", price: mainBun.price });
+    orderTotalDispatcher({ type: "increase", ingredient: mainBun });
     restIngredients.forEach((ingredient) =>
-      orderTotalDispatcher({ type: "increase", price: ingredient.price })
+      orderTotalDispatcher({ type: "increase", ingredient: ingredient })
     );
   }, []);
 
-  console.log(orderTotal);
   return (
     <section className={`${constructorStyles.constructor} pl-4`}>
       <ul className={`${constructorStyles.list} mt-25`}>

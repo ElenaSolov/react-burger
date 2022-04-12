@@ -4,9 +4,20 @@ import orderTotalStyles from "./orderTotal.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modals/modal/Modal";
 import OrderDetails from "../orderDetails/OrderDetails";
+import { sendOrder } from "../../utils/api.js";
 
 const OrderTotal = ({ orderTotal }) => {
   const [open, setOpen] = React.useState(false);
+  const [orderNum, setOrderNum] = React.useState("");
+
+  const makeOrder = () => {
+    sendOrder(orderTotal.ingredients)
+      .then((res) => {
+        setOrderNum(res.order.number);
+        setOpen(true);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className={`${orderTotalStyles.orderTotal} mt-10`}>
@@ -16,12 +27,12 @@ const OrderTotal = ({ orderTotal }) => {
           <CurrencyIcon type="primary" />
         </span>
       </p>
-      <Button type="primary" size="medium" onClick={() => setOpen(true)}>
+      <Button type="primary" size="medium" onClick={makeOrder}>
         Оформить заказ
       </Button>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
-          <OrderDetails />
+          <OrderDetails orderNum={orderNum} />
         </Modal>
       )}
     </div>
