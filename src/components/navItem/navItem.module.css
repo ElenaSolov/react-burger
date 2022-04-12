@@ -1,0 +1,14 @@
+.navItem{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: #F2F2F3;
+}
+.navItem:hover{
+    color: #F2F2F3;
+}
+
+.inactive {
+    color: #8585AD;
+}

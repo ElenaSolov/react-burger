@@ -1,0 +1,11 @@
+
+.header{
+    text-align: start;
+}
+
+.ingredients {
+    grid-area: ingredients;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
