@@ -8,12 +8,13 @@ import { sendOrder } from "../../utils/api.js";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
 
-const OrderTotal = ({ orderTotal }) => {
+const OrderTotal = ({ totalIngredients, totalPrice }) => {
+console.log(totalPrice);
   const [open, setOpen] = React.useState(false);
   const [orderNum, setOrderNum] = React.useState("");
 
   const makeOrder = () => {
-    sendOrder(orderTotal.ingredients)
+    sendOrder(totalIngredients.ingredients)
       .then((res) => {
         setOrderNum(res.order.number);
         setOpen(true);
@@ -24,7 +25,7 @@ const OrderTotal = ({ orderTotal }) => {
   return (
     <div className={`${orderTotalStyles.orderTotal} mt-10`}>
       <p className={`text text_type_digits-medium mr-10`}>
-        {orderTotal.orderTotal}
+        {totalPrice}
         <span className={orderTotalStyles.priceIcon}>
           <CurrencyIcon type="primary" />
         </span>
@@ -42,10 +43,8 @@ const OrderTotal = ({ orderTotal }) => {
 };
 
 OrderTotal.propTypes = {
-  orderTotal: PropTypes.shape({
-    orderTotal: PropTypes.number.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired),
-  }).isRequired,
+    totalPrice: PropTypes.number.isRequired,
+    totalIngredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired),
 };
 
 export default OrderTotal;

@@ -1,5 +1,4 @@
-const baseURL = "https://norma.nomoreparties.space/api/ingredients";
-const orderURL = "https://norma.nomoreparties.space/api/orders";
+const baseURL = "https://norma.nomoreparties.space/api";
 const headers = { "Content-Type": "application/json" };
 
 const getResponseData = (res) => {
@@ -15,11 +14,11 @@ const sendRequest = (method, body = null, url = baseURL) => {
 };
 
 export const getIngredients = () => {
-  return sendRequest("GET");
+  return sendRequest("GET", null, `${baseURL}/ingredients` );
 };
 
 export const sendOrder = (ingredients) => {
   const ids = ingredients.map((ingredient) => ingredient._id);
   const body = JSON.stringify({ ingredients: ids });
-  return sendRequest("POST", body, orderURL);
+  return sendRequest("POST", body, `${baseURL}/orders`);
 };
