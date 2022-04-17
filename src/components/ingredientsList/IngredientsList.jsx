@@ -2,10 +2,11 @@ import React from "react";
 import IngredientCard from "../ingredientCard/IngredientCard";
 import ingredientsListStyles from "./ingredientsList.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import propTypesConfig from "../../utils/propTypesConfig";
-import PropTypes from "prop-types";
+import { IngredientsContext } from "../../services/appContext.js";
 
-const IngredientsList = ({ ingredients }) => {
+const IngredientsList = () => {
+  const { ingredients } = React.useContext(IngredientsContext);
+
   return (
     <section
       className={`${ingredientsListStyles.ingredientsSection} ingredientsScroll`}
@@ -53,8 +54,5 @@ const IngredientsList = ({ ingredients }) => {
     </section>
   );
 };
-IngredientsList.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired)
-    .isRequired,
-};
+
 export default IngredientsList;

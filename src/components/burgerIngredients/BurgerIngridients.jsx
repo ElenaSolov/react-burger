@@ -3,10 +3,8 @@ import burgerIngredientsStyles from "./burgerIngredients.module.css";
 import IngredientsList from "../ingredientsList/IngredientsList";
 import { addScroll } from "../../utils/utils";
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
-import propTypesConfig from "../../utils/propTypesConfig";
-import PropTypes from "prop-types";
 
-const BurgerIngredients = ({ ingredients }) => {
+const BurgerIngredients = () => {
   useEffect(() => {
     addScroll();
   }, []);
@@ -19,14 +17,9 @@ const BurgerIngredients = ({ ingredients }) => {
         Соберите бургер
       </h1>
       <IngredientTabs />
-      <IngredientsList ingredients={ingredients} />
+      <IngredientsList />
     </section>
   );
-};
-
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired)
-    .isRequired,
 };
 
 export default BurgerIngredients;

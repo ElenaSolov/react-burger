@@ -4,6 +4,7 @@ import AppHeader from "../appHeader/AppHeader";
 import BurgerIngredients from "../burgerIngredients/BurgerIngridients";
 import BurgerConstructor from "../burgerConstructor/BurgerConstructor";
 import { getIngredients } from "../../utils/api.js";
+import { IngredientsContext } from "../../services/appContext.js";
 
 function App() {
   const [state, setState] = useState({
@@ -11,6 +12,7 @@ function App() {
     loading: true,
     success: false,
   });
+
   useEffect(() => {
     getIngredients()
       .then((data) => {
@@ -30,13 +32,15 @@ function App() {
     <h1>Loading</h1>
   ) : state.success ? (
     <div className={appStyles.app}>
-      <AppHeader />
-      <main className={appStyles.main} id="modals">
-        <div className={appStyles.container}>
-          <BurgerIngredients ingredients={state.ingredients} />
-          <BurgerConstructor ingredients={state.ingredients} />
-        </div>
-      </main>
+      <IngredientsContext.Provider value={state}>
+        <AppHeader />
+        <main className={appStyles.main} id="modals">
+          <div className={appStyles.container}>
+            <BurgerIngredients />
+            <BurgerConstructor />
+          </div>
+        </main>
+      </IngredientsContext.Provider>
     </div>
   ) : (
     <h1>Error</h1>
