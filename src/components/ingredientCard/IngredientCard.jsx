@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//import {useSelector} from "react-redux";
 import ingredientCardStyles from "./ingredientCard.module.css";
 import {
   Counter,
@@ -9,12 +10,12 @@ import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
 
-const IngredientCard = ({ ingredient }) => {
+const IngredientCard = ({ ingredient, onClick }) => {
   const [open, setOpen] = useState(false);
   const ingredientDetailsHeader = "Детали ингредиента";
 
   return (
-    <li onClick={() => !open && setOpen(true)}>
+    <li onClick={() => {onClick(); !open && setOpen(true)}}>
       <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>
         <Counter />
         <img
@@ -39,7 +40,7 @@ const IngredientCard = ({ ingredient }) => {
           onClose={() => setOpen(false)}
           header={ingredientDetailsHeader}
         >
-          <IngredientDetails ingredient={ingredient} />
+          <IngredientDetails />
         </Modal>
       )}
     </li>

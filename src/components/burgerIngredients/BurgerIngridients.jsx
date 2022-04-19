@@ -1,13 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import burgerIngredientsStyles from "./burgerIngredients.module.css";
 import IngredientsList from "../ingredientsList/IngredientsList";
-import { addScroll } from "../../utils/utils";
 import IngredientTabs from "../ingredientTabs/IngredientTabs";
 
 const BurgerIngredients = () => {
-  useEffect(() => {
-    addScroll();
-  }, []);
 
   return (
     <section className={burgerIngredientsStyles.ingredients}>

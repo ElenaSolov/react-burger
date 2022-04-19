@@ -31,3 +31,19 @@ function smoothScroll(evt) {
     block: 'start'
   })
 }
+
+//switch tabs
+
+export const getCurrentTab = () => {
+  const triggerLine = body.querySelector('.tabs').getBoundingClientRect().bottom;
+  const ingredientsLists = body.querySelectorAll('.ingredients__list');
+  let currentList = ingredientsLists[0];
+  for(let i = 0; i<=2; i++){
+    const listBottom = ingredientsLists[i].getBoundingClientRect().bottom;
+    if(listBottom>triggerLine) {
+      currentList = ingredientsLists[i];
+      break;
+    }
+  }
+  return(currentList.getAttribute('id'));
+}

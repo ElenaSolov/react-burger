@@ -13,11 +13,11 @@ const sendRequest = (method, body = null, url = baseURL) => {
   }).then(getResponseData);
 };
 
-export const getIngredients = () => {
+export const getIngredientsRequest = () => {
   return sendRequest("GET", null, `${baseURL}/ingredients` );
 };
 
-export const sendOrder = (ingredients) => {
+export const sendOrderRequest = (ingredients) => {
   const ids = ingredients.map((ingredient) => ingredient._id);
   const body = JSON.stringify({ ingredients: ids });
   return sendRequest("POST", body, `${baseURL}/orders`);

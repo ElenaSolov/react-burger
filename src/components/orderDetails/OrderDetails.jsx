@@ -1,15 +1,16 @@
 import React from "react";
 import orderDetailsStyles from "./orderDetails.module.css";
 import img from "../../images/order-done.png";
-import PropTypes from "prop-types";
+import {useSelector} from "react-redux";
 
-const OrderDetails = ({ orderNum }) => {
+const OrderDetails = () => {
+const order = useSelector(store=> store.order);
   return (
     <>
       <p
         className={`${orderDetailsStyles.orderNumber} text text_type_digits-large`}
       >
-        {orderNum}
+        {order.orderNum}
       </p>
       <p className={"text text_type_main-medium mt-8"}>идентификатор заказа</p>
       <img
@@ -27,8 +28,5 @@ const OrderDetails = ({ orderNum }) => {
   );
 };
 
-OrderDetails.propTypes = {
-  orderNum: PropTypes.number.isRequired,
-};
 
 export default OrderDetails;
