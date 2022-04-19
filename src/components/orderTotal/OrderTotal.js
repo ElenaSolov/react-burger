@@ -4,22 +4,18 @@ import orderTotalStyles from "./orderTotal.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modals/modal/Modal";
 import OrderDetails from "../orderDetails/OrderDetails";
-import { sendOrder } from "../../utils/api.js";
+import { sendOrder } from "../../services/actions/actions.js";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
+import {useDispatch} from "react-redux";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
-console.log(totalPrice);
+  const dispatch = useDispatch();
+
   const [open, setOpen] = React.useState(false);
-  const [orderNum, setOrderNum] = React.useState("");
 
   const makeOrder = () => {
-    sendOrder(totalIngredients.ingredients)
-      .then((res) => {
-        setOrderNum(res.order.number);
-        setOpen(true);
-      })
-      .catch((err) => console.log(err));
+    dispatch(sendOrder(totalIngredients, setOpen));
   };
 
   return (
@@ -35,7 +31,7 @@ console.log(totalPrice);
       </Button>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
-          <OrderDetails orderNum={orderNum} />
+          <OrderDetails />
         </Modal>
       )}
     </div>
