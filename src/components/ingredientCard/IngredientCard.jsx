@@ -9,13 +9,21 @@ import Modal from "../modals/modal/Modal";
 import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
 
 const IngredientCard = ({ ingredient, onClick }) => {
   const [open, setOpen] = useState(false);
   const ingredientDetailsHeader = "Детали ингредиента";
-
+  const [{isDrag}, dragRef] = useDrag({
+  type: 'ingredient',
+  item: ingredient,
+  collect: monitor => ({
+              isDrag: monitor.isDragging()
+          })
+  });
+console.log(ingredient._id)
   return (
-    <li onClick={() => {onClick(); !open && setOpen(true)}}>
+    !isDrag &&<li ref={dragRef} onClick={() => {onClick(); !open && setOpen(true)}}>
       <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>
         <Counter />
         <img

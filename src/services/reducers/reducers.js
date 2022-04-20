@@ -3,7 +3,9 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
-  ADD_INGREDIENT,
+  ORDER_INGREDIENT,
+  ORDER_BUN,
+  DELETE_FROM_ORDER,
   SEND_ORDER_REQUEST,
   SEND_ORDER_SUCCESS,
   SEND_ORDER_FAILED,
@@ -22,6 +24,7 @@ const initialState = {
   order: {
     totalPrice: 0,
     orderedIngredients: [],
+    orderedBun:{},
     orderRequest: false,
     orderFailed: false,
     orderStatus: false,
@@ -52,11 +55,25 @@ export const rootReducer = (state = initialState, action) => {
         ingredientsRequestStatus: 'failed'
       }
     }
-    case ADD_INGREDIENT: {
+    case ORDER_BUN: {
+      return{
+        ...state, order:
+          {...state.order, orderedBun: action.ingredient}
+      }
+    }
+    case ORDER_INGREDIENT: {
+      console.log(action)
       return {
         ...state,
         order: {
           ...state.order, orderedIngredients: [...state.order.orderedIngredients, action.ingredient]
+        }
+      }
+    }
+    case DELETE_FROM_ORDER: {
+      return {
+        ...state, order: {
+          ...state.order, orderedIngredients: state.orderedIngredients.filter(i=> i._id !== action.ingredient._id)
         }
       }
     }

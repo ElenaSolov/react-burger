@@ -4,8 +4,7 @@ import ingredientsListStyles from "./ingredientsList.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux';
 import {getIngredients, SET_CURRENT_INGREDIENT, SET_CURRENT_TAB} from '../../services/actions/actions.js';
-import { getCurrentTab } from '../../utils/utils.js';
-
+import { getCurrentTab, addScroll } from '../../utils/utils.js';
 
 const IngredientsList = () => {
     const dispatch = useDispatch();
@@ -13,7 +12,9 @@ const IngredientsList = () => {
     useEffect(()=>{
         dispatch(getIngredients());
         getCurrentTab();
+        addScroll('.ingredientsScroll');
     }, [dispatch]);
+
   const  ingredients = useSelector(store => store.ingredients);
   const setCurrentIngredient = (ingredient) => {
   dispatch({type: SET_CURRENT_INGREDIENT, ingredient})}

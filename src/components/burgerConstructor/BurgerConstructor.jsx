@@ -1,47 +1,58 @@
-import React, {useEffect, useMemo} from "react";
+import React, {useMemo, useEffect} from "react";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import constructorStyles from "./burgerConstructor.module.css";
 import OrderTotal from "../orderTotal/OrderTotal";
-import {useSelector, useDispatch} from 'react-redux';
-import { addScroll } from "../../utils/utils";
-import {ADD_INGREDIENT} from "../../services/actions/actions.js";
+import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+// import { addScroll } from "../../utils/utils";
+import {ORDER_INGREDIENT, ORDER_BUN} from "../../services/actions/actions.js";
+import { useDrop } from "react-dnd";
 
 
 const BurgerConstructor = () => {
   const isLoaded =  useSelector(store => store.ingredientsRequestStatus);
   const ingredients = useSelector(store => store.ingredients);
+  const orderedIngredients = useSelector(store => store.order.orderedIngredients, shallowEqual);
   const order = useSelector(store => store.order);
   const dispatch = useDispatch();
-  const mainBun = useMemo(
-  ()=> {
-  return ingredients.find((ingredient) => ingredient.name === "Краторная булка N-200i")
-  }, [ingredients]);
-  const restIngredients = useMemo(
-  ()=>{
-  return ingredients.filter((ingredient) => ingredient.type !== "bun");
-  }, [ingredients]
-  )
+  const mainBun = useSelector(store => store.order.orderedBun);
+
+  const [{isHover}, dropTarget] = useDrop({
+          accept: "ingredient",
+          drop: (item)  =>  onDropHandler(item),
+          collect: monitor => ({
+                      isHover: monitor.isOver(),
+                  })
+      });
+  const onDropHandler = (ingredient) => {
+      if(ingredient.type === 'bun'){
+        dispatch({type: ORDER_BUN, ingredient});
+        console.log(mainBun);
+        } else {
+        dispatch({type:ORDER_INGREDIENT, ingredient});
+      }
+      console.log(orderedIngredients)
+  }
+      const borderColor = isHover ? 'lightgreen' : 'transparent';
 
   useEffect(() => {
-       isLoaded&&addScroll();
-       isLoaded&&dispatch({type: ADD_INGREDIENT, ingredient: mainBun});
-       isLoaded&&restIngredients.forEach((ingredient) =>
-             dispatch({ type: ADD_INGREDIENT, ingredient: ingredient }));
-  }, [isLoaded, dispatch, mainBun, restIngredients]);
+//        orderedIngredients.length>0&&addScroll('.constructorScroll', '.bottom');
+  isLoaded&&dispatch({type: ORDER_BUN, ingredient: ingredients.find(i => i.type === 'bun')});
+  }, [isLoaded, dispatch, ingredients]);
 
   const totalPrice = useMemo(
     ()=>{
-      if(order.orderedIngredients.length>0){
-       return order.orderedIngredients.reduce((prev, next) => prev+next.price, 0)
+      if(!isLoaded) return 0;
+      if(orderedIngredients.length>0){
+       return orderedIngredients.reduce((prev, next) => prev+next.price, 0) + mainBun.price *2;
       };
-      return 0;
-    }, [order.orderedIngredients]);
+      return mainBun.price *2;
+    }, [orderedIngredients, mainBun, isLoaded]);
 
 
   return (
 
-    isLoaded&&<section className={`${constructorStyles.constructor} pl-4`}>
-      <ul className={`${constructorStyles.list} mt-25`}>
+    isLoaded&&<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`} style={{borderColor: borderColor}}>
+      <ul className={`${constructorStyles.list} mt-25`} >
         <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
           <ConstructorElement
             type="top"
@@ -52,7 +63,7 @@ const BurgerConstructor = () => {
           />
         </li>
         <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
-          {restIngredients.map((ingredient) => {
+          {orderedIngredients.map((ingredient) => {
             return (
               <li
                 key={`${ingredient._id}`}

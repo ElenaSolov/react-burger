@@ -6,12 +6,10 @@ function setElementHeight(el, bottomEl){
   const bottomHeight = bottomEl ? (body.offsetHeight - bottomEl.getBoundingClientRect().top) : marginBottom;
   el.style.maxHeight = Math.floor(document.documentElement.clientHeight - top -bottomHeight )+'px';
 }
-export function addScroll(){
- const ingredientsList = document.querySelector('.ingredientsScroll');
-    setElementHeight(ingredientsList, null);
-    const constructor = document.querySelector('.constructorScroll')
-    const bottomEl = document.querySelector('.bottom');
-  setElementHeight(constructor, bottomEl);
+export function addScroll(selector, bottomSelector = null){
+  const el = document.querySelector(selector);
+  const bottomEl = bottomSelector ? document.querySelector(bottomSelector): null;
+  setElementHeight(el, bottomEl);
 }
 
 // smooth scroll
