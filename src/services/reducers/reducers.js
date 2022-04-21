@@ -63,7 +63,7 @@ export const rootReducer = (state = initialState, action) => {
       }
     }
     case ORDER_INGREDIENT: {
-      console.log(action)
+      console.log('order action;' , action)
       return {
         ...state,
         order: {
@@ -72,6 +72,7 @@ export const rootReducer = (state = initialState, action) => {
       }
     }
     case DELETE_FROM_ORDER: {
+      console.log('delete')
       return {
         ...state, order: {
           ...state.order, orderedIngredients: state.order.orderedIngredients.filter(i=> i._id !== action.ingredient._id)
@@ -79,12 +80,11 @@ export const rootReducer = (state = initialState, action) => {
       }
     }
     case DECREASE_INGREDIENT: {
-      console.log("dec", action)
-      console.log(state.order.orderedIngredients)
-      console.log(state.order.orderedIngredients.splice(action.index, 0))
+      state.order.orderedIngredients.splice(action.index, 1);
       return {
-        ...state, order: {
-          ...state.order, orderedIngredients: state.order.orderedIngredients.splice(action.index-1, 0)
+        ...state,
+        order: {
+          ...state.order, orderedIngredients: [...state.order.orderedIngredients]
         }
       }
     }

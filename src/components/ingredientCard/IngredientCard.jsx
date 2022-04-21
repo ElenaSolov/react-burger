@@ -19,7 +19,6 @@ const IngredientCard = ({ ingredient, onClick }) => {
   if(ingredient._id === mainBun._id){
   count = 2;
   }
-  console.log(count);
   const [{isDrag}, dragRef] = useDrag({
   type: 'ingredient',
   item: ingredient,
@@ -27,7 +26,6 @@ const IngredientCard = ({ ingredient, onClick }) => {
               isDrag: monitor.isDragging()
           })
   });
-console.log(ingredient._id)
   return (
     !isDrag &&<li ref={dragRef} onClick={() => {onClick(); !open && setOpen(true)}}>
       <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>

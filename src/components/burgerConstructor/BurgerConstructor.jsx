@@ -26,13 +26,11 @@ const BurgerConstructor = () => {
   const onDropHandler = (ingredient) => {
       if(ingredient.type === 'bun'){
         dispatch({type: ORDER_BUN, ingredient});
-        console.log(mainBun);
         } else {
         dispatch({type:ORDER_INGREDIENT, ingredient});
       }
-      console.log(orderedIngredients)
   }
-      const borderColor = isHover ? 'lightgreen' : 'transparent';
+  const borderColor = isHover ? 'lightgreen' : 'transparent';
 
   useEffect(() => {
 //        orderedIngredients.length>0&&addScroll('.constructorScroll', '.bottom');
@@ -49,18 +47,16 @@ const BurgerConstructor = () => {
     }, [orderedIngredients, mainBun, isLoaded]);
 
   const handleClose = (e, index) => {
-  console.log(index)
   const ingredient = orderedIngredients.find(i => i.name === e.target.closest('.constructor-element').querySelector('.constructor-element__text').textContent);
-  console.log(ingredient);
   const count = orderedIngredients.filter(i => i._id === ingredient._id).length;
-  if(count<2){
-  dispatch({type:DELETE_FROM_ORDER, ingredient})
+    if(count<2){
+      dispatch({type:DELETE_FROM_ORDER, ingredient})
     } else {
-    dispatch({type: DECREASE_INGREDIENT, index});
+      dispatch({type: DECREASE_INGREDIENT, index});
+    }
   }
-  }
-  return (
 
+  return (
     isLoaded&&<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`} style={{borderColor: borderColor}}>
       <ul className={`${constructorStyles.list} mt-25`} >
         <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
