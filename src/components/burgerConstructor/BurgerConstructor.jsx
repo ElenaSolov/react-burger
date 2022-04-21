@@ -63,10 +63,10 @@ const BurgerConstructor = () => {
           />
         </li>
         <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
-          {orderedIngredients.map((ingredient) => {
+          {orderedIngredients.map((ingredient, index) => {
             return (
               <li
-                key={`${ingredient._id}`}
+                key={`${index}`}
                 className={`${constructorStyles.item} ml-8 mr-4 mb-4`}
               >
               <span className={constructorStyles.dragIcon}><DragIcon type='primary' /></span>
