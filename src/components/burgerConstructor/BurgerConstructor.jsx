@@ -4,7 +4,7 @@ import constructorStyles from "./burgerConstructor.module.css";
 import OrderTotal from "../orderTotal/OrderTotal";
 import {useSelector, useDispatch, shallowEqual} from 'react-redux';
 // import { addScroll } from "../../utils/utils";
-import {ORDER_INGREDIENT, ORDER_BUN} from "../../services/actions/actions.js";
+import {ORDER_INGREDIENT, ORDER_BUN, DELETE_FROM_ORDER, DECREASE_INGREDIENT} from "../../services/actions/actions.js";
 import { useDrop } from "react-dnd";
 
 
@@ -48,7 +48,17 @@ const BurgerConstructor = () => {
       return mainBun.price *2;
     }, [orderedIngredients, mainBun, isLoaded]);
 
-
+  const handleClose = (e, index) => {
+  console.log(index)
+  const ingredient = orderedIngredients.find(i => i.name === e.target.closest('.constructor-element').querySelector('.constructor-element__text').textContent);
+  console.log(ingredient);
+  const count = orderedIngredients.filter(i => i._id === ingredient._id).length;
+  if(count<2){
+  dispatch({type:DELETE_FROM_ORDER, ingredient})
+    } else {
+    dispatch({type: DECREASE_INGREDIENT, index});
+  }
+  }
   return (
 
     isLoaded&&<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`} style={{borderColor: borderColor}}>
@@ -75,6 +85,7 @@ const BurgerConstructor = () => {
                   text={`${ingredient.name}`}
                   price={`${ingredient.price}`}
                   thumbnail={`${ingredient.image}`}
+                  handleClose={(e)=>handleClose(e, index)}
                 />
               </li>
             );

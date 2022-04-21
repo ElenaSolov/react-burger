@@ -4,6 +4,7 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   ORDER_INGREDIENT,
+  DECREASE_INGREDIENT,
   ORDER_BUN,
   DELETE_FROM_ORDER,
   SEND_ORDER_REQUEST,
@@ -73,7 +74,17 @@ export const rootReducer = (state = initialState, action) => {
     case DELETE_FROM_ORDER: {
       return {
         ...state, order: {
-          ...state.order, orderedIngredients: state.orderedIngredients.filter(i=> i._id !== action.ingredient._id)
+          ...state.order, orderedIngredients: state.order.orderedIngredients.filter(i=> i._id !== action.ingredient._id)
+        }
+      }
+    }
+    case DECREASE_INGREDIENT: {
+      console.log("dec", action)
+      console.log(state.order.orderedIngredients)
+      console.log(state.order.orderedIngredients.splice(action.index, 0))
+      return {
+        ...state, order: {
+          ...state.order, orderedIngredients: state.order.orderedIngredients.splice(action.index-1, 0)
         }
       }
     }
