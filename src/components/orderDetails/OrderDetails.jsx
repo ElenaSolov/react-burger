@@ -4,13 +4,15 @@ import img from "../../images/order-done.png";
 import {useSelector} from "react-redux";
 
 const OrderDetails = () => {
-const order = useSelector(store=> store.order);
+
+const orders = useSelector(store=> store.orders);
+
   return (
     <>
       <p
         className={`${orderDetailsStyles.orderNumber} text text_type_digits-large`}
       >
-        {order.orderNum}
+        {orders[orders.length-1].orderNum}
       </p>
       <p className={"text text_type_main-medium mt-8"}>идентификатор заказа</p>
       <img

@@ -30,7 +30,8 @@ const initialState = {
     orderFailed: false,
     orderStatus: false,
     orderNum: null
-  }
+  },
+  orders: []
 }
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -71,7 +72,6 @@ export const rootReducer = (state = initialState, action) => {
       }
     }
     case DELETE_FROM_ORDER: {
-      console.log('delete')
       return {
         ...state, order: {
           ...state.order, orderedIngredients: state.order.orderedIngredients.filter(i=> i._id !== action.ingredient._id)
@@ -102,10 +102,11 @@ export const rootReducer = (state = initialState, action) => {
       }
     }
     case SEND_ORDER_SUCCESS:{
-      console.log('success', action)
+      const newOrder = {...state.order, orderRequest: false, orderFailed: false, orderStatus: 'success', orderNum: action.res.order.number, totalPrice: action.totalPrice}
       return {
         ...state,
-        order: {...state.order, orderRequest: false, orderFailed: false, orderStatus: 'success', orderNum: action.res.order.number}
+        order: initialState.order,
+        orders: [...state.orders, newOrder]
       }
     }
     case SEND_ORDER_FAILED: {

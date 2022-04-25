@@ -15,7 +15,8 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
   const [open, setOpen] = React.useState(false);
 
   const makeOrder = () => {
-    dispatch(sendOrder(totalIngredients, setOpen));
+    dispatch(sendOrder(totalIngredients, setOpen, totalPrice));
+    
   };
 
   return (

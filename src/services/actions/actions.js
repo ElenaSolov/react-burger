@@ -29,13 +29,13 @@ export function getIngredients(){
     })
   }
 }
-export function sendOrder(ingredients, openModal){
+export function sendOrder(ingredients, openModal, totalPrice){
   return function(dispatch){
     dispatch({type: SEND_ORDER_REQUEST, ingredients});
     sendOrderRequest(ingredients)
       .then(res => {
         if(res && res.success){
-          dispatch({type:SEND_ORDER_SUCCESS, res})
+          dispatch({type:SEND_ORDER_SUCCESS, res, totalPrice})
           openModal(true);
         } else {
           dispatch({SEND_ORDER_FAILED});
