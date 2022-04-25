@@ -1,22 +1,33 @@
-import React, {useMemo, useEffect} from "react";
-import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {useMemo, useEffect, useCallback} from "react";
 import constructorStyles from "./burgerConstructor.module.css";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderTotal from "../orderTotal/OrderTotal";
-import {useSelector, useDispatch, shallowEqual} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 // import { addScroll } from "../../utils/utils";
-import {ORDER_INGREDIENT, ORDER_BUN, DELETE_FROM_ORDER, DECREASE_INGREDIENT} from "../../services/actions/actions.js";
+import {ORDER_INGREDIENT, ORDER_BUN, MOVE_INGREDIENT} from "../../services/actions/actions.js";
 import { useDrop } from "react-dnd";
-
+import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
 
 const BurgerConstructor = () => {
   const isLoaded =  useSelector(store => store.ingredientsRequestStatus);
   const ingredients = useSelector(store => store.ingredients);
-  const orderedIngredients = useSelector(store => store.order.orderedIngredients, shallowEqual);
+  const orderedIngredients = useSelector(store => store.order.orderedIngredients);
   const order = useSelector(store => store.order);
   const dispatch = useDispatch();
   const mainBun = useSelector(store => store.order.orderedBun);
+  const moveItem = useCallback(
+          (dragIndex, hoverIndex) => {
+              const dragItem = orderedIngredients[dragIndex];
+              const hoverItem = orderedIngredients[hoverIndex];
+              // Swap places of dragItem and hoverItem in the ingredients array
+              const updatedIngredients = [...orderedIngredients];
+              updatedIngredients[dragIndex] = hoverItem;
+              updatedIngredients[hoverIndex] = dragItem;
+              dispatch({type:MOVE_INGREDIENT, updatedIngredients});
+          }, [orderedIngredients, dispatch]
+      )
 
-  const [{isHover}, dropTarget] = useDrop({
+  const [, dropTarget] = useDrop({
           accept: "ingredient",
           drop: (item)  =>  onDropHandler(item),
           collect: monitor => ({
@@ -26,12 +37,14 @@ const BurgerConstructor = () => {
   const onDropHandler = (ingredient) => {
       if(ingredient.type === 'bun'){
         dispatch({type: ORDER_BUN, ingredient});
-        } else {
+        }
+      else if(ingredient.start === 'constructor'){
+        return;
+}
+       else {
         dispatch({type:ORDER_INGREDIENT, ingredient});
       }
   }
-  const borderColor = isHover ? 'lightgreen' : 'transparent';
-
   useEffect(() => {
 //        orderedIngredients.length>0&&addScroll('.constructorScroll', '.bottom');
   isLoaded&&dispatch({type: ORDER_BUN, ingredient: ingredients.find(i => i.type === 'bun')});
@@ -46,18 +59,8 @@ const BurgerConstructor = () => {
       return mainBun.price *2;
     }, [orderedIngredients, mainBun, isLoaded]);
 
-  const handleClose = (e, index) => {
-  const ingredient = orderedIngredients.find(i => i.name === e.target.closest('.constructor-element').querySelector('.constructor-element__text').textContent);
-  const count = orderedIngredients.filter(i => i._id === ingredient._id).length;
-    if(count<2){
-      dispatch({type:DELETE_FROM_ORDER, ingredient})
-    } else {
-      dispatch({type: DECREASE_INGREDIENT, index});
-    }
-  }
-
   return (
-    isLoaded&&<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`} style={{borderColor: borderColor}}>
+    isLoaded&&<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`}>
       <ul className={`${constructorStyles.list} mt-25`} >
         <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
           <ConstructorElement
@@ -70,21 +73,7 @@ const BurgerConstructor = () => {
         </li>
         <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
           {orderedIngredients.map((ingredient, index) => {
-            return (
-              <li
-                key={`${index}`}
-                className={`${constructorStyles.item} ml-8 mr-4 mb-4`}
-              >
-              <span className={constructorStyles.dragIcon}><DragIcon type='primary' /></span>
-                <ConstructorElement
-                  isLocked={false}
-                  text={`${ingredient.name}`}
-                  price={`${ingredient.price}`}
-                  thumbnail={`${ingredient.image}`}
-                  handleClose={(e)=>handleClose(e, index)}
-                />
-              </li>
-            );
+            return <ConstructorItem key={index}ingredient={ingredient} index={index} moveItem={moveItem} />
           })}
         </ul>
         <li className={`${constructorStyles.bun} ml-8 mr-4 pt-4 bottom`}>

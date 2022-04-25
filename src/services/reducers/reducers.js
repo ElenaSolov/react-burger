@@ -5,6 +5,7 @@ import {
   GET_INGREDIENTS_REQUEST,
   ORDER_INGREDIENT,
   DECREASE_INGREDIENT,
+  MOVE_INGREDIENT,
   ORDER_BUN,
   DELETE_FROM_ORDER,
   SEND_ORDER_REQUEST,
@@ -63,7 +64,6 @@ export const rootReducer = (state = initialState, action) => {
       }
     }
     case ORDER_INGREDIENT: {
-      console.log('order action;' , action)
       return {
         ...state,
         order: {
@@ -85,6 +85,14 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         order: {
           ...state.order, orderedIngredients: [...state.order.orderedIngredients]
+        }
+      }
+    }
+    case MOVE_INGREDIENT: {
+      return {
+        ...state,
+        order: {
+          ...state.order, orderedIngredients: action.updatedIngredients
         }
       }
     }

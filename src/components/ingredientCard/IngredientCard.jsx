@@ -21,13 +21,17 @@ const IngredientCard = ({ ingredient, onClick }) => {
   }
   const [{isDrag}, dragRef] = useDrag({
   type: 'ingredient',
-  item: ingredient,
+  item: {...ingredient, start: 'ingredientCard'},
   collect: monitor => ({
               isDrag: monitor.isDragging()
           })
   });
+
   return (
-    !isDrag &&<li ref={dragRef} onClick={() => {onClick(); !open && setOpen(true)}}>
+    !isDrag &&<li
+      ref={dragRef}
+      onClick={() => {onClick(); !open && setOpen(true)}}
+      >
       <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>
         <Counter count={count}/>
         <img
