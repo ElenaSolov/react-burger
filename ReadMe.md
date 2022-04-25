@@ -9,6 +9,8 @@ Build your own space burger!
 * `React`
 * `JS`
 * `CSS modules`
+* `Redux`
+* `React DND`
 
 ## Install
 
