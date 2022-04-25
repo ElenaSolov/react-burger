@@ -3,7 +3,7 @@ import constructorStyles from "./burgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderTotal from "../orderTotal/OrderTotal";
 import {useSelector, useDispatch} from 'react-redux';
-// import { addScroll } from "../../utils/utils";
+import { addScroll } from "../../utils/utils";
 import {ORDER_INGREDIENT, ORDER_BUN, MOVE_INGREDIENT} from "../../services/actions/actions.js";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
@@ -16,23 +16,19 @@ const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const mainBun = useSelector(store => store.order.orderedBun);
   const moveItem = useCallback(
-          (dragIndex, hoverIndex) => {
-              const dragItem = orderedIngredients[dragIndex];
-              const hoverItem = orderedIngredients[hoverIndex];
-              // Swap places of dragItem and hoverItem in the ingredients array
-              const updatedIngredients = [...orderedIngredients];
-              updatedIngredients[dragIndex] = hoverItem;
-              updatedIngredients[hoverIndex] = dragItem;
-              dispatch({type:MOVE_INGREDIENT, updatedIngredients});
-          }, [orderedIngredients, dispatch]
-      )
+      (dragIndex, hoverIndex) => {
+          const dragItem = orderedIngredients[dragIndex];
+          const hoverItem = orderedIngredients[hoverIndex];
+          // Swap places of dragItem and hoverItem in the ingredients array
+          const updatedIngredients = [...orderedIngredients];
+          updatedIngredients[dragIndex] = hoverItem;
+          updatedIngredients[hoverIndex] = dragItem;
+          dispatch({type:MOVE_INGREDIENT, updatedIngredients});
+  }, [orderedIngredients, dispatch]);
 
   const [, dropTarget] = useDrop({
           accept: "ingredient",
-          drop: (item)  =>  onDropHandler(item),
-          collect: monitor => ({
-                      isHover: monitor.isOver(),
-                  })
+          drop: (item)  =>  onDropHandler(item)
       });
   const onDropHandler = (ingredient) => {
       if(ingredient.type === 'bun'){
@@ -40,15 +36,16 @@ const BurgerConstructor = () => {
         }
       else if(ingredient.start === 'constructor'){
         return;
-}
-       else {
+        }
+      else {
         dispatch({type:ORDER_INGREDIENT, ingredient});
       }
   }
-  useEffect(() => {
-//        orderedIngredients.length>0&&addScroll('.constructorScroll', '.bottom');
-  isLoaded&&dispatch({type: ORDER_BUN, ingredient: ingredients.find(i => i.type === 'bun')});
-  }, [isLoaded, dispatch, ingredients]);
+  useEffect(
+    () => {
+    orderedIngredients.length>5&&addScroll('.constructorScroll', '.bottom');
+    isLoaded&&dispatch({type: ORDER_BUN, ingredient: ingredients.find(i => i.type === 'bun')});
+  }, [isLoaded, dispatch, ingredients, orderedIngredients]);
 
   const totalPrice = useMemo(
     ()=>{
@@ -73,7 +70,7 @@ const BurgerConstructor = () => {
         </li>
         <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
           {orderedIngredients.map((ingredient, index) => {
-            return <ConstructorItem key={index}ingredient={ingredient} index={index} moveItem={moveItem} />
+            return <ConstructorItem key={index} ingredient={ingredient} index={index} moveItem={moveItem} />
           })}
         </ul>
         <li className={`${constructorStyles.bun} ml-8 mr-4 pt-4 bottom`}>

@@ -9,7 +9,6 @@ export const SEND_ORDER_FAILED = 'SEND_ORDER_FAILED';
 export const ORDER_INGREDIENT = 'ORDER_INGREDIENT';
 export const DECREASE_INGREDIENT = 'DECREASE_INGREDIENT';
 export const MOVE_INGREDIENT = 'MOVE_INGREDIENT';
-
 export const ORDER_BUN = 'ORDER_BUN';
 export const DELETE_FROM_ORDER = 'DELETE_FROM_ORDER';
 export const SET_CURRENT_INGREDIENT = 'SET_CURRENT_INGREDIENT';
@@ -40,7 +39,7 @@ export function sendOrder(ingredients, openModal){
           openModal(true);
         } else {
           dispatch({SEND_ORDER_FAILED});
-          console.log("Ощибка")
+          console.log("Ошибка")
         }
       })
   }

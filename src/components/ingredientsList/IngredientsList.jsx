@@ -7,7 +7,8 @@ import {getIngredients, SET_CURRENT_INGREDIENT, SET_CURRENT_TAB} from '../../ser
 import { getCurrentTab, addScroll } from '../../utils/utils.js';
 
 const IngredientsList = () => {
-    const dispatch = useDispatch();
+   const ingredients = useSelector(store => store.ingredients);
+   const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(getIngredients());
@@ -15,13 +16,13 @@ const IngredientsList = () => {
         addScroll('.ingredientsScroll');
     }, [dispatch]);
 
-  const  ingredients = useSelector(store => store.ingredients);
   const setCurrentIngredient = (ingredient) => {
   dispatch({type: SET_CURRENT_INGREDIENT, ingredient})}
     const setCurrentTab = () => {
     const currentTab = getCurrentTab();
     dispatch({type: SET_CURRENT_TAB, currentTab});
     }
+
   return (
     <section onScroll={setCurrentTab}
       className={`${ingredientsListStyles.ingredientsSection} ingredientsScroll`}
@@ -74,7 +75,7 @@ const IngredientsList = () => {
           })}
       </ul>
     </section>
-  );
+  )
 };
 
 export default IngredientsList;
