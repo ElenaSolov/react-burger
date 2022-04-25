@@ -4,6 +4,8 @@ import { DELETE_FROM_ORDER, DECREASE_INGREDIENT } from "../../services/actions/a
 import constructorItemStyles from "./constructorItem.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
+import propTypesConfig from "../../utils/propTypesConfig";
+import PropTypes from "prop-types";
 
 const ConstructorItem = ({index, ingredient, moveItem}) => {
 
@@ -85,4 +87,11 @@ const ConstructorItem = ({index, ingredient, moveItem}) => {
       />
   </li>)
 }
+
+ConstructorItem.propTypes = {
+  index: PropTypes.number.isRequired,
+  ingredient: PropTypes.shape(propTypesConfig).isRequired,
+  moveItem: PropTypes.func.isRequired
+};
+
 export default ConstructorItem;

@@ -9,6 +9,7 @@ import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
 
 const BurgerConstructor = () => {
+
   const isLoaded =  useSelector(store => store.ingredientsRequestStatus);
   const ingredients = useSelector(store => store.ingredients);
   const orderedIngredients = useSelector(store => store.order.orderedIngredients);
