@@ -12,12 +12,13 @@ function App() {
     <div className={appStyles.app}>
         <AppHeader />
         <DndProvider backend={HTML5Backend}>
-          <main className={appStyles.main} id="modals">
+          <main className={appStyles.main}>
             <div className={appStyles.container}>
               <BurgerIngredients />
               <BurgerConstructor />
             </div>
           </main>
+          <div id='modals' className={appStyles.modals}/>
         </DndProvider>
     </div>
   )
