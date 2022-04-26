@@ -58,7 +58,8 @@ const BurgerConstructor = () => {
     }, [orderedIngredients, mainBun, isLoaded]);
 
   return (
-    isLoaded&&<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`}>
+    isLoaded ?
+    (<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`}>
       <ul className={`${constructorStyles.list} mt-25`} >
         <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
           <ConstructorElement
@@ -85,7 +86,9 @@ const BurgerConstructor = () => {
         </li>
       </ul>
       <OrderTotal totalIngredients={order.orderedIngredients} totalPrice={totalPrice}  />
-    </section>
+    </section>)
+    :
+    <p className='text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive'>Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа</p>
   );
 };
 
