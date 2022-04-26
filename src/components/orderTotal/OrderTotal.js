@@ -10,13 +10,14 @@ import propTypesConfig from "../../utils/propTypesConfig";
 import {useDispatch} from "react-redux";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
+  
   const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
 
   const makeOrder = () => {
+    if(totalIngredients.length === 0) return;
     dispatch(sendOrder(totalIngredients, setOpen, totalPrice));
-    
   };
 
   return (

@@ -5,7 +5,7 @@ import {RESET_CURRENT_INGREDIENT} from "../../services/actions/actions.js"
 
 const IngredientDetails = () => {
 
-    const ingredient = useSelector(store => store.currentIngredient);
+    const ingredient = useSelector(store => store.ingredients.currentIngredient);
     const dispatch = useDispatch();
     useEffect(
       ()=>{

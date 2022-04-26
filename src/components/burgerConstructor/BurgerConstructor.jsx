@@ -10,8 +10,8 @@ import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
 
 const BurgerConstructor = () => {
 
-  const isLoaded =  useSelector(store => store.ingredientsRequestStatus);
-  const ingredients = useSelector(store => store.ingredients);
+  const isLoaded =  useSelector(store => store.ingredients.ingredientsRequestStatus);
+  const ingredients = useSelector(store => store.ingredients.ingredients);
   const orderedIngredients = useSelector(store => store.order.orderedIngredients);
   const order = useSelector(store => store.order);
   const dispatch = useDispatch();

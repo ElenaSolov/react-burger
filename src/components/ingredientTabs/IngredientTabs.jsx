@@ -7,7 +7,7 @@ import {SET_CURRENT_TAB} from "../../services/actions/actions.js";
 
 const IngredientTabs = () => {
   const dispatch = useDispatch();
-  const current = useSelector(store => store.currentTab);
+  const current = useSelector(store => store.ingredients.currentTab);
   const setCurrent = () => {
   dispatch({type:SET_CURRENT_TAB, current})
   }
