@@ -1,4 +1,4 @@
-import React, {useMemo, useEffect, useCallback} from "react";
+import React, {useMemo, useEffect} from "react";
 import constructorStyles from "./burgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderTotal from "../orderTotal/OrderTotal";
@@ -7,6 +7,7 @@ import { addScroll } from "../../utils/utils";
 import {ORDER_INGREDIENT, ORDER_BUN, MOVE_INGREDIENT} from "../../services/actions/actions.js";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
+import { v4 as uuidv4 } from 'uuid';
 
 const BurgerConstructor = () => {
 
@@ -18,8 +19,7 @@ const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const mainBun = useSelector(store => store.order.orderedBun);
   console.log('bun', mainBun)
-  const moveItem = useCallback(
-      (dragIndex, hoverIndex) => {
+  const moveItem = (dragIndex, hoverIndex) => {
           const dragItem = orderedIngredients[dragIndex];
           const hoverItem = orderedIngredients[hoverIndex];
           // Swap places of dragItem and hoverItem in the ingredients array
@@ -27,7 +27,8 @@ const BurgerConstructor = () => {
           updatedIngredients[dragIndex] = hoverItem;
           updatedIngredients[hoverIndex] = dragItem;
           dispatch({type:MOVE_INGREDIENT, updatedIngredients});
-  }, [orderedIngredients, dispatch]);
+          console.log(2, orderedIngredients)
+  };
 
   const [, dropTarget] = useDrop({
           accept: "ingredient",
@@ -84,7 +85,7 @@ const BurgerConstructor = () => {
         {orderedIngredients.length>0&&(
           <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
             {orderedIngredients.map((ingredient, index) => {
-              return <ConstructorItem key={index} ingredient={ingredient} index={index} moveItem={moveItem} />
+              return <ConstructorItem key={()=>uuidv4()} ingredient={ingredient} index={index} moveItem={moveItem} />
           })
           }
         </ul>)}

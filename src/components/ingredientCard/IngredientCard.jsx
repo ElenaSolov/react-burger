@@ -14,11 +14,9 @@ const IngredientCard = ({ ingredient, onClick }) => {
   const ingredientDetailsHeader = "Детали ингредиента";
   let count = useSelector(store=> store.order.orderedIngredients.filter(ing => ing._id === ingredient._id).length);
   const mainBun = useSelector(store => store.order.orderedBun);
-
   if(ingredient._id === mainBun._id){
   count = 2;
   }
-
   const [{isDrag}, dragRef] = useDrag({
   type: 'ingredient',
   item: {...ingredient, start: 'ingredientCard'},
