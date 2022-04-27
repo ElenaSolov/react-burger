@@ -11,11 +11,13 @@ import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
 const BurgerConstructor = () => {
 
   const isLoaded =  useSelector(store => store.ingredients.ingredientsRequestStatus);
-  const ingredients = useSelector(store => store.ingredients.ingredients);
+//   const ingredients = useSelector(store => store.ingredients.ingredients);
   const orderedIngredients = useSelector(store => store.order.orderedIngredients);
+  console.log(orderedIngredients)
   const order = useSelector(store => store.order);
   const dispatch = useDispatch();
   const mainBun = useSelector(store => store.order.orderedBun);
+  console.log('bun', mainBun)
   const moveItem = useCallback(
       (dragIndex, hoverIndex) => {
           const dragItem = orderedIngredients[dragIndex];
@@ -32,36 +34,45 @@ const BurgerConstructor = () => {
           drop: (item)  =>  onDropHandler(item)
       });
   const onDropHandler = (ingredient) => {
+  console.log(1)
       if(ingredient.type === 'bun'){
         dispatch({type: ORDER_BUN, ingredient});
         }
       else if(ingredient.start === 'constructor'){
+      console.log(33)
         return;
         }
       else {
+      console.log(22)
         dispatch({type:ORDER_INGREDIENT, ingredient});
       }
   }
   useEffect(
     () => {
     orderedIngredients.length>5&&addScroll('.constructorScroll', '.bottom');
-    isLoaded&&dispatch({type: ORDER_BUN, ingredient: ingredients.find(i => i.type === 'bun')});
-  }, [isLoaded, dispatch, ingredients, orderedIngredients]);
+//     isLoaded&&dispatch({type: ORDER_BUN, ingredient: ingredients.find(i => i.type === 'bun')});
+  }, [ orderedIngredients]);
 
   const totalPrice = useMemo(
     ()=>{
       if(!isLoaded) return 0;
+      const bunCost = mainBun.price ? mainBun.price*2 : 0;
+      console.log(bunCost)
       if(orderedIngredients.length>0){
-       return orderedIngredients.reduce((prev, next) => prev+next.price, 0) + mainBun.price *2;
+        return orderedIngredients.reduce((prev, next) => prev+next.price, 0) + bunCost;
       };
-      return mainBun.price *2;
+      return bunCost;
     }, [orderedIngredients, mainBun, isLoaded]);
 
   return (
-    isLoaded ?
-    (<section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`}>
+    <section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`}>
+      {(!isLoaded || (orderedIngredients.length<1&&!mainBun.name))&&(
+          <p className='text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive'>
+            Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа
+          </p>
+        )}
       <ul className={`${constructorStyles.list} mt-25`} >
-        <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
+        {mainBun.name&&(<li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -69,12 +80,15 @@ const BurgerConstructor = () => {
             price={`${mainBun.price}`}
             thumbnail={`${mainBun.image}`}
           />
-        </li>
-        <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
-          {orderedIngredients.map((ingredient, index) => {
-            return <ConstructorItem key={index} ingredient={ingredient} index={index} moveItem={moveItem} />
-          })}
-        </ul>
+        </li>)}
+        {orderedIngredients.length>0&&(
+          <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
+            {orderedIngredients.map((ingredient, index) => {
+              return <ConstructorItem key={index} ingredient={ingredient} index={index} moveItem={moveItem} />
+          })
+          }
+        </ul>)}
+        {mainBun.name&&(
         <li className={`${constructorStyles.bun} ml-8 mr-4 pt-4 bottom`}>
           <ConstructorElement
             type="bottom"
@@ -83,13 +97,11 @@ const BurgerConstructor = () => {
             price={`${mainBun.price}`}
             thumbnail={`${mainBun.image}`}
           />
-        </li>
+        </li>)}
       </ul>
       <OrderTotal totalIngredients={order.orderedIngredients} totalPrice={totalPrice}  />
     </section>)
-    :
-    <p className='text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive'>Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа</p>
-  );
+
 };
 
 export default BurgerConstructor;
