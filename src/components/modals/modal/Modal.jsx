@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 const Modal = ({ onClose, isOpen, children, header }) => {
   const modalRoot = document.getElementById("modals");
-  console.log(modalRoot)
 
   return ReactDOM.createPortal(
     isOpen && (
