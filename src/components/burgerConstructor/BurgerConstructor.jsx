@@ -32,14 +32,17 @@ const BurgerConstructor = () => {
           drop: (item)  =>  onDropHandler(item)
       });
   const onDropHandler = (ingredient) => {
+
       if(ingredient.type === 'bun'){
+
         dispatch(orderBun(ingredient));
         }
       else if(ingredient.start === 'constructor'){
         return;
         }
       else {
-        dispatch(orderIngredient(ingredient));
+      const key = uuidv4();
+        dispatch(orderIngredient({...ingredient, key}));
       }
   }
   useEffect(
@@ -78,8 +81,7 @@ const BurgerConstructor = () => {
         {orderedIngredients.length>0&&(
           <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
             {orderedIngredients.map((ingredient, index) => {
-            const key = uuidv4();
-              return <ConstructorItem key={key} ingredient={ingredient} index={index} moveItem={moveItem} />
+               return <ConstructorItem key={ingredient.key} ingredient={ingredient} index={index} moveItem={moveItem} />
           })
           }
         </ul>)}

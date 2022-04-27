@@ -15,10 +15,11 @@ export const SET_CURRENT_INGREDIENT = 'SET_CURRENT_INGREDIENT';
 export const RESET_CURRENT_INGREDIENT = 'RESET_CURRENT_INGREDIENT';
 export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
 
-export function orderIngredient(ingredient){
+export function orderIngredient(ingredient, key){
   return {
     type: 'ORDER_INGREDIENT',
-    ingredient
+    ingredient,
+    key
   }
 }
 export function decreaseIngredient(index){
@@ -70,10 +71,12 @@ export function getIngredients(){
       .then(res => {
         if (res && res.success) {
           dispatch({type:GET_INGREDIENTS_SUCCESS, ingredients: res.data });
-        } else {
-          dispatch({type: GET_INGREDIENTS_FAILED})
         }
     })
+      .catch(err => {
+        dispatch({type: GET_INGREDIENTS_FAILED})
+        console.log(err)
+      })
   }
 }
 export function sendOrder(ingredients, openModal, totalPrice){
@@ -84,10 +87,11 @@ export function sendOrder(ingredients, openModal, totalPrice){
         if(res && res.success){
           dispatch({type:SEND_ORDER_SUCCESS, res, totalPrice})
           openModal(true);
-        } else {
-          dispatch({SEND_ORDER_FAILED});
-          console.log("Ошибка")
         }
+      })
+      .catch(err => {
+        dispatch({SEND_ORDER_FAILED});
+        console.log(err)
       })
   }
 }
