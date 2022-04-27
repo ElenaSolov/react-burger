@@ -14,11 +14,9 @@ const BurgerConstructor = () => {
   const isLoaded =  useSelector(store => store.ingredients.ingredientsRequestStatus);
 //   const ingredients = useSelector(store => store.ingredients.ingredients);
   const orderedIngredients = useSelector(store => store.order.orderedIngredients);
-  console.log(orderedIngredients)
   const order = useSelector(store => store.order);
   const dispatch = useDispatch();
   const mainBun = useSelector(store => store.order.orderedBun);
-  console.log('bun', mainBun)
   const moveItem = (dragIndex, hoverIndex) => {
           const dragItem = orderedIngredients[dragIndex];
           const hoverItem = orderedIngredients[hoverIndex];
@@ -27,7 +25,6 @@ const BurgerConstructor = () => {
           updatedIngredients[dragIndex] = hoverItem;
           updatedIngredients[hoverIndex] = dragItem;
           dispatch({type:MOVE_INGREDIENT, updatedIngredients});
-          console.log(2, orderedIngredients)
   };
 
   const [, dropTarget] = useDrop({
@@ -35,16 +32,13 @@ const BurgerConstructor = () => {
           drop: (item)  =>  onDropHandler(item)
       });
   const onDropHandler = (ingredient) => {
-  console.log(1)
       if(ingredient.type === 'bun'){
         dispatch({type: ORDER_BUN, ingredient});
         }
       else if(ingredient.start === 'constructor'){
-      console.log(33)
         return;
         }
       else {
-      console.log(22)
         dispatch({type:ORDER_INGREDIENT, ingredient});
       }
   }
@@ -58,7 +52,6 @@ const BurgerConstructor = () => {
     ()=>{
       if(!isLoaded) return 0;
       const bunCost = mainBun.price ? mainBun.price*2 : 0;
-      console.log(bunCost)
       if(orderedIngredients.length>0){
         return orderedIngredients.reduce((prev, next) => prev+next.price, 0) + bunCost;
       };
@@ -85,7 +78,8 @@ const BurgerConstructor = () => {
         {orderedIngredients.length>0&&(
           <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
             {orderedIngredients.map((ingredient, index) => {
-              return <ConstructorItem key={()=>uuidv4()} ingredient={ingredient} index={index} moveItem={moveItem} />
+            const key = uuidv4();
+              return <ConstructorItem key={key} ingredient={ingredient} index={index} moveItem={moveItem} />
           })
           }
         </ul>)}
