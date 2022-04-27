@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { DELETE_FROM_ORDER, DECREASE_INGREDIENT } from "../../services/actions/actions.js";
+import { deleteFromOrder, decreaseIngredient } from "../../services/actions/actions.js";
 import constructorItemStyles from "./constructorItem.module.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from "react-dnd";
@@ -16,9 +16,9 @@ const ConstructorItem = ({index, ingredient, moveItem}) => {
     const ingredient = orderedIngredients.find(i => i.name === e.target.closest('.constructor-element').querySelector('.constructor-element__text').textContent);
     const count = orderedIngredients.filter(i => i._id === ingredient._id).length;
       if(count<2){
-        dispatch({type:DELETE_FROM_ORDER, ingredient})
+        dispatch(deleteFromOrder(ingredient));
       } else {
-        dispatch({type: DECREASE_INGREDIENT, index});
+        dispatch(decreaseIngredient(index));
       }
   }
   const [, dropRef] = useDrop({

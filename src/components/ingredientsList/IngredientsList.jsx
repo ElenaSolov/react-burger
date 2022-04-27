@@ -3,7 +3,7 @@ import IngredientCard from "../ingredientCard/IngredientCard";
 import ingredientsListStyles from "./ingredientsList.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux';
-import {getIngredients, SET_CURRENT_INGREDIENT, SET_CURRENT_TAB} from '../../services/actions/actions.js';
+import {getIngredients, setCurrentIngredient, setCurrentTab} from '../../services/actions/actions.js';
 import { getCurrentTab, addScroll } from '../../utils/utils.js';
 
 const IngredientsList = () => {
@@ -17,14 +17,8 @@ const IngredientsList = () => {
         addScroll('.ingredientsScroll');
     }, [dispatch]);
 
-  const setCurrentIngredient = (ingredient) => {
-    dispatch({type: SET_CURRENT_INGREDIENT, ingredient})}
-    const setCurrentTab = () => {
-      const currentTab = getCurrentTab();
-      dispatch({type: SET_CURRENT_TAB, currentTab});
-  }
   return (
-    <section onScroll={setCurrentTab}
+    <section onScroll={()=>dispatch(setCurrentTab(getCurrentTab()))}
       className={`${ingredientsListStyles.ingredientsSection} ingredientsScroll`}
     >
       <h2 id="buns" className={`${ingredientsListStyles.header} mt-10 header tab`}>
@@ -36,7 +30,7 @@ const IngredientsList = () => {
           .map((ingredient) => {
             return (
               <IngredientCard
-                onClick={()=> setCurrentIngredient(ingredient)}
+                onClick={()=> dispatch(setCurrentIngredient(ingredient))}
                 key={ingredient._id}
                 ingredient={ingredient} />
             );
@@ -51,7 +45,7 @@ const IngredientsList = () => {
           .map((ingredient) => {
             return (
               <IngredientCard
-                onClick={()=> setCurrentIngredient(ingredient)}
+                onClick={()=> dispatch(setCurrentIngredient(ingredient))}
                 key={ingredient._id}
                 ingredient={ingredient}
                 CurrencyIcon={CurrencyIcon}
@@ -68,7 +62,7 @@ const IngredientsList = () => {
           .map((ingredient) => {
             return (
               <IngredientCard
-                onClick={()=> setCurrentIngredient(ingredient)}
+                onClick={()=> dispatch(setCurrentIngredient(ingredient))}
                 key={ingredient._id}
                 ingredient={ingredient} />
             );

@@ -3,13 +3,13 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientTabsStyles from './ingredientTabs.module.css';
 import {setTabsListeners} from "../../utils/utils";
 import {useSelector, useDispatch} from "react-redux";
-import {SET_CURRENT_TAB} from "../../services/actions/actions.js";
+import {setCurrentTab} from "../../services/actions/actions.js";
 
 const IngredientTabs = () => {
   const dispatch = useDispatch();
   const current = useSelector(store => store.ingredients.currentTab);
   const setCurrent = () => {
-  dispatch({type:SET_CURRENT_TAB, current})
+  dispatch(setCurrentTab(current))
   }
 
     useEffect(()=> {

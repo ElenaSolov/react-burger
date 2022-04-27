@@ -4,7 +4,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import OrderTotal from "../orderTotal/OrderTotal";
 import {useSelector, useDispatch} from 'react-redux';
 import { addScroll } from "../../utils/utils";
-import {ORDER_INGREDIENT, ORDER_BUN, MOVE_INGREDIENT} from "../../services/actions/actions.js";
+import {orderIngredient, orderBun, moveIngredient} from "../../services/actions/actions.js";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
 import { v4 as uuidv4 } from 'uuid';
@@ -24,7 +24,7 @@ const BurgerConstructor = () => {
           const updatedIngredients = [...orderedIngredients];
           updatedIngredients[dragIndex] = hoverItem;
           updatedIngredients[hoverIndex] = dragItem;
-          dispatch({type:MOVE_INGREDIENT, updatedIngredients});
+          dispatch(moveIngredient(updatedIngredients));
   };
 
   const [, dropTarget] = useDrop({
@@ -33,13 +33,13 @@ const BurgerConstructor = () => {
       });
   const onDropHandler = (ingredient) => {
       if(ingredient.type === 'bun'){
-        dispatch({type: ORDER_BUN, ingredient});
+        dispatch(orderBun(ingredient));
         }
       else if(ingredient.start === 'constructor'){
         return;
         }
       else {
-        dispatch({type:ORDER_INGREDIENT, ingredient});
+        dispatch(orderIngredient(ingredient));
       }
   }
   useEffect(

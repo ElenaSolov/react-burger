@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import ingredientDetailsStyles from "./ingredientDetails.module.css";
 import {useSelector, useDispatch} from "react-redux";
-import {RESET_CURRENT_INGREDIENT} from "../../services/actions/actions.js"
+import {resetCurrentIngredient} from "../../services/actions/actions.js"
 
 const IngredientDetails = () => {
 
@@ -10,7 +10,7 @@ const IngredientDetails = () => {
     useEffect(
       ()=>{
       return function(){
-        dispatch({type: RESET_CURRENT_INGREDIENT})
+        dispatch(resetCurrentIngredient)
       }
 
     })
