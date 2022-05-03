@@ -8,7 +8,8 @@ const AppHeader = () => {
   const [current, setCurrent] = React.useState('Конструктор');
   return (
     <header className={headerStyles.header}>
-      <nav className={headerStyles.navBar}>
+      <div className={headerStyles.header__container}>
+        <nav className={headerStyles.navBar}>
         <ul className={headerStyles.navlist}>
           <li>
             <NavItem
@@ -36,6 +37,7 @@ const AppHeader = () => {
         text='Личный кабинет'
         Icon = {ProfileIcon}
         type={(current === 'Кабинет') ? 'primary' : 'secondary'}/>
+      </div>
     </header>
   );
 };

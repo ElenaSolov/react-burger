@@ -62,7 +62,7 @@ const BurgerConstructor = () => {
     }, [orderedIngredients, mainBun, isLoaded]);
 
   return (
-    <section ref={dropTarget} className={`${constructorStyles.constructor} pl-4`}>
+    <section ref={dropTarget} className={`${constructorStyles.constructor} ml-4`}>
       {(!isLoaded || (orderedIngredients.length<1&&!mainBun.name))&&(
           <p className='text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive'>
             Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа
