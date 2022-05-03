@@ -10,8 +10,7 @@ const sendRequest = (method, body = null, url = baseURL) => {
     method: method,
     body: body,
     headers: headers,
-  }).then(getResponseData)
-    .catch(err => console.log(err));
+  }).then(getResponseData);
 };
 
 export const getIngredientsRequest = () => {
