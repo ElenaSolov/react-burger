@@ -1,5 +1,5 @@
 .popupWindow {
-    position: absolute;
+    position: fixed;
     z-index: 3;
     width: 720px;
     min-height: 539px;
