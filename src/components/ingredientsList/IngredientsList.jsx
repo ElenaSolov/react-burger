@@ -7,12 +7,11 @@ import { setCurrentIngredient, setCurrentTab} from '../../services/actions/actio
 import { getCurrentTab, addScroll } from '../../utils/utils.js';
 
 const IngredientsList = () => {
-   const ingredients = useSelector(store => store.ingredients.ingredients);
 
+   const ingredients = useSelector(store => store.ingredients.ingredients);
    const dispatch = useDispatch();
 
     useEffect(()=>{
-//         dispatch(getIngredients());
         getCurrentTab();
         addScroll('.ingredientsScroll');
     }, [dispatch]);
