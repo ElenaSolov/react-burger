@@ -90,7 +90,7 @@ export function sendOrder(ingredients, openModal, totalPrice){
         }
       })
       .catch(err => {
-        dispatch({SEND_ORDER_FAILED});
+        dispatch({type:SEND_ORDER_FAILED});
         console.log(err)
       })
   }
