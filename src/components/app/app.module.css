@@ -21,9 +21,3 @@
   grid-template-areas:
         'ingredients constructor';
 }
-
-.modals {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}

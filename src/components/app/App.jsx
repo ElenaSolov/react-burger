@@ -18,7 +18,6 @@ function App() {
               <BurgerConstructor />
             </div>
           </main>
-          <div id='modals' className={appStyles.modals}/>
         </DndProvider>
     </div>
   )
