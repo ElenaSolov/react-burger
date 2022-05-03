@@ -17,50 +17,50 @@ export const SET_CURRENT_TAB = 'SET_CURRENT_TAB';
 
 export function orderIngredient(ingredient, key){
   return {
-    type: 'ORDER_INGREDIENT',
+    type: ORDER_INGREDIENT,
     ingredient,
     key
   }
 }
 export function decreaseIngredient(index){
   return {
-    type: 'DECREASE_INGREDIENT',
+    type: DECREASE_INGREDIENT,
     index
   }
 }
 export function moveIngredient(updatedIngredients){
   return {
-    type: 'MOVE_INGREDIENT',
+    type: MOVE_INGREDIENT,
     updatedIngredients
   }
 }
 export function orderBun(ingredient){
   return {
-    type: 'ORDER_BUN',
+    type: ORDER_BUN,
     ingredient
   }
 }
 export function deleteFromOrder(ingredient){
   return {
-    type: 'DELETE_FROM_ORDER',
+    type: DELETE_FROM_ORDER,
     ingredient
   }
 }
 export function setCurrentIngredient(ingredient){
   return {
-    type: 'SET_CURRENT_INGREDIENT',
+    type: SET_CURRENT_INGREDIENT,
     ingredient
   }
 }
 export function resetCurrentIngredient(ingredient){
   return {
-    type: 'RESET_CURRENT_INGREDIENT',
+    type: RESET_CURRENT_INGREDIENT,
     ingredient
   }
 }
 export function setCurrentTab(currentTab){
   return {
-    type: 'SET_CURRENT_TAB',
+    type: SET_CURRENT_TAB,
     currentTab
   }
 }
