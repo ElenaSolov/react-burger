@@ -3,7 +3,7 @@ import IngredientCard from "../ingredientCard/IngredientCard";
 import ingredientsListStyles from "./ingredientsList.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from 'react-redux';
-import {getIngredients, setCurrentIngredient, setCurrentTab} from '../../services/actions/actions.js';
+import { setCurrentIngredient, setCurrentTab} from '../../services/actions/actions.js';
 import { getCurrentTab, addScroll } from '../../utils/utils.js';
 
 const IngredientsList = () => {
@@ -12,7 +12,7 @@ const IngredientsList = () => {
    const dispatch = useDispatch();
 
     useEffect(()=>{
-        dispatch(getIngredients());
+//         dispatch(getIngredients());
         getCurrentTab();
         addScroll('.ingredientsScroll');
     }, [dispatch]);

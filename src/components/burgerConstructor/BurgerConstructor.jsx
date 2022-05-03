@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from 'uuid';
 const BurgerConstructor = () => {
 
   const isLoaded =  useSelector(store => store.ingredients.ingredientsRequestStatus);
-//   const ingredients = useSelector(store => store.ingredients.ingredients);
   const orderedIngredients = useSelector(store => store.order.orderedIngredients);
   const order = useSelector(store => store.order);
   const dispatch = useDispatch();
