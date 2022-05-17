@@ -8,7 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import img from "../../images/burger_icon.svg";
 import { getIngredients } from "../../services/actions/actions.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { LoginPage } from "../../pages/login";
+import LoginPage from "../../pages/login";
+import RegisterPage from "../../pages/register";
 import { HomePage } from "../../pages/home";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Routes>
           <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
           <Route path="/" exact element={<HomePage />} />
         </Routes>
       </DndProvider>

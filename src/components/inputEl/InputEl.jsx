@@ -21,7 +21,7 @@ const InputEl = ({ type, placeholder }) => {
         />
       </div>
     ) : (
-      <div className={`${inputStyles.input} mt-6 mb-6`}>
+      <div className={`${inputStyles.input} mt-6`}>
         <Input
           type="password"
           onChange={onChange}

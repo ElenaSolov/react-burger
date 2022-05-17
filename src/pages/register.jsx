@@ -4,32 +4,27 @@ import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
 import { Link } from "react-router-dom";
 
-function LoginPage() {
+function RegisterPage() {
   return (
     <section className={pagesStyles.login}>
       <div className={pagesStyles.container}>
         <h2 className={`${pagesStyles.title} text text_type_main-large`}>
-          Вход
+          Регистрация
         </h2>
         <form className={pagesStyles.form}>
+          <InputEl type="text" placeholder="Имя" />
           <InputEl type="email" placeholder="E-mail" />
           <InputEl type="password" placeholder="Пароль" />
           <div className="mt-6">
             <Button type="primary" size="medium" onClick={() => {}}>
-              Войти
+              Зарегистрироваться
             </Button>
           </div>
         </form>
         <p className="text text_type_main-default text_color_inactive mt-20">
-          Вы — новый пользователь?
-          <Link to="/register" className={pagesStyles.link}>
-            Зарегистрироваться
-          </Link>
-        </p>
-        <p className="text text_type_main-default text_color_inactive mt-4">
-          Забыли пароль?
-          <Link to="/" className={pagesStyles.link}>
-            Восстановить пароль
+          Уже зарегистрированы?
+          <Link to="/login" className={pagesStyles.link}>
+            Войти
           </Link>
         </p>
       </div>
@@ -37,4 +32,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegisterPage;
