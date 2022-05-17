@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function LoginPage() {
   return (
-    <section className={pagesStyles.login}>
+    <section className={pagesStyles.page}>
       <div className={pagesStyles.container}>
         <h2 className={`${pagesStyles.title} text text_type_main-medium`}>
           Вход
@@ -28,7 +28,7 @@ function LoginPage() {
         </p>
         <p className="text text_type_main-default text_color_inactive mt-4">
           Забыли пароль?
-          <Link to="/restore" className={pagesStyles.link}>
+          <Link to="/forgot-password" className={pagesStyles.link}>
             Восстановить пароль
           </Link>
         </p>
