@@ -12,14 +12,20 @@ const InputEl = ({ type, placeholder }) => {
   };
   const input =
     type === "email" ? (
-      <div className={`${inputStyles.input} mt-6`}>
-        <EmailInput
-          onChange={onChange}
-          value={value}
-          name={"email"}
-          placeholder={placeholder}
-        />
-      </div>
+      placeholder ? (
+        <div className={`${inputStyles.input} mt-6`}>
+          <Input
+            onChange={onChange}
+            value={value}
+            name={"email"}
+            placeholder={placeholder}
+          />
+        </div>
+      ) : (
+        <div className={`${inputStyles.input} mt-6`}>
+          <EmailInput onChange={onChange} value={value} name={"email"} />
+        </div>
+      )
     ) : (
       <div className={`${inputStyles.input} mt-6`}>
         <Input

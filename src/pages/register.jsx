@@ -8,7 +8,7 @@ function RegisterPage() {
   return (
     <section className={pagesStyles.login}>
       <div className={pagesStyles.container}>
-        <h2 className={`${pagesStyles.title} text text_type_main-large`}>
+        <h2 className={`${pagesStyles.title} text text_type_main-medium`}>
           Регистрация
         </h2>
         <form className={pagesStyles.form}>

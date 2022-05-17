@@ -10,6 +10,7 @@ import { getIngredients } from "../../services/actions/actions.js";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginPage from "../../pages/login";
 import RegisterPage from "../../pages/register";
+import RestorePasswordPage from "../../pages/restorePassword";
 import { HomePage } from "../../pages/home";
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Routes>
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
+          <Route path="restore" element={<RestorePasswordPage />} />
           <Route path="/" exact element={<HomePage />} />
         </Routes>
       </DndProvider>
