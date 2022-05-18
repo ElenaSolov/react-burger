@@ -22,5 +22,6 @@ NavItem.propTypes = {
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };
 export default NavItem;
