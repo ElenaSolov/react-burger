@@ -10,6 +10,9 @@ const InputEl = ({ type, placeholder, margin }) => {
   const [value, setValue] = React.useState("");
   const onChange = (e) => {
     setValue(e.target.value);
+    if (value.length < 2) {
+      setError(true);
+    } else setError(false);
   };
   const onChangeWithValidation = (e) => {
     setValue(e.target.value);
@@ -59,21 +62,27 @@ const InputEl = ({ type, placeholder, margin }) => {
       <div className={styles}>
         <Input
           type={type}
+          name={type}
           onChange={onChange}
           value={value}
           placeholder={placeholder}
           icon={icon}
           ref={inputRef}
           onIconClick={onIconClick}
+          error={error}
+          errorText={"Пожалуйста, введите более 2х символов"}
         />
       </div>
     ) : (
       <div className={styles}>
         <Input
           type={type}
+          name={type}
           onChange={onChange}
           value={value}
           placeholder={placeholder}
+          error={error}
+          errorText={"Пожалуйста, введите более 2х символов"}
         />
       </div>
     );

@@ -32,3 +32,14 @@ export const sendResetPasswordRequest = (email) => {
   const body = JSON.stringify({ email: email });
   return sendRequest("POST", body, `${baseURL}/password-reset/reset`);
 };
+
+// auth
+
+export const sendAuthRequest = (email, password, name) => {
+  const body = JSON.stringify({ email, password, name });
+  return sendRequest("POST", body, `${baseURL}/auth/register`);
+};
+export const sendLoginRequest = (email, password) => {
+  const body = JSON.stringify({ email, password });
+  return sendRequest("POST", body, `${baseURL}/auth/login`);
+};

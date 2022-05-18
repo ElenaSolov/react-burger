@@ -34,8 +34,11 @@
 }
 .profileLink{
     display: block;
-    height: 64px;
+    line-height: 64px;
     text-decoration: none;
+}
+.profileLinkActive{
+    color: #F2F2F3;
 }
 .profileLink:hover{
     color: #F2F2F3;

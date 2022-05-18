@@ -13,6 +13,7 @@ import RegisterPage from "../../pages/register";
 import RestorePasswordPage from "../../pages/restorePassword";
 import ResetPasswordPage from "../../pages/reset";
 import Profile from "../../pages/profile";
+import ProtectedRoute from "../ProtectedRoute";
 
 import { HomePage } from "../../pages/home";
 
@@ -41,7 +42,15 @@ function App() {
           <Route path="forgot-password" element={<RestorePasswordPage />} />
           <Route path="forgot-password/reset" element={<ResetPasswordPage />} />
           <Route path="/" exact element={<HomePage />} />
-          <Route path="profile" exact element={<Profile />} />
+          <Route
+            path="profile"
+            exact
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </DndProvider>
     </Router>

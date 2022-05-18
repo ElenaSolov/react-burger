@@ -1,30 +1,39 @@
 import React from "react";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Profile() {
+  const className = `${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`;
+  const activeClassName = `${pagesStyles.profileLink} ${pagesStyles.profileLinkActive} text text_type_main-medium`;
   return (
     <section className={pagesStyles.page}>
       <div className={pagesStyles.profile}>
         <div>
-          <h2
-            className={`${pagesStyles.profileLink} text text_type_main-medium`}
+          <NavLink
+            to="/profile"
+            className={({ isActive }) =>
+              isActive ? activeClassName : className
+            }
           >
             Профиль
-          </h2>
-          <Link
-            to="/profile/orders"
-            className={`${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`}
+          </NavLink>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? activeClassName : className
+            }
           >
             История заказов
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="/"
-            className={`${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`}
+            className={({ isActive }) =>
+              isActive ? activeClassName : className
+            }
           >
             Выход
-          </Link>
+          </NavLink>
           <p
             className={`${pagesStyles.text} text text_type_main-default mt-20`}
           >
