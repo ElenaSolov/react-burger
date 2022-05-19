@@ -108,6 +108,7 @@ export function getCookie(name) {
     return decodeURIComponent(matches[1]);
   } else {
     console.log("else");
+    if (name === "refreshToken") return;
     refreshCookie()
       .then((res) => {
         setCookie("refreshToken", res.refreshToken, 1200);

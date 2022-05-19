@@ -28,16 +28,6 @@ export const sendOrderRequest = (ingredients) => {
   return sendRequest("POST", body, `${baseURL}/orders`);
 };
 
-export const sendRestorePasswordRequest = (email) => {
-  const body = JSON.stringify({ email: email });
-  return sendRequest("POST", body, `${baseURL}/password-reset`);
-};
-
-export const sendResetPasswordRequest = (email) => {
-  const body = JSON.stringify({ email: email });
-  return sendRequest("POST", body, `${baseURL}/password-reset/reset`);
-};
-
 // auth
 
 export const sendAuthRequest = (email, password, name) => {
@@ -55,4 +45,18 @@ export const getUserInfo = () => {
 export const refreshCookie = () => {
   const body = JSON.stringify({ token: getCookie("refreshToken") });
   return sendRequest("POST", body, `${baseURL}/auth/token`);
+};
+export const sendRestorePasswordRequest = (email) => {
+  const body = JSON.stringify({ email: email });
+  return sendRequest("POST", body, `${baseURL}/password-reset`);
+};
+export const sendResetPasswordRequest = (password) => {
+  console.log(password);
+  const headers = { authorization: getCookie("accessToken") };
+  const body = JSON.stringify({
+    password: password,
+    token: getCookie("accessToken"),
+  });
+  console.log(body);
+  return sendRequest("POST", body, `${baseURL}/password-reset/reset`, headers);
 };

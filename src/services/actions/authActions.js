@@ -2,6 +2,7 @@ import {
   getUserInfo,
   sendAuthRequest,
   sendLoginRequest,
+  sendResetPasswordRequest,
 } from "../../utils/api";
 import { setCookie } from "../../utils/utils";
 
@@ -10,6 +11,7 @@ export const REGISTER_FAIL = "REGISTER_FAIL";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 export const LOGOUT = "LOGOUT";
 
 export function register(email, password, name) {
@@ -58,6 +60,27 @@ export function login(email, password) {
 export function getUser() {
   return function (dispatch) {
     getUserInfo()
+      .then((res) => {
+        if (res && res.success) {
+          console.log("res", res);
+          dispatch({
+            type: UPDATE_USER_SUCCESS,
+            email: res.user.email,
+            name: res.user.name,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: UPDATE_USER_FAIL,
+        });
+      });
+  };
+}
+export function resetPassword(password) {
+  return function (dispatch) {
+    sendResetPasswordRequest(password)
       .then((res) => {
         if (res && res.success) {
           console.log("res", res);

@@ -3,16 +3,17 @@ import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
 import { NavLink } from "react-router-dom";
 import { getUser } from "../services/actions/authActions";
-import { refreshCookie } from "../utils/api.js";
 import { useDispatch, useSelector } from "react-redux";
 
 function Profile() {
   const user = useSelector((store) => store.auth);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getUser());
-    refreshCookie();
-  }, [dispatch]);
+  }, [dispatch, user.isAuth]);
+  console.log(user);
+
   const className = `${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`;
   const activeClassName = `${pagesStyles.profileLink} ${pagesStyles.profileLinkActive} text text_type_main-medium`;
   return (

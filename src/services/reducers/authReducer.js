@@ -5,12 +5,13 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAIL,
 } from "../actions/authActions";
 
 const initialState = {
   isAuth: false,
-  name: null,
-  email: null,
+  name: "",
+  email: "",
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -27,8 +28,9 @@ export const authReducer = (state = initialState, action) => {
       };
     }
     case REGISTER_FAIL:
-    case LOGIN_FAIL: {
-      console.log("f");
+    case LOGIN_FAIL:
+    case UPDATE_USER_FAIL:
+    case LOGOUT: {
       return {
         ...initialState,
       };

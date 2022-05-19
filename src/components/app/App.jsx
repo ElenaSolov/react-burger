@@ -14,6 +14,7 @@ import RestorePasswordPage from "../../pages/restorePassword";
 import ResetPasswordPage from "../../pages/reset";
 import Profile from "../../pages/profile";
 import ProtectedRoute from "../ProtectedRoute";
+import { getUser } from "../../services/actions/authActions";
 
 import { HomePage } from "../../pages/home";
 
@@ -25,6 +26,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
+    dispatch(getUser());
   }, [dispatch]);
 
   return !isLoaded ? (
