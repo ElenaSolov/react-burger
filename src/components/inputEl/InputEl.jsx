@@ -6,8 +6,8 @@ import {
 import inputStyles from "./inputEl.module.css";
 import { validateEmail } from "../../utils/utils";
 
-const InputEl = ({ type, placeholder, margin }) => {
-  const [value, setValue] = React.useState("");
+const InputEl = ({ type, placeholder, margin, initialValue = "" }) => {
+  const [value, setValue] = React.useState(initialValue);
   const onChange = (e) => {
     setValue(e.target.value);
     if (value.length < 2) {

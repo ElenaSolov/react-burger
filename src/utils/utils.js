@@ -1,3 +1,5 @@
+import { refreshCookie } from "./api.js";
+
 //vertical scroll
 const body = document.querySelector("body");
 function setElementHeight(el, bottomEl) {
@@ -93,4 +95,25 @@ export function setCookie(name, value, props) {
     }
   }
   document.cookie = updatedCookie;
+}
+export function getCookie(name) {
+  const matches = document.cookie.match(
+    new RegExp(
+      "(?:^|; )" +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+        "=([^;]*)"
+    )
+  );
+  if (matches) {
+    return decodeURIComponent(matches[1]);
+  } else {
+    console.log("else");
+    refreshCookie()
+      .then((res) => {
+        setCookie("refreshToken", res.refreshToken, 1200);
+        setCookie("accessToken", res.accessToken, 1200);
+        return getCookie(name);
+      })
+      .catch((err) => console.log(err));
+  }
 }

@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
 import { NavLink } from "react-router-dom";
+import { getUser } from "../services/actions/authActions";
+import { refreshCookie } from "../utils/api.js";
+import { useDispatch, useSelector } from "react-redux";
 
 function Profile() {
+  const user = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+    refreshCookie();
+  }, [dispatch]);
   const className = `${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`;
   const activeClassName = `${pagesStyles.profileLink} ${pagesStyles.profileLinkActive} text text_type_main-medium`;
   return (
@@ -42,8 +51,17 @@ function Profile() {
         </div>
         <div className="ml-15">
           <form className={pagesStyles.form}>
-            <InputEl type="text" placeholder="Имя" margin={0} />
-            <InputEl type="text" placeholder="Логин" />
+            <InputEl
+              type="text"
+              placeholder="Имя"
+              margin={0}
+              initialValue={user.name}
+            />
+            <InputEl
+              type="text"
+              placeholder="Логин"
+              initialValue={user.email}
+            />
             <InputEl type="password" placeholder="Пароль" />
           </form>
         </div>

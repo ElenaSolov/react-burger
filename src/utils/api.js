@@ -1,11 +1,16 @@
+import { getCookie } from "./utils";
+
 const baseURL = "https://norma.nomoreparties.space/api";
-const headers = { "Content-Type": "application/json" };
+const defaultHeaders = { "Content-Type": "application/json" };
 
 const getResponseData = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
 
-const sendRequest = (method, body = null, url = baseURL) => {
+const sendRequest = (method, body = null, url = baseURL, additionalHeaders) => {
+  const headers = additionalHeaders
+    ? { ...defaultHeaders, ...additionalHeaders }
+    : defaultHeaders;
   return fetch(`${url}`, {
     method: method,
     body: body,
@@ -42,4 +47,12 @@ export const sendAuthRequest = (email, password, name) => {
 export const sendLoginRequest = (email, password) => {
   const body = JSON.stringify({ email, password });
   return sendRequest("POST", body, `${baseURL}/auth/login`);
+};
+export const getUserInfo = () => {
+  const headers = { authorization: getCookie("accessToken") };
+  return sendRequest("GET", null, `${baseURL}/auth/user`, headers);
+};
+export const refreshCookie = () => {
+  const body = JSON.stringify({ token: getCookie("refreshToken") });
+  return sendRequest("POST", body, `${baseURL}/auth/token`);
 };
