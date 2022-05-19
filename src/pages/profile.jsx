@@ -4,6 +4,7 @@ import InputEl from "../components/inputEl/InputEl";
 import { NavLink } from "react-router-dom";
 import { getUser } from "../services/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
+import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function Profile() {
   const user = useSelector((store) => store.auth);
@@ -64,6 +65,14 @@ function Profile() {
               initialValue={user.email}
             />
             <InputEl type="password" placeholder="Пароль" />
+            <div className={`${pagesStyles.buttonBar} mt-6`}>
+              <Button type="secondary" size="medium">
+                Отмена
+              </Button>
+              <Button type="primary" size="medium">
+                Сохранить
+              </Button>
+            </div>
           </form>
         </div>
       </div>
