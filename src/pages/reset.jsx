@@ -1,15 +1,20 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { getFormValues } from "../utils/utils";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../services/actions/authActions";
 
 function ResetPasswordPage() {
   const ref = useRef();
   const dispatch = useDispatch();
+  const auth = useSelector((store) => store.auth);
+
+  useEffect(() => {
+    if (auth.isAuth) Navigate("/profile");
+  }, [auth]);
 
   const onSubmit = (e) => {
     e.preventDefault();

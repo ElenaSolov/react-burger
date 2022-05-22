@@ -3,8 +3,10 @@ import {
   sendAuthRequest,
   sendLoginRequest,
   sendResetPasswordRequest,
+  sendLogoutRequest,
+  sendUserUpdate,
 } from "../../utils/api";
-import { setCookie } from "../../utils/utils";
+import { setCookie, deleteCookie } from "../../utils/utils";
 
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAIL = "REGISTER_FAIL";
@@ -90,6 +92,39 @@ export function resetPassword(password) {
             name: res.user.name,
           });
         }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+export function logout() {
+  return function (dispatch) {
+    sendLogoutRequest()
+      .then(() => {
+        dispatch({
+          type: LOGOUT,
+        });
+        deleteCookie("refreshToken");
+        deleteCookie("accessToken");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+export function updateUserInfo(name, email, password) {
+  console.log(name, email, password);
+  return function (dispatch) {
+    console.log(33);
+    sendUserUpdate(name, email, password)
+      .then(() => {
+        dispatch({
+          type: UPDATE_USER_SUCCESS,
+          name,
+          email,
+        });
+        console.log(44);
       })
       .catch((err) => {
         console.log(err);

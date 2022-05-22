@@ -51,12 +51,20 @@ export const sendRestorePasswordRequest = (email) => {
   return sendRequest("POST", body, `${baseURL}/password-reset`);
 };
 export const sendResetPasswordRequest = (password) => {
-  console.log(password);
   const headers = { authorization: getCookie("accessToken") };
   const body = JSON.stringify({
     password: password,
     token: getCookie("accessToken"),
   });
-  console.log(body);
   return sendRequest("POST", body, `${baseURL}/password-reset/reset`, headers);
+};
+export const sendLogoutRequest = () => {
+  const body = JSON.stringify({ token: getCookie("refreshToken") });
+  return sendRequest("POST", body, `${baseURL}/auth/logout`);
+};
+export const sendUserUpdate = (name, email, password) => {
+  const headers = { authorization: getCookie("accessToken") };
+  const body = JSON.stringify({ name, email, password });
+  console.log(body);
+  return sendRequest("PATCH", body, `${baseURL}/auth/user`, headers);
 };

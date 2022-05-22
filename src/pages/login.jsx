@@ -14,12 +14,12 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (auth.isAuth) navigate("/");
+    if (auth.isAuth) navigate("/profile");
   }, [auth, navigate]);
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let values = getFormValues(ref.current.elements);
+    const values = getFormValues(ref.current.elements);
     console.log(values);
     dispatch(login(values.email, values.password));
   };

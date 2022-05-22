@@ -1,14 +1,21 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
 import { Link, useNavigate } from "react-router-dom";
 import { sendRestorePasswordRequest } from "../utils/api";
 import { validateEmail } from "../utils/utils";
+import { useSelector } from "react-redux";
 
 function RestorePasswordPage() {
   const ref = useRef();
   let navigate = useNavigate();
+  const auth = useSelector((store) => store.auth);
+
+  useEffect(() => {
+    if (auth.isAuth) navigate("/profile");
+  }, [auth, navigate]);
+
   const onClick = (e) => {
     e.preventDefault();
     if (validateEmail(ref.current.elements.email.value)) {

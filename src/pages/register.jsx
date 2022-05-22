@@ -14,7 +14,7 @@ function RegisterPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth.isAuth) navigate("/");
+    if (auth.isAuth) navigate("/profile");
   }, [auth, navigate]);
 
   const onSubmit = (e) => {

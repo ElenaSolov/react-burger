@@ -6,8 +6,23 @@ import {
 import inputStyles from "./inputEl.module.css";
 import { validateEmail } from "../../utils/utils";
 
-const InputEl = ({ type, placeholder, margin, initialValue = "" }) => {
+const InputEl = ({
+  type,
+  placeholder,
+  margin,
+  initialValue = "",
+  reset,
+  setReset,
+}) => {
   const [value, setValue] = React.useState(initialValue);
+
+  React.useEffect(() => {
+    if (reset) {
+      setValue(initialValue);
+      setReset(false);
+    }
+  }, [initialValue, reset, setReset]);
+
   const onChange = (e) => {
     setValue(e.target.value);
     if (value.length < 2) {
@@ -20,6 +35,7 @@ const InputEl = ({ type, placeholder, margin, initialValue = "" }) => {
       setError(true);
     } else setError(false);
   };
+
   const [icon, setIcon] = React.useState("HideIcon");
   const inputRef = React.useRef(null);
 

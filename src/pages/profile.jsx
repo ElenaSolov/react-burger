@@ -1,22 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
 import { NavLink } from "react-router-dom";
-import { getUser } from "../services/actions/authActions";
+import {
+  getUser,
+  logout,
+  updateUserInfo,
+} from "../services/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { getFormValues } from "../utils/utils";
 
 function Profile() {
   const user = useSelector((store) => store.auth);
+  const [reset, setReset] = React.useState(false);
   const dispatch = useDispatch();
+  const ref = useRef();
 
   useEffect(() => {
     dispatch(getUser());
   }, [dispatch, user.isAuth]);
-  console.log(user);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    if (e.target.textContent === "Отмена") {
+      setReset(true);
+    } else {
+      const values = getFormValues(ref.current.elements);
+      dispatch(updateUserInfo(values.text, values.email, values.password));
+    }
+  };
+
+  const onCancel = (e) => {
+    console.log(e.target.textContent);
+    e.preventDefault();
+    setReset(true);
+  };
 
   const className = `${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`;
   const activeClassName = `${pagesStyles.profileLink} ${pagesStyles.profileLinkActive} text text_type_main-medium`;
+
   return (
     <section className={pagesStyles.page}>
       <div className={pagesStyles.profile}>
@@ -39,9 +63,11 @@ function Profile() {
           </NavLink>
           <NavLink
             to="/"
-            className={({ isActive }) =>
-              isActive ? activeClassName : className
-            }
+            onClick={() => {
+              console.log(11);
+              dispatch(logout());
+            }}
+            className={className}
           >
             Выход
           </NavLink>
@@ -52,21 +78,30 @@ function Profile() {
           </p>
         </div>
         <div className="ml-15">
-          <form className={pagesStyles.form}>
+          <form ref={ref} className={pagesStyles.form} onSubmit={onSubmit}>
             <InputEl
+              reset={reset}
+              setReset={setReset}
               type="text"
               placeholder="Имя"
               margin={0}
               initialValue={user.name}
             />
             <InputEl
-              type="text"
+              reset={reset}
+              setReset={setReset}
+              type="email"
               placeholder="Логин"
               initialValue={user.email}
             />
-            <InputEl type="password" placeholder="Пароль" />
+            <InputEl
+              type="password"
+              placeholder="Пароль"
+              reset={reset}
+              setReset={setReset}
+            />
             <div className={`${pagesStyles.buttonBar} mt-6`}>
-              <Button type="secondary" size="medium">
+              <Button onClick={onCancel} type="secondary" size="medium">
                 Отмена
               </Button>
               <Button type="primary" size="medium">

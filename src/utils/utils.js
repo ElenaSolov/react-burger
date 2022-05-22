@@ -118,3 +118,6 @@ export function getCookie(name) {
       .catch((err) => console.log(err));
   }
 }
+export function deleteCookie(name) {
+  setCookie(name, null, { expires: -1 });
+}
