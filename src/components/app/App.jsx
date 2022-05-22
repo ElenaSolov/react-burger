@@ -13,6 +13,7 @@ import RegisterPage from "../../pages/register";
 import RestorePasswordPage from "../../pages/restorePassword";
 import ResetPasswordPage from "../../pages/reset";
 import Profile from "../../pages/profile";
+import IngredientPage from "../../pages/ingredient";
 import ProtectedRoute from "../ProtectedRoute";
 import { getUser } from "../../services/actions/authActions";
 
@@ -39,11 +40,12 @@ function App() {
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
         <Routes>
+          <Route path="/" exact element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="forgot-password" element={<RestorePasswordPage />} />
           <Route path="forgot-password/reset" element={<ResetPasswordPage />} />
-          <Route path="/" exact element={<HomePage />} />
+          <Route path="ingredients/:id" element={<IngredientPage />} />
           <Route
             path="profile"
             exact

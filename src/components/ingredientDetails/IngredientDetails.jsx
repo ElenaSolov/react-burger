@@ -1,19 +1,19 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import ingredientDetailsStyles from "./ingredientDetails.module.css";
-import {useSelector, useDispatch} from "react-redux";
-import {resetCurrentIngredient} from "../../services/actions/actions.js"
+import { useSelector, useDispatch } from "react-redux";
+import { resetCurrentIngredient } from "../../services/actions/actions.js";
 
 const IngredientDetails = () => {
-
-    const ingredient = useSelector(store => store.ingredients.currentIngredient);
-    const dispatch = useDispatch();
-    useEffect(
-      ()=>{
-      return function(){
-        dispatch(resetCurrentIngredient)
-      }
-
-    })
+  const ingredient = useSelector(
+    (store) => store.ingredients.currentIngredient
+  );
+  console.log(ingredient);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    return function () {
+      dispatch(resetCurrentIngredient);
+    };
+  });
 
   return (
     <>
