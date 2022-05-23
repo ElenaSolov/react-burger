@@ -23,9 +23,10 @@ export const getIngredientsRequest = () => {
 };
 
 export const sendOrderRequest = (ingredients) => {
+  const headers = { authorization: getCookie("accessToken") };
   const ids = ingredients.map((ingredient) => ingredient._id);
   const body = JSON.stringify({ ingredients: ids });
-  return sendRequest("POST", body, `${baseURL}/orders`);
+  return sendRequest("POST", body, `${baseURL}/orders`, headers);
 };
 
 // auth

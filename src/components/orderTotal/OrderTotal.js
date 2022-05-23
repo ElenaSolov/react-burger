@@ -9,13 +9,20 @@ import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { openOrderModal } from "../../services/actions/modalActions";
+import { useNavigate } from "react-router-dom";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
   const dispatch = useDispatch();
   const open = useSelector((store) => store.modal.openOrderModal);
+  const auth = useSelector((store) => store.auth);
+  const navigate = useNavigate();
 
   const makeOrder = () => {
     if (totalIngredients.length === 0) return;
+    if (!auth.isAuth) {
+      navigate("login", { replace: true, state: "/" });
+      return;
+    }
     dispatch(sendOrder(totalIngredients, openOrderModal, totalPrice));
   };
 

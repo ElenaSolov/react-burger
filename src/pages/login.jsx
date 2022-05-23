@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { login } from "../services/actions/authActions";
 import { useSelector, useDispatch } from "react-redux";
 import { getFormValues } from "../utils/utils";
@@ -12,10 +12,12 @@ function LoginPage() {
   const navigate = useNavigate();
   const ref = useRef();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const redirectPath = location.state;
 
   useEffect(() => {
-    if (auth.isAuth) navigate("/profile");
-  }, [auth, navigate]);
+    if (auth.isAuth) navigate(redirectPath);
+  }, [auth, navigate, redirectPath]);
 
   const onSubmit = (e) => {
     e.preventDefault();
