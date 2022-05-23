@@ -7,17 +7,16 @@ import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../services/actions/actions.js";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { openOrderModal } from "../../services/actions/modalActions";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
-  
   const dispatch = useDispatch();
-
-  const [open, setOpen] = React.useState(false);
+  const open = useSelector((store) => store.modal.openOrderModal);
 
   const makeOrder = () => {
-    if(totalIngredients.length === 0) return;
-    dispatch(sendOrder(totalIngredients, setOpen, totalPrice));
+    if (totalIngredients.length === 0) return;
+    dispatch(sendOrder(totalIngredients, openOrderModal, totalPrice));
   };
 
   return (
@@ -32,7 +31,7 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
         Оформить заказ
       </Button>
       {open && (
-        <Modal isOpen={open} onClose={() => setOpen(false)}>
+        <Modal>
           <OrderDetails />
         </Modal>
       )}
@@ -41,8 +40,10 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
 };
 
 OrderTotal.propTypes = {
-    totalPrice: PropTypes.number.isRequired,
-    totalIngredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired),
+  totalPrice: PropTypes.number.isRequired,
+  totalIngredients: PropTypes.arrayOf(
+    PropTypes.shape(propTypesConfig).isRequired
+  ),
 };
 
 export default OrderTotal;

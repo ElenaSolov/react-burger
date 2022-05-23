@@ -11,17 +11,17 @@ import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
 import { Link } from "react-router-dom";
-import { openModal } from "../../services/actions/modalActions.js";
+import { openIngredientModal } from "../../services/actions/modalActions.js";
 import { setCurrentIngredient } from "../../services/actions/actions";
 
 const IngredientCard = ({ ingredient }) => {
-  const open = useSelector((store) => store.modal.open);
+  const open = useSelector((store) => store.modal.openIngredientModal);
   const ingredientDetailsHeader = "Детали ингредиента";
   const id = ingredient._id;
   const dispatch = useDispatch();
 
   const onClick = () => {
-    !open && dispatch(openModal());
+    !open && dispatch(openIngredientModal());
     dispatch(setCurrentIngredient(ingredient));
   };
 

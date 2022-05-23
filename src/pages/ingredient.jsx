@@ -7,7 +7,8 @@ import { setCurrentIngredient } from "../services/actions/actions";
 import { HomePage } from "./home.jsx";
 
 const IngredientPage = () => {
-  const modalState = useSelector((store) => store.modal);
+  const modalState = useSelector((store) => store.modal.openIngredientModal);
+  console.log(modalState);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const location = useLocation();
   const id = location.pathname.split("/")[2];
@@ -16,7 +17,7 @@ const IngredientPage = () => {
 
   dispatch(setCurrentIngredient(ingredient));
 
-  return modalState.open ? (
+  return modalState ? (
     <HomePage />
   ) : (
     <section className={pagesStyles.ingredientMain}>

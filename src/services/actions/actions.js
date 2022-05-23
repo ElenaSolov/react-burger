@@ -86,7 +86,7 @@ export function sendOrder(ingredients, openModal, totalPrice) {
       .then((res) => {
         if (res && res.success) {
           dispatch({ type: SEND_ORDER_SUCCESS, res, totalPrice });
-          openModal(true);
+          dispatch(openModal());
         }
       })
       .catch((err) => {
