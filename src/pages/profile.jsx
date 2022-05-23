@@ -23,7 +23,6 @@ function Profile() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     if (e.target.textContent === "Отмена") {
       setReset(true);
     } else {
@@ -33,7 +32,6 @@ function Profile() {
   };
 
   const onCancel = (e) => {
-    console.log(e.target.textContent);
     e.preventDefault();
     setReset(true);
   };
@@ -64,7 +62,6 @@ function Profile() {
           <NavLink
             to="/"
             onClick={() => {
-              console.log(11);
               dispatch(logout());
             }}
             className={className}

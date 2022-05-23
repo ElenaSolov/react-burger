@@ -7,7 +7,6 @@ const IngredientDetails = () => {
   const ingredient = useSelector(
     (store) => store.ingredients.currentIngredient
   );
-  console.log(ingredient);
   const dispatch = useDispatch();
   useEffect(() => {
     return function () {

@@ -19,7 +19,6 @@ function ResetPasswordPage() {
   const onSubmit = (e) => {
     e.preventDefault();
     let values = getFormValues(ref.current.elements);
-    console.log(values);
     dispatch(resetPassword(values.text));
   };
 

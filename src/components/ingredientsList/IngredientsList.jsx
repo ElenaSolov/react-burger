@@ -11,7 +11,6 @@ import { getCurrentTab, addScroll } from "../../utils/utils.js";
 
 const IngredientsList = () => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  console.log(ingredients);
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -21,7 +21,6 @@ export function register(email, password, name) {
     sendAuthRequest(email, password, name)
       .then((res) => {
         if (res && res.success) {
-          console.log("res", res);
           dispatch({
             type: REGISTER_SUCCESS,
             email: res.user.email,
@@ -42,7 +41,6 @@ export function login(email, password) {
     sendLoginRequest(email, password)
       .then((res) => {
         if (res && res.success) {
-          console.log("res", res);
           dispatch({
             type: LOGIN_SUCCESS,
             email: res.user.email,
@@ -64,7 +62,6 @@ export function getUser() {
     getUserInfo()
       .then((res) => {
         if (res && res.success) {
-          console.log("res", res);
           dispatch({
             type: UPDATE_USER_SUCCESS,
             email: res.user.email,
@@ -85,7 +82,6 @@ export function resetPassword(password) {
     sendResetPasswordRequest(password)
       .then((res) => {
         if (res && res.success) {
-          console.log("res", res);
           dispatch({
             type: UPDATE_USER_SUCCESS,
             email: res.user.email,
@@ -114,9 +110,7 @@ export function logout() {
   };
 }
 export function updateUserInfo(name, email, password) {
-  console.log(name, email, password);
   return function (dispatch) {
-    console.log(33);
     sendUserUpdate(name, email, password)
       .then(() => {
         dispatch({
@@ -124,7 +118,6 @@ export function updateUserInfo(name, email, password) {
           name,
           email,
         });
-        console.log(44);
       })
       .catch((err) => {
         console.log(err);

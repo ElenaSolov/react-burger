@@ -16,7 +16,6 @@ import Profile from "../../pages/profile";
 import IngredientPage from "../../pages/ingredient";
 import ProtectedRoute from "../ProtectedRoute";
 import { getUser } from "../../services/actions/authActions";
-
 import { HomePage } from "../../pages/home";
 
 function App() {

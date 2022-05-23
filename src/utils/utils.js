@@ -107,7 +107,6 @@ export function getCookie(name) {
   if (matches) {
     return decodeURIComponent(matches[1]);
   } else {
-    console.log("else");
     if (name === "refreshToken") return;
     refreshCookie()
       .then((res) => {

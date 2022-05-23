@@ -20,7 +20,6 @@ function LoginPage() {
   const onSubmit = (e) => {
     e.preventDefault();
     const values = getFormValues(ref.current.elements);
-    console.log(values);
     dispatch(login(values.email, values.password));
   };
 

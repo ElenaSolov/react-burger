@@ -19,7 +19,6 @@ export const authReducer = (state = initialState, action) => {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
     case UPDATE_USER_SUCCESS: {
-      console.log(action);
       return {
         ...state,
         isAuth: true,

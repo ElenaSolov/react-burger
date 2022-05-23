@@ -47,7 +47,6 @@ export function deleteFromOrder(ingredient) {
   };
 }
 export function setCurrentIngredient(ingredient) {
-  console.log("set");
   return {
     type: SET_CURRENT_INGREDIENT,
     ingredient,

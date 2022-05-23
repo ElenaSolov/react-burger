@@ -65,6 +65,5 @@ export const sendLogoutRequest = () => {
 export const sendUserUpdate = (name, email, password) => {
   const headers = { authorization: getCookie("accessToken") };
   const body = JSON.stringify({ name, email, password });
-  console.log(body);
   return sendRequest("PATCH", body, `${baseURL}/auth/user`, headers);
 };

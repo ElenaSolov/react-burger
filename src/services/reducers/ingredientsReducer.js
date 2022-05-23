@@ -41,7 +41,6 @@ export const ingredientsReducer = (state = initialState, action) => {
       };
     }
     case SET_CURRENT_INGREDIENT: {
-      console.log(22);
       return {
         ...state,
         currentIngredient: action.ingredient,
