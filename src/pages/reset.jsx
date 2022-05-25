@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../services/actions/authActions";
 
 const ResetPasswordPage = () => {
-  console.log("ResetPasswordPage");
   const ref = useRef();
   const dispatch = useDispatch();
   const auth = useSelector((store) => store.auth);
@@ -30,7 +29,6 @@ const ResetPasswordPage = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     let values = getFormValues(ref.current.elements);
-    console.log(values);
     dispatch(resetPassword(values[0], values[1]));
   };
 

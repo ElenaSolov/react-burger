@@ -11,7 +11,6 @@ function RestorePasswordPage() {
   const ref = useRef();
   let navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
-  console.log(auth);
   const dispatch = useDispatch();
 
   useEffect(() => {

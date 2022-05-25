@@ -8,7 +8,6 @@ import { HomePage } from "./home.jsx";
 
 const IngredientPage = () => {
   const modalState = useSelector((store) => store.modal.openIngredientModal);
-  console.log(modalState);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const location = useLocation();
   const id = location.pathname.split("/")[2];

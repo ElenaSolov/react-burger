@@ -14,9 +14,6 @@ function LoginPage() {
   const dispatch = useDispatch();
   const location = useLocation();
   const redirectPath = location.state ? location.state : "/profile";
-  require("react-dom");
-  window.React2 = require("react");
-  console.log(window.React1 === window.React2);
 
   useEffect(() => {
     if (auth.isAuth) navigate(redirectPath);

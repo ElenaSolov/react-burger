@@ -27,7 +27,6 @@ function Profile() {
       setReset(true);
     } else {
       const values = getFormValues(ref.current.elements);
-      console.log(values);
       dispatch(updateUserInfo(values[0], values[1], values[2]));
     }
   };

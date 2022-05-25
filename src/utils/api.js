@@ -57,7 +57,6 @@ export const sendResetPasswordRequest = (password, token) => {
     token,
   });
 
-  console.log(body);
   return sendRequest("POST", body, `${baseURL}/password-reset/reset`);
 };
 export const sendLogoutRequest = () => {
