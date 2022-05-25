@@ -5,6 +5,7 @@ import {
   sendResetPasswordRequest,
   sendLogoutRequest,
   sendUserUpdate,
+  sendRestorePasswordRequest,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
 
@@ -15,6 +16,8 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
 export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 export const LOGOUT = "LOGOUT";
+export const RESTORE_USER_EMAIL_SUCCESS = "RESTORE_USER_EMAIL_SUCCESS";
+export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 
 export function register(email, password, name) {
   return function (dispatch) {
@@ -77,15 +80,29 @@ export function getUser() {
       });
   };
 }
-export function resetPassword(password) {
+export function restorePassword(email) {
   return function (dispatch) {
-    sendResetPasswordRequest(password)
+    sendRestorePasswordRequest(email)
       .then((res) => {
         if (res && res.success) {
           dispatch({
-            type: UPDATE_USER_SUCCESS,
-            email: res.user.email,
-            name: res.user.name,
+            type: RESTORE_USER_EMAIL_SUCCESS,
+            email: email,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+export function resetPassword(password, token) {
+  return function (dispatch) {
+    sendResetPasswordRequest(password, token)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: RESET_PASSWORD_SUCCESS,
           });
         }
       })

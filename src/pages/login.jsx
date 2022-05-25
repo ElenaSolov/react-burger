@@ -13,7 +13,10 @@ function LoginPage() {
   const ref = useRef();
   const dispatch = useDispatch();
   const location = useLocation();
-  const redirectPath = location.state;
+  const redirectPath = location.state ? location.state : "/profile";
+  require("react-dom");
+  window.React2 = require("react");
+  console.log(window.React1 === window.React2);
 
   useEffect(() => {
     if (auth.isAuth) navigate(redirectPath);
@@ -22,7 +25,7 @@ function LoginPage() {
   const onSubmit = (e) => {
     e.preventDefault();
     const values = getFormValues(ref.current.elements);
-    dispatch(login(values.email, values.password));
+    dispatch(login(values[0], values[1]));
   };
 
   return (

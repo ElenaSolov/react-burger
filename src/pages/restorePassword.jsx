@@ -3,25 +3,27 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
 import { Link, useNavigate } from "react-router-dom";
-import { sendRestorePasswordRequest } from "../utils/api";
+import { restorePassword } from "../services/actions/authActions";
 import { validateEmail } from "../utils/utils";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 function RestorePasswordPage() {
   const ref = useRef();
   let navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
+  console.log(auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (auth.isAuth) navigate("/profile");
+    if (!auth.isAuth && auth.email)
+      navigate("reset", { state: "forgot-password" });
   }, [auth, navigate]);
 
   const onClick = (e) => {
     e.preventDefault();
     if (validateEmail(ref.current.elements.email.value)) {
-      sendRestorePasswordRequest(ref.current.elements.email.value)
-        .then(() => navigate("/forgot-password/reset"))
-        .catch((err) => console.log(err));
+      dispatch(restorePassword(ref.current.elements.email.value));
     }
   };
   return (

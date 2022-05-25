@@ -4,12 +4,29 @@ import ModalOverlay from "../modalOverlay/ModalOverlay";
 import modalStyles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { useSelector, useDispatch } from "react-redux";
+import { closeModal } from "../../../services/actions/modalActions.js";
+import { useNavigate } from "react-router-dom";
 
-const Modal = ({ onClose, isOpen, children, header }) => {
+const Modal = ({ children, header }) => {
+  const modalState = useSelector((store) => store.modal);
+  const open = modalState.openIngredientModal
+    ? true
+    : modalState.openOrderModal
+    ? true
+    : false;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const onClose = () => {
+    dispatch(closeModal());
+    navigate("/");
+  };
+
   const modalRoot = document.getElementById("modals");
 
   return ReactDOM.createPortal(
-    isOpen && (
+    open && (
       <>
         <div
           className={`${modalStyles.popupWindow} pl-10 pr-10`}
@@ -38,8 +55,6 @@ const Modal = ({ onClose, isOpen, children, header }) => {
 };
 
 Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
   children: PropTypes.element.isRequired,
   header: PropTypes.string,
 };

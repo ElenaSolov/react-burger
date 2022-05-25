@@ -2,24 +2,36 @@ import React, { useRef, useEffect } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
 import InputEl from "../components/inputEl/InputEl";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { getFormValues } from "../utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../services/actions/authActions";
 
-function ResetPasswordPage() {
+const ResetPasswordPage = () => {
+  console.log("ResetPasswordPage");
   const ref = useRef();
   const dispatch = useDispatch();
   const auth = useSelector((store) => store.auth);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (auth.isAuth) Navigate("/profile");
-  }, [auth]);
+    if (location.state !== "forgot-password") {
+      navigate("/forgot-password");
+    }
+    if (auth.isAuth) {
+      navigate("/profile");
+    }
+    if (auth.resetPassword) {
+      navigate("/login");
+    }
+  }, [auth, location, navigate]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     let values = getFormValues(ref.current.elements);
-    dispatch(resetPassword(values.text));
+    console.log(values);
+    dispatch(resetPassword(values[0], values[1]));
   };
 
   return (
@@ -50,6 +62,6 @@ function ResetPasswordPage() {
       </div>
     </section>
   );
-}
+};
 
 export default ResetPasswordPage;

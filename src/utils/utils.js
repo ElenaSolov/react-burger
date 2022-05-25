@@ -65,9 +65,9 @@ export function validateEmail(mail) {
 //get form values
 
 export const getFormValues = (form) => {
-  let values = {};
+  let values = [];
   for (let el of form) {
-    values[el.name] = el.value;
+    values.push(el.value);
   }
   return values;
 };

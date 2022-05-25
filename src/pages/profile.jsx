@@ -27,7 +27,8 @@ function Profile() {
       setReset(true);
     } else {
       const values = getFormValues(ref.current.elements);
-      dispatch(updateUserInfo(values.text, values.email, values.password));
+      console.log(values);
+      dispatch(updateUserInfo(values[0], values[1], values[2]));
     }
   };
 
