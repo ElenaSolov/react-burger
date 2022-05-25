@@ -17,6 +17,7 @@ import IngredientPage from "../../pages/ingredient";
 import ProtectedRoute from "../ProtectedRoute";
 import { getUser } from "../../services/actions/authActions";
 import { HomePage } from "../../pages/home";
+import NotFoundPage from "../../pages/notFoundPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
         <Routes>
+          <Route path="*" element={<NotFoundPage />} />
           <Route path="/" exact element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<RegisterPage />} />

@@ -59,3 +59,15 @@
     align-items: center;
     height: 100%;
 }
+
+.notFoundSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.notFoundTitle {
+    font-size: 170px;
+    margin: 0;
+}
