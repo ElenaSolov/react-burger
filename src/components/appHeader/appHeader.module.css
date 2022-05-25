@@ -2,11 +2,19 @@
     display: flex;
     background-color: #1C1C21;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
 }
 
 .navlist{
     display: flex;
     list-style-type: none;
+    padding: 0;
+}
+.header__container {
+    max-width: 1280px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

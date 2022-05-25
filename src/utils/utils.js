@@ -6,12 +6,10 @@ function setElementHeight(el, bottomEl){
   const bottomHeight = bottomEl ? (body.offsetHeight - bottomEl.getBoundingClientRect().top) : marginBottom;
   el.style.maxHeight = Math.floor(document.documentElement.clientHeight - top -bottomHeight )+'px';
 }
-export function addScroll(){
- const ingredientsList = document.querySelector('.ingredientsScroll');
-    setElementHeight(ingredientsList, null);
-    const constructor = document.querySelector('.constructorScroll')
-    const bottomEl = document.querySelector('.bottom');
-  setElementHeight(constructor, bottomEl);
+export function addScroll(selector, bottomSelector = null){
+  const el = document.querySelector(selector);
+  const bottomEl = bottomSelector ? document.querySelector(bottomSelector): null;
+  setElementHeight(el, bottomEl);
 }
 
 // smooth scroll
@@ -30,4 +28,20 @@ function smoothScroll(evt) {
     behavior: 'smooth',
     block: 'start'
   })
+}
+
+//switch tabs
+
+export const getCurrentTab = () => {
+  const triggerLine = body.querySelector('.tabs').getBoundingClientRect().bottom;
+  const ingredientsLists = body.querySelectorAll('.ingredients__list');
+  let currentList = ingredientsLists[0];
+  for(let i = 0; i<=2; i++){
+    const listBottom = ingredientsLists[i].getBoundingClientRect().bottom;
+    if(listBottom>triggerLine) {
+      currentList = ingredientsLists[i];
+      break;
+    }
+  }
+  return(currentList.getAttribute('id'));
 }

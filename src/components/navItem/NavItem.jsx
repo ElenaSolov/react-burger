@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 const NavItem = ({ type, active, value, Icon, text, onClick }) => {
   const classes = active
-    ? `${navItemStyles.navItem} mb-4 mt-4 mr-2 p-5`
+    ? `${navItemStyles.navItem} mb-4 mt-4 p-5`
     : `${navItemStyles.navItem} ${navItemStyles.inactive} mb-4 mt-4 mr-2 p-5`;
 
   return (

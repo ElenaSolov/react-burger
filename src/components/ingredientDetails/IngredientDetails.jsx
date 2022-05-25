@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ingredientDetailsStyles from "./ingredientDetails.module.css";
-import propTypesConfig from "../../utils/propTypesConfig";
-import PropTypes from "prop-types";
+import {useSelector, useDispatch} from "react-redux";
+import {resetCurrentIngredient} from "../../services/actions/actions.js"
 
-const IngredientDetails = ({ ingredient }) => {
+const IngredientDetails = () => {
+
+    const ingredient = useSelector(store => store.ingredients.currentIngredient);
+    const dispatch = useDispatch();
+    useEffect(
+      ()=>{
+      return function(){
+        dispatch(resetCurrentIngredient)
+      }
+
+    })
+
   return (
     <>
       <img
@@ -48,9 +59,6 @@ const IngredientDetails = ({ ingredient }) => {
       </ul>
     </>
   );
-};
-IngredientDetails.propTypes = {
-  ingredient: PropTypes.shape(propTypesConfig).isRequired,
 };
 
 export default IngredientDetails;

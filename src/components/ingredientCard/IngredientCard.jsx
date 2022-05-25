@@ -1,22 +1,37 @@
 import React, { useState } from "react";
+import {useSelector} from "react-redux";
 import ingredientCardStyles from "./ingredientCard.module.css";
-import {
-  Counter,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modals/modal/Modal";
 import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
 
-const IngredientCard = ({ ingredient }) => {
+const IngredientCard = ({ ingredient, onClick }) => {
+
   const [open, setOpen] = useState(false);
   const ingredientDetailsHeader = "Детали ингредиента";
+  let count = useSelector(store=> store.order.orderedIngredients.filter(ing => ing._id === ingredient._id).length);
+  const mainBun = useSelector(store => store.order.orderedBun);
+  if(ingredient._id === mainBun._id){
+  count = 2;
+  }
+  const [{isDrag}, dragRef] = useDrag({
+  type: 'ingredient',
+  item: {...ingredient, start: 'ingredientCard'},
+  collect: monitor => ({
+              isDrag: monitor.isDragging()
+          })
+  });
 
   return (
-    <li onClick={() => !open && setOpen(true)}>
+    !isDrag &&<li
+      ref={dragRef}
+      onClick={() => {onClick(); !open && setOpen(true)}}
+      >
       <article className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10`}>
-        <Counter />
+        <Counter count={count}/>
         <img
           className={`${ingredientCardStyles.img} ml-4 mr-4`}
           src={ingredient.image}
@@ -39,7 +54,7 @@ const IngredientCard = ({ ingredient }) => {
           onClose={() => setOpen(false)}
           header={ingredientDetailsHeader}
         >
-          <IngredientDetails ingredient={ingredient} />
+          <IngredientDetails />
         </Modal>
       )}
     </li>
@@ -48,6 +63,7 @@ const IngredientCard = ({ ingredient }) => {
 
 IngredientCard.propTypes = {
   ingredient: PropTypes.shape(propTypesConfig).isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default IngredientCard;

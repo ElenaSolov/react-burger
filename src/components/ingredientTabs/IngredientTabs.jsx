@@ -2,15 +2,22 @@ import React, {useEffect} from 'react';
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientTabsStyles from './ingredientTabs.module.css';
 import {setTabsListeners} from "../../utils/utils";
+import {useSelector, useDispatch} from "react-redux";
+import {setCurrentTab} from "../../services/actions/actions.js";
 
 const IngredientTabs = () => {
-    const [current, setCurrent] = React.useState('Булки');
+  const dispatch = useDispatch();
+  const current = useSelector(store => store.ingredients.currentTab);
+  const setCurrent = () => {
+  dispatch(setCurrentTab(current))
+  }
+
     useEffect(()=> {
         setTabsListeners()
     }, []);
     
     return (
-        <ul className={`${ingredientTabsStyles.tabs} mt-5`}>
+        <ul className={`${ingredientTabsStyles.tabs} mt-5 tabs`}>
             <li>
                 <a href='#buns' className={`${ingredientTabsStyles.tabLink} tabLink`}>
                     <Tab value="Булки" active={current === 'Булки'} onClick={setCurrent}>Булки</Tab>
