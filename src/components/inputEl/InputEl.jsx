@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import inputStyles from "./inputEl.module.css";
 import { validateEmail } from "../../utils/utils";
+import PropTypes from "prop-types";
 
 const InputEl = ({
   type,
@@ -106,4 +107,12 @@ const InputEl = ({
   return <>{input}</>;
 };
 
+InputEl.propTypes = {
+  type: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
+  initialValue: PropTypes.string,
+  margin: PropTypes.number,
+  reset: PropTypes.bool,
+  setReset: PropTypes.func,
+};
 export default InputEl;

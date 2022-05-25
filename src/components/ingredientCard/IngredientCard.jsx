@@ -80,7 +80,6 @@ const IngredientCard = ({ ingredient }) => {
 
 IngredientCard.propTypes = {
   ingredient: PropTypes.shape(propTypesConfig).isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 export default IngredientCard;
