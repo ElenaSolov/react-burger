@@ -52,7 +52,7 @@ function Profile() {
             Профиль
           </NavLink>
           <NavLink
-            to="/"
+            to="orders"
             className={({ isActive }) =>
               isActive ? activeClassName : className
             }

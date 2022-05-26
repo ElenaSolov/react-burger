@@ -20,6 +20,7 @@ import NotFoundPage from "../../pages/notFoundPage";
 import Modal from "../modals/modal/Modal";
 import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import FeedPage from "../../pages/feed";
+import OrdersPage from "../../pages/orders";
 
 function App() {
   const dispatch = useDispatch();
@@ -64,6 +65,15 @@ function App() {
             element={
               <ProtectedRoute>
                 <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile/orders"
+            exact
+            element={
+              <ProtectedRoute>
+                <OrdersPage />
               </ProtectedRoute>
             }
           />
