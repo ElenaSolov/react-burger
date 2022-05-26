@@ -1,29 +1,25 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import ingredientCardStyles from "./ingredientCard.module.css";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import Modal from "../modals/modal/Modal";
-import IngredientDetails from "../ingredientDetails/IngredientDetails";
+// import Modal from "../modals/modal/Modal";
+// import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
-import { Link } from "react-router-dom";
-import { openIngredientModal } from "../../services/actions/modalActions.js";
-import { setCurrentIngredient } from "../../services/actions/actions";
+import { Link, useLocation } from "react-router-dom";
+// import { openIngredientModal } from "../../services/actions/modalActions.js";
+// import { setCurrentIngredient } from "../../services/actions/actions";
 
-const IngredientCard = ({ ingredient }) => {
-  const open = useSelector((store) => store.modal.openIngredientModal);
-  const ingredientDetailsHeader = "Детали ингредиента";
+const IngredientCard = ({ ingredient, onClick }) => {
+  //   const open = useSelector((store) => store.modal.openIngredientModal);
+  //   const ingredientDetailsHeader = "Детали ингредиента";
   const id = ingredient._id;
-  const dispatch = useDispatch();
-
-  const onClick = () => {
-    !open && dispatch(openIngredientModal());
-    dispatch(setCurrentIngredient(ingredient));
-  };
+  //   const dispatch = useDispatch();
+  const location = useLocation();
 
   let count = useSelector(
     (store) =>
@@ -50,6 +46,7 @@ const IngredientCard = ({ ingredient }) => {
         <Link
           to={`ingredients/${id}`}
           className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10 id={id}`}
+          state={{ background: location }}
         >
           <Counter count={count} />
           <img
@@ -67,12 +64,6 @@ const IngredientCard = ({ ingredient }) => {
           </p>
           <p className="mt-4 text text_type_main-default">{ingredient.name}</p>
         </Link>
-
-        {open && (
-          <Modal header={ingredientDetailsHeader}>
-            <IngredientDetails />
-          </Modal>
-        )}
       </li>
     )
   );

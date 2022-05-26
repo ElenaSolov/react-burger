@@ -38,7 +38,10 @@ const IngredientsList = () => {
           .map((ingredient) => {
             return (
               <IngredientCard
-                onClick={() => dispatch(setCurrentIngredient(ingredient))}
+                onClick={() => {
+                  console.log(90);
+                  dispatch(setCurrentIngredient(ingredient));
+                }}
                 key={ingredient._id}
                 ingredient={ingredient}
               />

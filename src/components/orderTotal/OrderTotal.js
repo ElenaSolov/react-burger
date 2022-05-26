@@ -7,23 +7,16 @@ import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../services/actions/actions.js";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
-import { useDispatch, useSelector } from "react-redux";
-import { openOrderModal } from "../../services/actions/modalActions";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
   const dispatch = useDispatch();
-  const open = useSelector((store) => store.modal.openOrderModal);
-  const auth = useSelector((store) => store.auth);
-  const navigate = useNavigate();
+
+  const [open, setOpen] = React.useState(false);
 
   const makeOrder = () => {
     if (totalIngredients.length === 0) return;
-    if (!auth.isAuth) {
-      navigate("login", { replace: true, state: "/" });
-      return;
-    }
-    dispatch(sendOrder(totalIngredients, openOrderModal, totalPrice));
+    dispatch(sendOrder(totalIngredients, setOpen, totalPrice));
   };
 
   return (
@@ -38,7 +31,7 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
         Оформить заказ
       </Button>
       {open && (
-        <Modal>
+        <Modal isOpen={open} onClose={() => setOpen(false)}>
           <OrderDetails />
         </Modal>
       )}

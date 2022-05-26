@@ -50,6 +50,7 @@ const AppHeader = () => {
           path="/profile"
         />
       </div>
+      <button type="button" className={headerStyles.burger}></button>
     </header>
   );
 };
