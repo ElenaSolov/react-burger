@@ -3,10 +3,7 @@ import IngredientCard from "../ingredientCard/IngredientCard";
 import ingredientsListStyles from "./ingredientsList.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setCurrentIngredient,
-  setCurrentTab,
-} from "../../services/actions/actions.js";
+import { setCurrentTab } from "../../services/actions/actions.js";
 import { getCurrentTab, addScroll } from "../../utils/utils.js";
 
 const IngredientsList = () => {
@@ -37,14 +34,7 @@ const IngredientsList = () => {
           .filter((ingredient) => ingredient["type"] === "bun")
           .map((ingredient) => {
             return (
-              <IngredientCard
-                onClick={() => {
-                  console.log(90);
-                  dispatch(setCurrentIngredient(ingredient));
-                }}
-                key={ingredient._id}
-                ingredient={ingredient}
-              />
+              <IngredientCard key={ingredient._id} ingredient={ingredient} />
             );
           })}
       </ul>
@@ -60,7 +50,6 @@ const IngredientsList = () => {
           .map((ingredient) => {
             return (
               <IngredientCard
-                onClick={() => dispatch(setCurrentIngredient(ingredient))}
                 key={ingredient._id}
                 ingredient={ingredient}
                 CurrencyIcon={CurrencyIcon}
@@ -79,11 +68,7 @@ const IngredientsList = () => {
           .filter((ingredient) => ingredient["type"] === "main")
           .map((ingredient) => {
             return (
-              <IngredientCard
-                onClick={() => dispatch(setCurrentIngredient(ingredient))}
-                key={ingredient._id}
-                ingredient={ingredient}
-              />
+              <IngredientCard key={ingredient._id} ingredient={ingredient} />
             );
           })}
       </ul>

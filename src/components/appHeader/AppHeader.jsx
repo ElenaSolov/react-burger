@@ -34,7 +34,7 @@ const AppHeader = () => {
                 text="Лента заказов"
                 Icon={ListIcon}
                 type={current === "Лента" ? "primary" : "secondary"}
-                path="/"
+                path="/feed"
               />
             </li>
           </ul>

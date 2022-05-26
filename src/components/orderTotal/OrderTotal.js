@@ -7,15 +7,22 @@ import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../services/actions/actions.js";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const auth = useSelector((store) => store.auth);
 
   const [open, setOpen] = React.useState(false);
 
   const makeOrder = () => {
     if (totalIngredients.length === 0) return;
+    if (!auth.isAuth) {
+      navigate("login", { replace: true, state: "/" });
+      return;
+    }
     dispatch(sendOrder(totalIngredients, setOpen, totalPrice));
   };
 

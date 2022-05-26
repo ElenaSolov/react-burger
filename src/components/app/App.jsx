@@ -19,6 +19,7 @@ import { HomePage } from "../../pages/home";
 import NotFoundPage from "../../pages/notFoundPage";
 import Modal from "../modals/modal/Modal";
 import IngredientDetails from "../ingredientDetails/IngredientDetails";
+import FeedPage from "../../pages/feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,6 +56,7 @@ function App() {
           <Route path="forgot-password" element={<RestorePasswordPage />} />
           <Route path="forgot-password/reset" element={<ResetPasswordPage />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
+          <Route path="feed" element={<FeedPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route
             path="profile"

@@ -2,14 +2,11 @@ import {
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  RESET_CURRENT_INGREDIENT,
-  SET_CURRENT_INGREDIENT,
   SET_CURRENT_TAB,
 } from "../actions/actions";
 
 const initialState = {
   ingredients: [],
-  currentIngredient: null,
   currentTab: "Булки",
   ingredientsRequest: false,
   ingredientsFailed: false,
@@ -40,18 +37,7 @@ export const ingredientsReducer = (state = initialState, action) => {
         ingredientsRequestStatus: "failed",
       };
     }
-    case SET_CURRENT_INGREDIENT: {
-      return {
-        ...state,
-        currentIngredient: action.ingredient,
-      };
-    }
-    case RESET_CURRENT_INGREDIENT: {
-      return {
-        ...state,
-        currentIngredient: initialState.currentIngredient,
-      };
-    }
+
     case SET_CURRENT_TAB: {
       return {
         ...state,

@@ -46,18 +46,7 @@ export function deleteFromOrder(ingredient) {
     ingredient,
   };
 }
-export function setCurrentIngredient(ingredient) {
-  return {
-    type: SET_CURRENT_INGREDIENT,
-    ingredient,
-  };
-}
-export function resetCurrentIngredient(ingredient) {
-  return {
-    type: RESET_CURRENT_INGREDIENT,
-    ingredient,
-  };
-}
+
 export function setCurrentTab(currentTab) {
   return {
     type: SET_CURRENT_TAB,
@@ -86,7 +75,7 @@ export function sendOrder(ingredients, openModal, totalPrice) {
       .then((res) => {
         if (res && res.success) {
           dispatch({ type: SEND_ORDER_SUCCESS, res, totalPrice });
-          dispatch(openModal());
+          openModal(true);
         }
       })
       .catch((err) => {
