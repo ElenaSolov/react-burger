@@ -7,6 +7,7 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
 
 const AppHeader = () => {
   const [current, setCurrent] = React.useState("Конструктор");
@@ -39,7 +40,9 @@ const AppHeader = () => {
             </li>
           </ul>
         </nav>
-        <Logo />
+        <Link to="/">
+          <Logo />
+        </Link>
         <NavItem
           value="Кабинет"
           active={current === "Кабинет"}
