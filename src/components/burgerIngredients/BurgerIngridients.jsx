@@ -1,10 +1,8 @@
 import React from "react";
 import burgerIngredientsStyles from "./burgerIngredients.module.css";
 import IngredientsList from "../ingredientsList/IngredientsList";
-import IngredientTabs from "../ingredientTabs/IngredientTabs";
 
 const BurgerIngredients = () => {
-
   return (
     <section className={burgerIngredientsStyles.ingredients}>
       <h1
@@ -12,7 +10,6 @@ const BurgerIngredients = () => {
       >
         Соберите бургер
       </h1>
-      <IngredientTabs />
       <IngredientsList />
     </section>
   );

@@ -21,24 +21,24 @@ export function addScroll(selector, bottomSelector = null) {
 }
 
 // smooth scroll
-export function setTabsListeners() {
-  const navLinks = document.querySelectorAll(".tabLink");
+// export function setTabsListeners() {
+//   const navLinks = document.querySelectorAll(".tabLink");
+//
+//   for (let link of navLinks) {
+//     link.addEventListener("click", smoothScroll);
+//   }
+// }
+// function smoothScroll(evt) {
+//   evt.preventDefault();
+//   const blockID = evt.target.closest(".tabLink").getAttribute("href").slice(1);
+//
+//   document.getElementById(blockID).scrollIntoView({
+//     behavior: "smooth",
+//     block: "start",
+//   });
+// }
 
-  for (let link of navLinks) {
-    link.addEventListener("click", smoothScroll);
-  }
-}
-function smoothScroll(evt) {
-  evt.preventDefault();
-  const blockID = evt.target.closest(".tabLink").getAttribute("href").slice(1);
-
-  document.getElementById(blockID).scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-}
-
-//switch tabs
+// switch tabs
 
 export const getCurrentTab = () => {
   const triggerLine = body

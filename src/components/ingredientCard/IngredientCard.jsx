@@ -5,20 +5,13 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-// import Modal from "../modals/modal/Modal";
-// import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
-// import { openIngredientModal } from "../../services/actions/modalActions.js";
-// import { setCurrentIngredient } from "../../services/actions/actions";
 
-const IngredientCard = ({ ingredient, onClick }) => {
-  //   const open = useSelector((store) => store.modal.openIngredientModal);
-  //   const ingredientDetailsHeader = "Детали ингредиента";
+const IngredientCard = ({ ingredient }) => {
   const id = ingredient._id;
-  //   const dispatch = useDispatch();
   const location = useLocation();
 
   let count = useSelector(
@@ -42,7 +35,7 @@ const IngredientCard = ({ ingredient, onClick }) => {
 
   return (
     !isDrag && (
-      <li ref={dragRef} onClick={onClick}>
+      <li ref={dragRef}>
         <Link
           to={`ingredients/${id}`}
           className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10 id={id}`}
