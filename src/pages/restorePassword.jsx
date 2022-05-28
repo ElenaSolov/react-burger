@@ -22,10 +22,8 @@ function RestorePasswordPage() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(emailValue);
 
     if (validateEmail(emailValue)) {
-      console.log(emailValue);
       dispatch(restorePassword(emailValue));
     }
   };

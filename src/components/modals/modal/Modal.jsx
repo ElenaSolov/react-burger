@@ -10,20 +10,14 @@ const Modal = ({ children, header, onClose }) => {
 
   return ReactDOM.createPortal(
     <>
-      <div
-        className={`${modalStyles.popupWindow} pl-10 pr-10`}
-        onClose={onClose}
-      >
+      <div className={`${modalStyles.popupWindow} pl-10 pr-10`}>
         <div className={`${modalStyles.header} mt-10`}>
           {header && (
             <p className={`${modalStyles.text} text text_type_main-large`}>
               {header}
             </p>
           )}
-          <button
-            onClick={onClose}
-            className={`${modalStyles.closeBtn} closeBtn`}
-          >
+          <button className={`${modalStyles.closeBtn} closeBtn`}>
             <CloseIcon onClick={onClose} />
           </button>
         </div>

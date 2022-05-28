@@ -9,7 +9,6 @@ function ProtectedRoute({
   type = "private",
 }) {
   let auth = useSelector((store) => store.auth);
-  console.log(auth);
   const location = useLocation();
 
   if (!auth.isAuth && type === "private") {
