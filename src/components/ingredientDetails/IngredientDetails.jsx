@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const IngredientDetails = () => {
-  console.log(22);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const location = useLocation();
 

@@ -29,9 +29,7 @@ function App() {
   );
   window.history.replaceState({}, document.title);
   const location = useLocation();
-  console.log(location);
   const background = location.state?.background;
-  console.log(background);
   const navigate = useNavigate();
   const onModalClose = () => {
     navigate("/");

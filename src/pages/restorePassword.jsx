@@ -10,7 +10,7 @@ import { validateEmail, onInputChange } from "../utils/utils";
 import { useSelector, useDispatch } from "react-redux";
 
 function RestorePasswordPage() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const [emailValue, setEmailValue] = React.useState("");
