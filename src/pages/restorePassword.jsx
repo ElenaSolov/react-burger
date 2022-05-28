@@ -20,7 +20,7 @@ function RestorePasswordPage() {
       navigate("reset", { state: "forgot-password" });
   }, [auth, navigate]);
 
-  const onClick = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
     console.log(emailValue);
 
@@ -35,7 +35,7 @@ function RestorePasswordPage() {
         <h2 className={`${pagesStyles.title} text text_type_main-medium`}>
           Восстановление пароля
         </h2>
-        <form className={pagesStyles.form}>
+        <form onSubmit={onSubmit} className={pagesStyles.form}>
           <div className={`${pagesStyles.input} mt-6`}>
             <Input
               type="email"
@@ -45,7 +45,7 @@ function RestorePasswordPage() {
             />
           </div>
           <div className="mt-6">
-            <Button type="primary" size="medium" onClick={onClick}>
+            <Button type="primary" size="medium">
               Восстановить
             </Button>
           </div>

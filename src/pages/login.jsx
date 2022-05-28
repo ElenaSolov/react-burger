@@ -41,11 +41,7 @@ function LoginPage() {
             />
           </div>
           <div className="mt-6">
-            <Button
-              type="primary"
-              size="medium"
-              onClick={(e) => e.preventDefault}
-            >
+            <Button type="primary" size="medium">
               Войти
             </Button>
           </div>
