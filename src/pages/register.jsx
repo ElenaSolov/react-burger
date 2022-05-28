@@ -1,26 +1,26 @@
-import React, { useRef, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
-import InputEl from "../components/inputEl/InputEl";
-import { Link, useNavigate } from "react-router-dom";
+import {
+  Input,
+  PasswordInput,
+  EmailInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
 import { register } from "../services/actions/authActions";
-import { getFormValues } from "../utils/utils";
+import { onInputChange } from "../utils/utils";
 
 function RegisterPage() {
-  const ref = useRef();
   const dispatch = useDispatch();
-  const auth = useSelector((store) => store.auth);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (auth.isAuth) navigate("/profile");
-  }, [auth, navigate]);
+  const [name, setName] = React.useState("");
+  const [emailValue, setEmailValue] = React.useState("");
+  const [passwordValue, setPasswordValue] = React.useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
-    let values = getFormValues(ref.current.elements);
-    dispatch(register(values.email, values.password, values.text));
+    dispatch(register(emailValue, passwordValue, name));
   };
 
   return (
@@ -29,10 +29,29 @@ function RegisterPage() {
         <h2 className={`${pagesStyles.title} text text_type_main-medium`}>
           Регистрация
         </h2>
-        <form ref={ref} className={pagesStyles.form} onSubmit={onSubmit}>
-          <InputEl type="text" placeholder="Имя" />
-          <InputEl type="email" placeholder="E-mail" />
-          <InputEl type="password" placeholder="Пароль" />
+        <form className={pagesStyles.form} onSubmit={onSubmit}>
+          <div className={`${pagesStyles.input} mt-6`}>
+            <Input
+              type="text"
+              placeholder="Имя"
+              value={name}
+              onChange={(e) => onInputChange(e, setName)}
+            />
+          </div>
+          <div className={`${pagesStyles.input} mt-6`}>
+            <EmailInput
+              value={emailValue}
+              onChange={(e) => onInputChange(e, setEmailValue)}
+            />
+          </div>
+          <div className={`${pagesStyles.input} mt-6`}>
+            <PasswordInput
+              type="password"
+              placeholder="Пароль"
+              value={passwordValue}
+              onChange={(e) => onInputChange(e, setPasswordValue)}
+            />
+          </div>
           <div className="mt-6">
             <Button
               type="primary"

@@ -1,7 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import pagesStyles from "./pages.module.css";
-import InputEl from "../components/inputEl/InputEl";
 import { NavLink } from "react-router-dom";
+import {
+  Input,
+  PasswordInput,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import {
   getUser,
   logout,
@@ -9,13 +12,14 @@ import {
 } from "../services/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getFormValues } from "../utils/utils";
+import { onInputChange } from "../utils/utils";
 
 function Profile() {
   const user = useSelector((store) => store.auth);
-  const [reset, setReset] = React.useState(false);
+  const [name, setName] = React.useState(user.name);
+  const [emailValue, setEmailValue] = React.useState(user.email);
+  const [passwordValue, setPasswordValue] = React.useState("");
   const dispatch = useDispatch();
-  const ref = useRef();
 
   useEffect(() => {
     dispatch(getUser());
@@ -23,17 +27,17 @@ function Profile() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (e.target.textContent === "Отмена") {
-      setReset(true);
+    if (document.activeElement.textContent === "Отмена") {
+      onCancel();
     } else {
-      const values = getFormValues(ref.current.elements);
-      dispatch(updateUserInfo(values[0], values[1], values[2]));
+      dispatch(updateUserInfo(name, emailValue, passwordValue));
     }
   };
 
-  const onCancel = (e) => {
-    e.preventDefault();
-    setReset(true);
+  const onCancel = () => {
+    setName(user.name);
+    setEmailValue(user.email);
+    setPasswordValue("");
   };
 
   const className = `${pagesStyles.profileLink} text text_type_main-medium text_color_inactive`;
@@ -75,30 +79,33 @@ function Profile() {
           </p>
         </div>
         <div className="ml-15">
-          <form ref={ref} className={pagesStyles.form} onSubmit={onSubmit}>
-            <InputEl
-              reset={reset}
-              setReset={setReset}
-              type="text"
-              placeholder="Имя"
-              margin={0}
-              initialValue={user.name}
-            />
-            <InputEl
-              reset={reset}
-              setReset={setReset}
-              type="email"
-              placeholder="Логин"
-              initialValue={user.email}
-            />
-            <InputEl
-              type="password"
-              placeholder="Пароль"
-              reset={reset}
-              setReset={setReset}
-            />
+          <form className={pagesStyles.form} onSubmit={onSubmit}>
+            <div className={`${pagesStyles.input} mt-6`}>
+              <Input
+                type="text"
+                placeholder="Имя"
+                value={name}
+                onChange={(e) => onInputChange(e, setName)}
+              />
+            </div>
+            <div className={`${pagesStyles.input} mt-6`}>
+              <Input
+                type="email"
+                placeholder="Логин"
+                value={emailValue}
+                onChange={(e) => onInputChange(e, setEmailValue)}
+              />
+            </div>
+            <div className={`${pagesStyles.input} mt-6`}>
+              <PasswordInput
+                type="password"
+                placeholder="Пароль"
+                value={passwordValue}
+                onChange={(e) => onInputChange(e, setPasswordValue)}
+              />
+            </div>
             <div className={`${pagesStyles.buttonBar} mt-6`}>
-              <Button onClick={onCancel} type="secondary" size="medium">
+              <Button type="secondary" size="medium">
                 Отмена
               </Button>
               <Button type="primary" size="medium">

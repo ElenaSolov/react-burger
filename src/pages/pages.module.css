@@ -71,3 +71,6 @@
     font-size: 170px;
     margin: 0;
 }
+.input, .input div:not(input+div){
+    width: 100%;
+}

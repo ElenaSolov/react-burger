@@ -28,9 +28,9 @@ export function register(email, password, name) {
             type: REGISTER_SUCCESS,
             email: res.user.email,
             name: res.user.name,
-            accessToken: res.accessToken.split("Bearer ")[1],
           });
-          setCookie("token", res.refreshToken);
+          setCookie("accessToken", res.accessToken, 20);
+          setCookie("refreshToken", res.refreshToken);
         }
       })
       .catch((err) => {
@@ -50,8 +50,8 @@ export function login(email, password) {
             name: res.user.name,
             accessToken: res.accessToken,
           });
-          setCookie("refreshToken", res.refreshToken, 1200);
-          setCookie("accessToken", res.accessToken, 1200);
+          setCookie("refreshToken", res.refreshToken);
+          setCookie("accessToken", res.accessToken, 20);
         }
       })
       .catch((err) => {

@@ -1,28 +1,32 @@
-import React, { useRef, useEffect } from "react";
-import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useEffect } from "react";
+import {
+  Button,
+  Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
-import InputEl from "../components/inputEl/InputEl";
 import { Link, useNavigate } from "react-router-dom";
 import { restorePassword } from "../services/actions/authActions";
-import { validateEmail } from "../utils/utils";
+import { validateEmail, onInputChange } from "../utils/utils";
 import { useSelector, useDispatch } from "react-redux";
 
 function RestorePasswordPage() {
-  const ref = useRef();
   let navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
+  const [emailValue, setEmailValue] = React.useState("");
 
   useEffect(() => {
-    if (auth.isAuth) navigate("/profile");
     if (!auth.isAuth && auth.email)
       navigate("reset", { state: "forgot-password" });
   }, [auth, navigate]);
 
   const onClick = (e) => {
     e.preventDefault();
-    if (validateEmail(ref.current.elements.email.value)) {
-      dispatch(restorePassword(ref.current.elements.email.value));
+    console.log(emailValue);
+
+    if (validateEmail(emailValue)) {
+      console.log(emailValue);
+      dispatch(restorePassword(emailValue));
     }
   };
   return (
@@ -31,8 +35,15 @@ function RestorePasswordPage() {
         <h2 className={`${pagesStyles.title} text text_type_main-medium`}>
           Восстановление пароля
         </h2>
-        <form ref={ref} className={pagesStyles.form}>
-          <InputEl type="email" placeholder="Укажите e-mail" />
+        <form className={pagesStyles.form}>
+          <div className={`${pagesStyles.input} mt-6`}>
+            <Input
+              type="email"
+              placeholder="Укажите e-mail"
+              value={emailValue}
+              onChange={(e) => onInputChange(e, setEmailValue)}
+            />
+          </div>
           <div className="mt-6">
             <Button type="primary" size="medium" onClick={onClick}>
               Восстановить

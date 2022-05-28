@@ -62,40 +62,14 @@ export function validateEmail(mail) {
   return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
 }
 
-//get form values
-
-export const getFormValues = (form) => {
-  let values = [];
-  for (let el of form) {
-    values.push(el.value);
-  }
-  return values;
-};
-
 // token
-
-export function setCookie(name, value, props) {
-  props = props || {};
-  let exp = props.expires;
-  if (typeof exp == "number" && exp) {
-    const d = new Date();
-    d.setTime(d.getTime() + exp * 1000);
-    exp = props.expires = d;
-  }
-  if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString();
-  }
-  value = encodeURIComponent(value);
-  let updatedCookie = name + "=" + value;
-  for (const propName in props) {
-    updatedCookie += "; " + propName;
-    const propValue = props[propName];
-    if (propValue !== true) {
-      updatedCookie += "=" + propValue;
-    }
-  }
-  document.cookie = updatedCookie;
+export function setCookie(name, value, exmins = 120) {
+  const d = new Date();
+  d.setTime(d.getTime() + exmins * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + ";" + expires + ";path=/";
 }
+
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
@@ -110,8 +84,8 @@ export function getCookie(name) {
     if (name === "refreshToken") return;
     refreshCookie()
       .then((res) => {
-        setCookie("refreshToken", res.refreshToken, 1200);
-        setCookie("accessToken", res.accessToken, 1200);
+        setCookie("refreshToken", res.refreshToken);
+        setCookie("accessToken", res.accessToken);
         return getCookie(name);
       })
       .catch((err) => console.log(err));
@@ -120,3 +94,8 @@ export function getCookie(name) {
 export function deleteCookie(name) {
   setCookie(name, null, { expires: -1 });
 }
+
+//input values
+export const onInputChange = (e, setValue) => {
+  setValue(e.target.value);
+};

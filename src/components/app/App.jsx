@@ -52,13 +52,45 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Routes location={background || location}>
           <Route path="/" exact element={<HomePage />} />
-          <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
-          <Route path="forgot-password" element={<RestorePasswordPage />} />
-          <Route path="forgot-password/reset" element={<ResetPasswordPage />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
           <Route path="feed" element={<FeedPage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route
+            path="register"
+            exact
+            element={
+              <ProtectedRoute type="public" redirectPath="/profile">
+                <RegisterPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="login"
+            exact
+            element={
+              <ProtectedRoute type="public" redirectPath="/profile">
+                <LoginPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="forgot-password"
+            exact
+            element={
+              <ProtectedRoute type="public" redirectPath="/profile">
+                <RestorePasswordPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="forgot-password/reset"
+            exact
+            element={
+              <ProtectedRoute type="public" redirectPath="/profile">
+                <ResetPasswordPage />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="profile"
             exact
