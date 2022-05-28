@@ -68,14 +68,14 @@ export function getIngredients() {
       });
   };
 }
-export function sendOrder(ingredients, openModal, totalPrice) {
+export function sendOrder(ingredients, openOrderModal, totalPrice) {
   return function (dispatch) {
     dispatch({ type: SEND_ORDER_REQUEST, ingredients });
     sendOrderRequest(ingredients)
       .then((res) => {
         if (res && res.success) {
           dispatch({ type: SEND_ORDER_SUCCESS, res, totalPrice });
-          openModal(true);
+          openOrderModal();
         }
       })
       .catch((err) => {
