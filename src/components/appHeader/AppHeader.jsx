@@ -8,9 +8,11 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import img from "../../images/burger_icon.svg";
 
 const AppHeader = () => {
   const [current, setCurrent] = React.useState("Конструктор");
+  const openMobileMenu = () => {};
   return (
     <header className={headerStyles.header}>
       <div className={headerStyles.header__container}>
@@ -41,7 +43,10 @@ const AppHeader = () => {
           </ul>
         </nav>
         <Link to="/">
-          <Logo />
+          <div className={headerStyles.mainLogo}>
+            <Logo />
+          </div>
+          <img className={headerStyles.smallLogo} src={img} alt="Логотип" />
         </Link>
         <NavItem
           value="Кабинет"
@@ -52,8 +57,12 @@ const AppHeader = () => {
           type={current === "Кабинет" ? "primary" : "secondary"}
           path="/profile"
         />
+        <button
+          type="button"
+          className={headerStyles.burger}
+          onClick={openMobileMenu}
+        ></button>
       </div>
-      <button type="button" className={headerStyles.burger}></button>
     </header>
   );
 };

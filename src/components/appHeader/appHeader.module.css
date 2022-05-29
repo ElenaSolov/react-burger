@@ -21,11 +21,33 @@
 .burger{
     display: none;
     outline: none;
-    width:18px;
-    height: 12px;
+    border: 0;
+    width:24px;
+    height: 24px;
+    background-color: transparent;
+    background-image: url("../../images/mobile_menu_icon.svg");
+    position: relative;
+    margin: 20px 8px;
+}
+
+
+.smallLogo{
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin: 12px 8px;
 }
 @media  screen and (max-width: 470px){
     .burger{
         display: block;
+    }
+    .navBar{
+        display: none;
+    }
+    .smallLogo{
+        display: block;
+    }
+    .mainLogo{
+        display: none;
     }
 }

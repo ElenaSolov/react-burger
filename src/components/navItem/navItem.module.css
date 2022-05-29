@@ -12,3 +12,8 @@
 .inactive {
     color: #8585AD;
 }
+@media  screen and (max-width: 470px){
+    .navItem{
+        display: none;
+    }
+}
