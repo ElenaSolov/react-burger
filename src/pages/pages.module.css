@@ -1,0 +1,76 @@
+.page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+    height: 430px;
+
+}
+.title {
+    margin: 0 auto;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.link{
+    text-decoration: none;
+    margin-left: 7px;
+    color: #4C4CFF;
+}
+.profile{
+    display: grid;
+    grid-template-columns: 320px 480px;
+}
+.profileLink{
+    display: block;
+    line-height: 64px;
+    text-decoration: none;
+}
+.profileLinkActive{
+    color: #F2F2F3;
+}
+.profileLink:hover{
+    color: #F2F2F3;
+}
+.text{
+    color: #8585AD;
+    opacity: 0.4;
+}
+.buttonBar{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
+.ingredientMain{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.notFoundSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.notFoundTitle {
+    font-size: 170px;
+    margin: 0;
+}
+.input, .input div:not(input+div){
+    width: 100%;
+}

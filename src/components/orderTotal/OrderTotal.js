@@ -7,17 +7,43 @@ import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../services/actions/actions.js";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
-import {useDispatch} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const OrderTotal = ({ totalIngredients, totalPrice }) => {
-  
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const auth = useSelector((store) => store.auth);
   const [open, setOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState("");
+  const noIngredients = (
+    <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
+      Пожалуйста, выберете булку и начинки
+    </h2>
+  );
+  const sending = (
+    <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
+      Пожалуйста, подождите, мы оформляем Ваш заказ...
+    </h2>
+  );
+
+  const openOrderModal = () => {
+    setModalContent(<OrderDetails />);
+  };
 
   const makeOrder = () => {
-    if(totalIngredients.length === 0) return;
-    dispatch(sendOrder(totalIngredients, setOpen, totalPrice));
+    if (!auth.isAuth) {
+      navigate("login", { replace: true, state: "/" });
+      return;
+    }
+    if (totalIngredients.length === 0) {
+      setModalContent(noIngredients);
+      setOpen(true);
+      return;
+    }
+    setModalContent(sending);
+    setOpen(true);
+    dispatch(sendOrder(totalIngredients, openOrderModal, totalPrice));
   };
 
   return (
@@ -33,7 +59,8 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
       </Button>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
-          <OrderDetails />
+          {/*<OrderDetails />*/}
+          {modalContent}
         </Modal>
       )}
     </div>
@@ -41,8 +68,10 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
 };
 
 OrderTotal.propTypes = {
-    totalPrice: PropTypes.number.isRequired,
-    totalIngredients: PropTypes.arrayOf(PropTypes.shape(propTypesConfig).isRequired),
+  totalPrice: PropTypes.number.isRequired,
+  totalIngredients: PropTypes.arrayOf(
+    PropTypes.shape(propTypesConfig).isRequired
+  ),
 };
 
 export default OrderTotal;

@@ -1,19 +1,14 @@
-import React, {useEffect} from "react";
+import React from "react";
 import ingredientDetailsStyles from "./ingredientDetails.module.css";
-import {useSelector, useDispatch} from "react-redux";
-import {resetCurrentIngredient} from "../../services/actions/actions.js"
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const IngredientDetails = () => {
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
+  const location = useLocation();
 
-    const ingredient = useSelector(store => store.ingredients.currentIngredient);
-    const dispatch = useDispatch();
-    useEffect(
-      ()=>{
-      return function(){
-        dispatch(resetCurrentIngredient)
-      }
-
-    })
+  const id = location.pathname.split("/")[2];
+  const ingredient = ingredients.find((ing) => ing._id === id);
 
   return (
     <>

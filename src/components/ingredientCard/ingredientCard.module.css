@@ -5,7 +5,8 @@
     align-items: center;
     max-width: 272px;
     position: relative;
-    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 
 .img{
