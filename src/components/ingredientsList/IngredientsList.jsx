@@ -34,10 +34,7 @@ const IngredientsList = () => {
     <>
       <ul className={`${ingredientsListStyles.tabs} mt-5 tabs`}>
         <li>
-          <a
-            href="#buns"
-            className={`${ingredientsListStyles.tabLink} tabLink`}
-          >
+          <a className={`${ingredientsListStyles.tabLink} tabLink`}>
             <Tab
               value="Булки"
               active={current === "Булки"}
@@ -48,10 +45,7 @@ const IngredientsList = () => {
           </a>
         </li>
         <li>
-          <a
-            href="#sauces"
-            className={`${ingredientsListStyles.tabLink} tabLink`}
-          >
+          <a className={`${ingredientsListStyles.tabLink} tabLink`}>
             <Tab
               value="Соусы"
               active={current === "Соусы"}
@@ -62,10 +56,7 @@ const IngredientsList = () => {
           </a>
         </li>
         <li>
-          <a
-            href="#mains"
-            className={`${ingredientsListStyles.tabLink} tabLink`}
-          >
+          <a className={`${ingredientsListStyles.tabLink} tabLink`}>
             <Tab
               value="Начинки"
               active={current === "Начинки"}
