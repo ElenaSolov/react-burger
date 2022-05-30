@@ -4,6 +4,14 @@
     justify-content: center;
     height: 100%;
 }
+.main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -73,4 +81,48 @@
 }
 .input, .input div:not(input+div){
     width: 100%;
+}
+.feedContent{
+    max-width: 1240px;
+    display: grid;
+    grid-template-areas: "title title""orders info";
+    grid-template-columns: repeat(2, 1fr);
+}
+.feedTitle{
+    grid-area: title;
+    margin: 40px 0 4px;
+    text-align: start;
+}
+
+.orders{
+    grid-area: orders;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+.info{
+    grid-area: info;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+.table{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+.tableColumn{
+    width: 274px;
+}
+.list{
+    list-style-type: none;
+    margin: 24px 0 60px;
+    padding: 0;
+}
+.done{
+    color: #00CCCC;
+
+}
+.item:first-of-type{
+    margin-top: 0;
 }

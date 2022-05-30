@@ -38,6 +38,7 @@ const AppHeader = () => {
                 Icon={ListIcon}
                 type={current === "Лента" ? "primary" : "secondary"}
                 path="/feed"
+                margin={true}
               />
             </li>
           </ul>

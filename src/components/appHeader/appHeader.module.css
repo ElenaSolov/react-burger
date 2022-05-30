@@ -3,13 +3,14 @@
     background-color: #1C1C21;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    margin: 20px 40px 0;
 }
 
 .navlist{
     display: flex;
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 .header__container {
     max-width: 1280px;

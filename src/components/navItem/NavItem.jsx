@@ -3,10 +3,21 @@ import navItemStyles from "./navItem.module.css";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
-const NavItem = ({ type, active, value, Icon, text, onClick, path }) => {
+const NavItem = ({
+  type,
+  active,
+  value,
+  Icon,
+  text,
+  onClick,
+  path,
+  margin,
+}) => {
+  let marginLeft = null;
+  if (margin) marginLeft = "ml-2";
   const classes = active
-    ? `${navItemStyles.navItem} mb-4 mt-4 p-5`
-    : `${navItemStyles.navItem} ${navItemStyles.inactive} mb-4 mt-4 mr-2 p-5`;
+    ? `${navItemStyles.navItem} ${marginLeft} mb-4 mt-4 mr-5 pt-4 pb-4`
+    : `${navItemStyles.navItem} ${marginLeft} ${navItemStyles.inactive} mb-4 mt-4 mr-5 pt-4 pb-4`;
 
   return (
     <NavLink to={path} className={`${classes}`} onClick={() => onClick(value)}>
@@ -23,5 +34,6 @@ NavItem.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   path: PropTypes.string.isRequired,
+  margin: PropTypes.bool,
 };
 export default NavItem;
