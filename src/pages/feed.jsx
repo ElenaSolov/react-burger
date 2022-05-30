@@ -13,7 +13,7 @@ function FeedPage() {
         </h1>
         <section className={pageStyles.orders}>
           <OrderCard
-            number="034535"
+            id="034535"
             date="Сегодня, 16:20 i-GMT+3"
             name="Death Star Starship Main бургер"
             ingredients={[
@@ -24,7 +24,7 @@ function FeedPage() {
             price={480}
           />
           <OrderCard
-            number="034534"
+            id="034534"
             date="Сегодня, 13:20 i-GMT+3"
             name="Interstellar бургер"
             ingredients={[
