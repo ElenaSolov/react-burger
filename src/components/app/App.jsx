@@ -20,7 +20,8 @@ import NotFoundPage from "../../pages/notFoundPage";
 import Modal from "../modals/modal/Modal";
 import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import FeedPage from "../../pages/feed";
-import OrdersPage from "../../pages/orders";
+import OrderPage from "../../pages/order";
+import ProfileOrders from "../../pages/profileOrders";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
           <Route path="/" exact element={<HomePage />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
           <Route path="feed" element={<FeedPage />} />
+          <Route path="feed/:id" element={<OrderPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route
             path="register"
@@ -103,7 +105,15 @@ function App() {
             exact
             element={
               <ProtectedRoute>
-                <OrdersPage />
+                <ProfileOrders />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="profile/orders/:id"
+            element={
+              <ProtectedRoute>
+                <OrderPage />
               </ProtectedRoute>
             }
           />

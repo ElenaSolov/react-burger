@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 
-const OrderCard = ({ id, date, name, ingredients, price }) => {
+const OrderCard = ({ id, date, name, ingredients, price, status }) => {
   const ingredientsArray = useSelector(
     (store) => store.ingredients.ingredients
   );
@@ -18,6 +18,7 @@ const OrderCard = ({ id, date, name, ingredients, price }) => {
           </p>
         </div>
         <h3 className="text text_type_main-medium">{name}</h3>
+        {status && <p>{status}</p>}
         <div className={orderCardStyles.header}>
           <ul className={orderCardStyles.list}>
             {ingredients.map((ing, ind) => {
