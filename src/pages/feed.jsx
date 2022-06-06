@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import pageStyles from "./pages.module.css";
 import OrderCard from "../components/orderCard/OrderCard";
+import { useDispatch, useSelector } from "react-redux";
+import { startConnection } from "../services/actions/wsActions";
 
 function FeedPage() {
-  const ordersDone = ["034533", "034532", "034531", "034530", "034529"];
-  const ordersInprocess = ["034538", "034541", "034541"];
+  const dispatch = useDispatch();
+  const orders = useSelector((store) => store.feed.orders);
+  console.log(orders);
+
+  const wsUrl = "wss://norma.nomoreparties.space/orders/all";
+  useEffect(() => dispatch(startConnection(wsUrl)), [dispatch]);
+
+  const ordersDone =
+    orders && orders.filter((order) => order.status === "done");
+  const ordersInprocess =
+    orders && orders.filter((order) => order.status === "created");
+  const doneToday = ordersDone.filter((order) => {
+    const today = new Date().toJSON().slice(0, 10);
+    return order.createdAt.slice(0, 10) === today;
+  }).length;
   return (
     <main className={pageStyles.main}>
       <div className={pageStyles.feedContent}>
@@ -44,35 +59,61 @@ function FeedPage() {
             <div className={pageStyles.tableColumn}>
               <p className="text text_type_main-medium mt-16px">Готовы:</p>
               <ul className={pageStyles.list}>
-                {ordersDone.map((num) => (
-                  <li
-                    className={`${pageStyles.done} ${pageStyles.item} mt-2 text text_type_digits-default`}
-                  >
-                    {num}
-                  </li>
-                ))}
+                {ordersDone &&
+                  ordersDone.slice(0, 5).map((order) => (
+                    <li
+                      key={order._id}
+                      className={`${pageStyles.done} ${pageStyles.item} mt-2 text text_type_digits-default`}
+                    >
+                      {order.number}
+                    </li>
+                  ))}
+              </ul>
+              <ul className={pageStyles.list}>
+                {ordersDone &&
+                  ordersDone.slice(5, 10).map((order) => (
+                    <li
+                      key={order._id}
+                      className={`${pageStyles.done} ${pageStyles.item} mt-2 text text_type_digits-default`}
+                    >
+                      {order.number}
+                    </li>
+                  ))}
               </ul>
             </div>
 
             <div className={pageStyles.tableColumn}>
               <p className="text text_type_main-medium mt-16px">В работе:</p>
               <ul className={pageStyles.list}>
-                {ordersInprocess.map((num) => (
-                  <li
-                    className={`${pageStyles.item} mt-2 text text_type_digits-default`}
-                  >
-                    {num}
-                  </li>
-                ))}
+                {ordersInprocess &&
+                  ordersInprocess.slice(0, 5).map((order) => (
+                    <li
+                      key={order._id}
+                      className={`${pageStyles.item} mt-2 text text_type_digits-default`}
+                    >
+                      {order.number}
+                    </li>
+                  ))}
+              </ul>
+              <ul className={pageStyles.list}>
+                {ordersInprocess &&
+                  ordersInprocess.slice(5, 10).map((order) => (
+                    <li
+                      key={order._id}
+                      className={`${pageStyles.item} mt-2 text text_type_digits-default`}
+                    >
+                      {order.number}
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
           <p className="text text_type_main-medium">Выполнено за все время:</p>
-          <p className="text text_type_digits-large">28 752</p>
+          <p className="text text_type_digits-large">{orders.length}</p>
           <p className="text text_type_main-medium mt-15">
             Выполнено за все сегодня:
           </p>
-          <p className="text text_type_digits-large">138</p>
+          <p className="text text_type_digits-large">{doneToday}</p>
         </section>
       </div>
     </main>
