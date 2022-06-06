@@ -4,27 +4,37 @@ import { useSelector } from "react-redux";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 
-const OrderCard = ({ id, date, name, ingredients, price, status }) => {
+const OrderCard = ({ order }) => {
   const ingredientsArray = useSelector(
     (store) => store.ingredients.ingredients
   );
+  console.log(ingredientsArray);
+  const price = order.ingredients.reduce((prev, next) => {
+    console.log(prev, next);
+    const ingredient = ingredientsArray.find((ing) => {
+      console.log(ing._id, next);
+      return next === ing._id;
+    });
+    console.log(ingredient);
+    return prev + ingredient.price;
+  }, 0);
   return (
-    <Link to={id} className={orderCardStyles.link}>
+    <Link to={order.number} className={orderCardStyles.link}>
       <article className={orderCardStyles.order}>
         <div className={orderCardStyles.header}>
-          <p className="text text_type_digits-default">#{id}</p>
+          <p className="text text_type_digits-default">#{order.number}</p>
           <p className="text text_type_main-default text_color_inactive">
-            {date}
+            {order.createdAt}
           </p>
         </div>
-        <h3 className="text text_type_main-medium">{name}</h3>
-        {status && <p>{status}</p>}
+        <h3 className="text text_type_main-medium">{order.name}</h3>
+        {order.status && <p>{order.status}</p>}
         <div className={orderCardStyles.header}>
           <ul className={orderCardStyles.list}>
-            {ingredients.map((ing, ind) => {
+            {order.ingredients.map((ing, ind) => {
               const ingredient = ingredientsArray.find((i) => i._id === ing);
               if (ind === 5) {
-                const rest = ingredients.length - 6;
+                const rest = order.ingredients.length - 6;
                 return (
                   <li key={ind} className={orderCardStyles.item}>
                     <span
