@@ -81,3 +81,26 @@ export function deleteCookie(name) {
 export const onInputChange = (e, setValue) => {
   setValue(e.target.value);
 };
+
+//date converter
+
+export const getDate = (date) => {
+  const orderDate = new Date(date);
+  let days;
+  const now = new Date();
+  const nowDay = now.getDate();
+  let day = orderDate.getDate();
+  let hour = orderDate.getHours();
+  let min = orderDate.getMinutes();
+  const gmt = orderDate.toString().split("GMT")[1];
+  if (min < 10) min = "0" + min;
+  const time = `${hour}:${min} i-GMT${gmt.slice(0, 1)}${Number(
+    gmt.slice(1, 3)
+  )}`;
+  if (nowDay - day > 1) {
+    days = nowDay - day;
+    return `${days} дня назад, ${time}`;
+  } else if (nowDay - day === 1) {
+    return `Вчера, ${time}`;
+  } else return `Сегодня, ${time}`;
+};

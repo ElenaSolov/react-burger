@@ -3,6 +3,7 @@ import pageStyles from "./pages.module.css";
 import OrderCard from "../components/orderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
 import { startConnection } from "../services/actions/wsActions";
+import { addScroll } from "../utils/utils";
 
 function FeedPage() {
   const dispatch = useDispatch();
@@ -10,7 +11,10 @@ function FeedPage() {
   console.log(orders);
 
   const wsUrl = "wss://norma.nomoreparties.space/orders/all";
-  useEffect(() => dispatch(startConnection(wsUrl)), [dispatch]);
+  useEffect(() => {
+    dispatch(startConnection(wsUrl));
+    if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
+  }, [dispatch, orders.length]);
 
   const ordersDone =
     orders && orders.filter((order) => order.status === "done");
@@ -20,42 +24,17 @@ function FeedPage() {
     const today = new Date().toJSON().slice(0, 10);
     return order.createdAt.slice(0, 10) === today;
   }).length;
+
   return (
     <main className={pageStyles.main}>
       <div className={pageStyles.feedContent}>
         <h1 className={`${pageStyles.feedTitle} text text_type_main-large`}>
           Лента заказов
         </h1>
-        <section className={pageStyles.orders}>
+        <section className={`${pageStyles.orders} ordersScroll`}>
           {orders.map((order) => (
             <OrderCard key={order._id} order={order} />
           ))}
-          {/*           <OrderCard */}
-          {/*             id="034535" */}
-          {/*             date="Сегодня, 16:20 i-GMT+3" */}
-          {/*             name="Death Star Starship Main бургер" */}
-          {/*             ingredients={[ */}
-          {/*               "60d3b41abdacab0026a733c7", */}
-          {/*               "60d3b41abdacab0026a733ce", */}
-          {/*               "60d3b41abdacab0026a733ca", */}
-          {/*             ]} */}
-          {/*             price={480} */}
-          {/*           /> */}
-          {/*           <OrderCard */}
-          {/*             id="034534" */}
-          {/*             date="Сегодня, 13:20 i-GMT+3" */}
-          {/*             name="Interstellar бургер" */}
-          {/*             ingredients={[ */}
-          {/*               "60d3b41abdacab0026a733c7", */}
-          {/*               "60d3b41abdacab0026a733d4", */}
-          {/*               "60d3b41abdacab0026a733d3", */}
-          {/*               "60d3b41abdacab0026a733c9", */}
-          {/*               "60d3b41abdacab0026a733c8", */}
-          {/*               "60d3b41abdacab0026a733cc", */}
-          {/*               "60d3b41abdacab0026a733ce", */}
-          {/*             ]} */}
-          {/*             price={560} */}
-          {/*           /> */}
         </section>
         <section className={`${pageStyles.info} ml-15`}>
           <div className={pageStyles.table}>

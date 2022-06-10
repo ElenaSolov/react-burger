@@ -3,22 +3,23 @@ import orderCardStyles from "./orderCard.module.css";
 import { useSelector } from "react-redux";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import { getDate } from "../../utils/utils";
 
 const OrderCard = ({ order }) => {
+  console.log(order);
   const ingredientsArray = useSelector(
     (store) => store.ingredients.ingredients
   );
-  console.log(ingredientsArray);
   const price = order.ingredients.reduce((prev, next) => {
     console.log(prev, next);
+    if (!next) return prev;
     const ingredient = ingredientsArray.find((ing) => {
-      console.log(ing._id, next);
       return next === ing._id;
     });
-    console.log(ingredient);
+    console.log(prev, ingredient.price);
     return prev + ingredient.price;
   }, 0);
-
+  const date = getDate(order.createdAt);
   const status =
     order.status === "done"
       ? {
@@ -26,13 +27,14 @@ const OrderCard = ({ order }) => {
           className: `${orderCardStyles.done} text text_type_main-default`,
         }
       : { text: "Готовится", className: "text text_type_main-default" };
+
   return (
     <Link to={order.number} className={orderCardStyles.link}>
       <article className={orderCardStyles.order}>
         <div className={orderCardStyles.header}>
           <p className="text text_type_digits-default">#{order.number}</p>
           <p className="text text_type_main-default text_color_inactive">
-            {order.createdAt}
+            {date}
           </p>
         </div>
         <h3 className="text text_type_main-medium">{order.name}</h3>
@@ -41,6 +43,7 @@ const OrderCard = ({ order }) => {
           <ul className={orderCardStyles.list}>
             {order.ingredients.map((ing, ind) => {
               const ingredient = ingredientsArray.find((i) => i._id === ing);
+              console.log(ind, ingredient);
               if (ind === 5) {
                 const rest = order.ingredients.length - 6;
                 return (
@@ -52,7 +55,7 @@ const OrderCard = ({ order }) => {
                     </span>
                     <img
                       src={ingredient.image}
-                      alt="ingredient.name"
+                      alt={ingredient.name}
                       className={orderCardStyles.img}
                     />
                   </li>
@@ -60,13 +63,16 @@ const OrderCard = ({ order }) => {
               }
               if (ind > 5) return null;
               return (
-                <li key={ind} className={orderCardStyles.item}>
-                  <img
-                    src={ingredient.image}
-                    alt="ingredient.name"
-                    className={orderCardStyles.img}
-                  />
-                </li>
+                ingredient && (
+                  <li key={ind} className={orderCardStyles.item}>
+                    {console.log(ind, ingredient)}
+                    <img
+                      src={ingredient.image}
+                      alt={ingredient.name}
+                      className={orderCardStyles.img}
+                    />
+                  </li>
+                )
               );
             })}
           </ul>
