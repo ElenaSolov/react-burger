@@ -6,12 +6,11 @@ export const WS_GET_MESSAGE = "WS_GET_MESSAGE";
 export const WS_SEND_MESSAGE = "WS_SEND_MESSAGE";
 export const WS_USER_NAME_UPDATE = "WS_USER_NAME_UPDATE";
 
-export const startConnection = (wsUrl, auth) => {
-  console.log(wsUrl);
+export const startConnection = (wsUrl) => {
   return function (dispatch) {
     dispatch({
       type: WS_CONNECTION_START,
-      payload: { wsUrl, auth },
+      payload: { wsUrl },
     });
   };
 };

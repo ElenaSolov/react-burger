@@ -1,3 +1,10 @@
+import { getCookie } from "../utils/utils";
+
+const wsURLS = {
+  all: "wss://norma.nomoreparties.space/orders/all",
+  orders: "wss://norma.nomoreparties.space/orders",
+};
+
 export const socketMiddleware = (wsActions) => {
   return (store) => {
     let socket = null;
@@ -8,12 +15,16 @@ export const socketMiddleware = (wsActions) => {
       const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
       if (type === wsInit) {
         console.log(payload);
-        const { wsUrl, auth } = payload;
+        const wsUrl =
+          payload.wsUrl === "orders"
+            ? wsURLS[payload.wsUrl] +
+              `?token=${getCookie("accessToken").split("Bearer ")[1]}`
+            : wsURLS[payload.wsUrl];
         socket = new WebSocket(wsUrl);
+        console.log(11);
       }
-      console.log(socket);
-
       if (socket) {
+        console.log(22);
         socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });
         };
@@ -32,6 +43,7 @@ export const socketMiddleware = (wsActions) => {
 
         socket.onclose = (event) => {
           dispatch({ type: onClose, payload: event });
+          socket.close();
         };
       }
 

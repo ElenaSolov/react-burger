@@ -1,0 +1,20 @@
+.profile{
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+.profileLink{
+    display: block;
+    line-height: 64px;
+    text-decoration: none;
+}
+.profileLinkActive{
+    color: #F2F2F3;
+}
+.profileLink:hover{
+    color: #F2F2F3;
+}
+.text{
+    color: #8585AD;
+    opacity: 0.4;
+}

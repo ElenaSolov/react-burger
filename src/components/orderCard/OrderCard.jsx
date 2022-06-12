@@ -6,17 +6,15 @@ import { Link } from "react-router-dom";
 import { getDate } from "../../utils/utils";
 
 const OrderCard = ({ order }) => {
-  console.log(order);
+  //   console.log(order);
   const ingredientsArray = useSelector(
     (store) => store.ingredients.ingredients
   );
   const price = order.ingredients.reduce((prev, next) => {
-    console.log(prev, next);
     if (!next) return prev;
     const ingredient = ingredientsArray.find((ing) => {
       return next === ing._id;
     });
-    console.log(prev, ingredient.price);
     return prev + ingredient.price;
   }, 0);
   const date = getDate(order.createdAt);
@@ -43,7 +41,6 @@ const OrderCard = ({ order }) => {
           <ul className={orderCardStyles.list}>
             {order.ingredients.map((ing, ind) => {
               const ingredient = ingredientsArray.find((i) => i._id === ing);
-              console.log(ind, ingredient);
               if (ind === 5) {
                 const rest = order.ingredients.length - 6;
                 return (
@@ -65,7 +62,6 @@ const OrderCard = ({ order }) => {
               return (
                 ingredient && (
                   <li key={ind} className={orderCardStyles.item}>
-                    {console.log(ind, ingredient)}
                     <img
                       src={ingredient.image}
                       alt={ingredient.name}

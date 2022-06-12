@@ -11,7 +11,6 @@ import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
 
 const IngredientCard = ({ ingredient }) => {
-  console.log(ingredient);
   const id = ingredient._id;
   const location = useLocation();
 

@@ -26,9 +26,11 @@ export const wsReducer = (state = initialState, action) => {
       };
 
     case WS_CONNECTION_CLOSED:
+      console.log("closed");
       return {
         ...state,
         wsConnected: false,
+        orders: [],
       };
 
     case WS_GET_MESSAGE:

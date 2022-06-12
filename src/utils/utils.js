@@ -89,7 +89,7 @@ export const getDate = (date) => {
   let days;
   const now = new Date();
   const nowDay = now.getDate();
-  let day = orderDate.getDate();
+  let day = orderDate.getUTCDate();
   let hour = orderDate.getHours();
   let min = orderDate.getMinutes();
   const gmt = orderDate.toString().split("GMT")[1];
@@ -97,6 +97,7 @@ export const getDate = (date) => {
   const time = `${hour}:${min} i-GMT${gmt.slice(0, 1)}${Number(
     gmt.slice(1, 3)
   )}`;
+
   if (nowDay - day > 1) {
     days = nowDay - day;
     return `${days} дня назад, ${time}`;

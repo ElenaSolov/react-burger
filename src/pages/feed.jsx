@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import pageStyles from "./pages.module.css";
 import OrderCard from "../components/orderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
-import { startConnection } from "../services/actions/wsActions";
+import {
+  startConnection,
+  wsConnectionClosed,
+} from "../services/actions/wsActions";
 import { addScroll } from "../utils/utils";
 
 function FeedPage() {
@@ -10,11 +13,15 @@ function FeedPage() {
   const orders = useSelector((store) => store.feed.orders);
   console.log(orders);
 
-  const wsUrl = "wss://norma.nomoreparties.space/orders/all";
+  //   const wsUrl = "wss://norma.nomoreparties.space/orders/all";
   useEffect(() => {
-    dispatch(startConnection(wsUrl));
+    dispatch(startConnection("all"));
     if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
   }, [dispatch, orders.length]);
+
+  useEffect(() => {
+    return () => dispatch(wsConnectionClosed());
+  }, [dispatch]);
 
   const ordersDone =
     orders && orders.filter((order) => order.status === "done");
@@ -93,7 +100,7 @@ function FeedPage() {
           <p className="text text_type_main-medium">Выполнено за все время:</p>
           <p className="text text_type_digits-large">{orders.length}</p>
           <p className="text text_type_main-medium mt-15">
-            Выполнено за все сегодня:
+            Выполнено за сегодня:
           </p>
           <p className="text text_type_digits-large">{doneToday}</p>
         </section>
