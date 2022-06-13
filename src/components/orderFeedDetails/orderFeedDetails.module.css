@@ -1,0 +1,43 @@
+.orderContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 640px;
+    min-height: 430px;
+}
+.orderText{
+    align-self: start;
+}
+.orderTotalContainer{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 50px;
+}
+.list{
+    list-style-type: none;
+    padding: 0;
+    align-self: start;
+    width: 100%;
+}
+.ingredient{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.img{
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 2px solid #801AB2;
+    box-sizing: border-box;
+    padding: 2px;
+}
+.status{
+    align-self: start;
+}
+.total{
+    display: flex;
+    margin-left: auto;
+}

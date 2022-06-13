@@ -4,7 +4,7 @@ import OrderCard from "../components/orderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
 import {
   startConnection,
-  wsConnectionClosed,
+  closeConnection,
 } from "../services/actions/wsActions";
 import { addScroll } from "../utils/utils";
 
@@ -13,14 +13,13 @@ function FeedPage() {
   const orders = useSelector((store) => store.feed.orders);
   console.log(orders);
 
-  //   const wsUrl = "wss://norma.nomoreparties.space/orders/all";
   useEffect(() => {
     dispatch(startConnection("all"));
     if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
   }, [dispatch, orders.length]);
 
   useEffect(() => {
-    return () => dispatch(wsConnectionClosed());
+    return () => dispatch(closeConnection());
   }, [dispatch]);
 
   const ordersDone =
@@ -38,11 +37,11 @@ function FeedPage() {
         <h1 className={`${pageStyles.feedTitle} text text_type_main-large`}>
           Лента заказов
         </h1>
-        <section className={`${pageStyles.orders} ordersScroll`}>
+        <ul className={`${pageStyles.orders} ordersScroll`}>
           {orders.map((order) => (
             <OrderCard key={order._id} order={order} />
           ))}
-        </section>
+        </ul>
         <section className={`${pageStyles.info} ml-15`}>
           <div className={pageStyles.table}>
             <div className={pageStyles.tableColumn}>

@@ -27,7 +27,7 @@ export const wsConnectionError = () => {
   };
 };
 
-export const wsConnectionClosed = () => {
+export const closeConnection = () => {
   return {
     type: WS_CONNECTION_CLOSED,
   };

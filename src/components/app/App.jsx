@@ -22,6 +22,7 @@ import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import FeedPage from "../../pages/feed";
 import OrderPage from "../../pages/order";
 import ProfileOrders from "../../pages/profileOrders";
+import OrderFeedDetails from "../orderFeedDetails/OrderFeedDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function App() {
   const background = location.state?.background;
   const navigate = useNavigate();
   const onModalClose = () => {
-    navigate("/");
+    navigate(location.state.background);
   };
 
   useEffect(() => {
@@ -126,6 +127,22 @@ function App() {
               element={
                 <Modal onClose={onModalClose}>
                   <IngredientDetails />
+                </Modal>
+              }
+            />
+          </Routes>
+        )}
+        {background && (
+          <Routes>
+            {/* Попап с модальным окном */}
+            <Route
+              path="/feed/:id"
+              element={
+                <Modal onClose={onModalClose}>
+                  <OrderFeedDetails
+                    order={location.state.order}
+                    status={location.state.status}
+                  />
                 </Modal>
               }
             />

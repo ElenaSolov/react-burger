@@ -10,35 +10,33 @@ const ProfileNav = () => {
 
   return (
     <div className={profileNavStyles.profile}>
-      <div>
-        <NavLink
-          end
-          to="/profile"
-          className={({ isActive }) => (isActive ? activeClassName : className)}
-        >
-          Профиль
-        </NavLink>
-        <NavLink
-          to="/profile/orders"
-          className={({ isActive }) => (isActive ? activeClassName : className)}
-        >
-          История заказов
-        </NavLink>
-        <NavLink
-          to="/"
-          onClick={() => {
-            dispatch(logout());
-          }}
-          className={className}
-        >
-          Выход
-        </NavLink>
-        <p
-          className={`${profileNavStyles.text} text text_type_main-default mt-20`}
-        >
-          В этом разделе вы можете изменить свои персональные данные
-        </p>
-      </div>
+      <NavLink
+        end
+        to="/profile"
+        className={({ isActive }) => (isActive ? activeClassName : className)}
+      >
+        Профиль
+      </NavLink>
+      <NavLink
+        to="/profile/orders"
+        className={({ isActive }) => (isActive ? activeClassName : className)}
+      >
+        История заказов
+      </NavLink>
+      <NavLink
+        to="/"
+        onClick={() => {
+          dispatch(logout());
+        }}
+        className={className}
+      >
+        Выход
+      </NavLink>
+      <p
+        className={`${profileNavStyles.text} text text_type_main-default mt-20`}
+      >
+        В этом разделе вы можете изменить свои персональные данные
+      </p>
     </div>
   );
 };

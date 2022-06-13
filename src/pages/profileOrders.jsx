@@ -3,8 +3,10 @@ import pagesStyles from "./pages.module.css";
 import { getUser } from "../services/actions/authActions";
 import { useDispatch, useSelector } from "react-redux";
 import OrderCard from "../components/orderCard/OrderCard";
-import { startConnection } from "../services/actions/wsActions";
-import { addScroll } from "../utils/utils";
+import {
+  startConnection,
+  closeConnection,
+} from "../services/actions/wsActions";
 import ProfileNav from "../components/profileNav/ProfileNav";
 
 function ProfileOrders() {
@@ -16,13 +18,17 @@ function ProfileOrders() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(startConnection("orders"));
-    addScroll(".ordersScroll", ".bottom");
-  }, [dispatch, user.isAuth, orders.length]);
+    //     addScroll(".ordersScroll");
+  }, [dispatch, user.isAuth]);
+
+  useEffect(() => {
+    return () => dispatch(closeConnection());
+  }, [dispatch]);
 
   return (
     <section className={pagesStyles.page}>
       <ProfileNav />
-      <ul className={`${pagesStyles.myOrders} mr-15 ordersScroll`}>
+      <ul className={`${pagesStyles.myOrders} ml-15`}>
         {orders.map((order) => (
           <OrderCard key={order._id} order={order} />
         ))}

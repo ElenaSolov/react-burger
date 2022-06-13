@@ -1,7 +1,6 @@
 .order{
     box-sizing: border-box;
-    margin: 16px 0 0;
-    width: 584px;
+    margin: 16px 10px 0 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

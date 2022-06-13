@@ -35,21 +35,6 @@
     margin-left: 7px;
     color: #4C4CFF;
 }
-/*.profile{*/
-/*    display: grid;*/
-/*    grid-template-columns: 320px 480px;*/
-/*}*/
-/*.profileLink{*/
-/*    display: block;*/
-/*    line-height: 64px;*/
-/*    text-decoration: none;*/
-/*}*/
-/*.profileLinkActive{*/
-/*    color: #F2F2F3;*/
-/*}*/
-/*.profileLink:hover{*/
-/*    color: #F2F2F3;*/
-/*}*/
 .text{
     color: #8585AD;
     opacity: 0.4;
@@ -99,6 +84,9 @@
     display: flex;
     flex-direction: column;
     overflow: auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 .info{
     grid-area: info;
@@ -127,13 +115,13 @@
 .item:first-of-type{
     margin-top: 0;
 }
-.orderContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 640px;
-    min-height: 430px;
-}
+/*.orderContainer {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    width: 640px;*/
+/*    min-height: 430px;*/
+/*}*/
 .ingredient{
     display: flex;
     align-items: center;
@@ -148,14 +136,14 @@
     box-sizing: border-box;
     padding: 2px;
 }
-.orderText{
-    align-self: start;
-}
-.orderTotalContainer{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
+/*.orderText{*/
+/*    align-self: start;*/
+/*}*/
+/*.orderTotalContainer{*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    width: 100%;*/
+/*}*/
 .ingredientsList{
     list-style-type: none;
     margin: 24px 0 60px;
@@ -175,4 +163,8 @@
 .myOrders{
     overflow-y: auto;
     width: 844px;
+    max-height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
 }
