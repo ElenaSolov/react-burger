@@ -40,17 +40,3 @@ export const wsGetMessage = (message) => {
     payload: message,
   };
 };
-
-export const wsSendMessage = (message) => {
-  return {
-    type: WS_SEND_MESSAGE,
-    payload: message,
-  };
-};
-
-export const wsUserNameUpdate = (userName) => {
-  return {
-    type: WS_USER_NAME_UPDATE,
-    payload: userName,
-  };
-};
