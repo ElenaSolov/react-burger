@@ -43,8 +43,12 @@ const OrderCard = ({ order }) => {
                 const ingredient = ingredientsArray.find((i) => i._id === ing);
                 if (ind === 5) {
                   const rest = order.ingredients.length - 6;
+                  console.log(rest);
                   return (
-                    <li key={ind} className={orderCardStyles.item}>
+                    <li
+                      key={ind}
+                      className={`${orderCardStyles.item} ${orderCardStyles.itemLast}`}
+                    >
                       <span
                         className={`${orderCardStyles.rest} text text_type_main-default`}
                       >
