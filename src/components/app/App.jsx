@@ -21,6 +21,7 @@ import Modal from "../modals/modal/Modal";
 import IngredientDetails from "../ingredientDetails/IngredientDetails";
 import FeedPage from "../../pages/feed";
 import OrderPage from "../../pages/order";
+import MyOrderPage from "../../pages/myOrderPage";
 import ProfileOrders from "../../pages/profileOrders";
 import OrderFeedDetails from "../orderFeedDetails/OrderFeedDetails";
 
@@ -114,7 +115,7 @@ function App() {
             path="profile/orders/:id"
             element={
               <ProtectedRoute>
-                <OrderPage />
+                <MyOrderPage />
               </ProtectedRoute>
             }
           />
