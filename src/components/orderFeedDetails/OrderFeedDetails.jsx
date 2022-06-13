@@ -1,9 +1,9 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
 import orderFeedDetailsStyles from "./orderFeedDetails.module.css";
-import { getDate } from "../../utils/utils";
+import { getDate, getOrderStatus } from "../../utils/utils";
 
-const OrderFeedDetails = ({ order, status }) => {
+const OrderFeedDetails = ({ order }) => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const orderIngredients = [];
   order.ingredients.forEach((ingredient) => {
@@ -17,6 +17,7 @@ const OrderFeedDetails = ({ order, status }) => {
   });
   console.log(orderIngredients);
   const date = getDate(order.createdAt);
+  const status = getOrderStatus(order);
 
   return (
     <div className={orderFeedDetailsStyles.orderContainer}>

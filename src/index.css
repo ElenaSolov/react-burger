@@ -16,3 +16,6 @@ body{
   display: flex;
   flex-direction: column;
 }
+.done{
+  color: #00CCCC;
+}

@@ -7,6 +7,7 @@ export const WS_SEND_MESSAGE = "WS_SEND_MESSAGE";
 export const WS_USER_NAME_UPDATE = "WS_USER_NAME_UPDATE";
 
 export const startConnection = (wsUrl) => {
+  console.log(wsUrl);
   return function (dispatch) {
     dispatch({
       type: WS_CONNECTION_START,

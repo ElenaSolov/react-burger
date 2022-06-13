@@ -3,10 +3,9 @@ import orderCardStyles from "./orderCard.module.css";
 import { useSelector } from "react-redux";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
-import { getDate } from "../../utils/utils";
+import { getDate, getOrderStatus } from "../../utils/utils";
 
 const OrderCard = ({ order }) => {
-  //   console.log(order);
   const ingredientsArray = useSelector(
     (store) => store.ingredients.ingredients
   );
@@ -18,16 +17,9 @@ const OrderCard = ({ order }) => {
     return prev + ingredient.price;
   }, 0);
   const date = getDate(order.createdAt);
-  const status =
-    order.status === "done"
-      ? {
-          text: "Выполнен",
-          className: `${orderCardStyles.done} text text_type_main-default`,
-        }
-      : { text: "Готовится", className: "text text_type_main-default" };
+  const status = getOrderStatus(order);
 
   const location = useLocation();
-  console.log(location);
 
   return (
     <li>

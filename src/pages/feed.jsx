@@ -11,14 +11,13 @@ import { addScroll } from "../utils/utils";
 function FeedPage() {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.feed.orders);
-  console.log(orders);
+
+  useEffect(() => {
+    if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
+  }, [orders.length]);
 
   useEffect(() => {
     dispatch(startConnection("all"));
-    if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
-  }, [dispatch, orders.length]);
-
-  useEffect(() => {
     return () => dispatch(closeConnection());
   }, [dispatch]);
 

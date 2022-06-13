@@ -105,3 +105,13 @@ export const getDate = (date) => {
     return `Вчера, ${time}`;
   } else return `Сегодня, ${time}`;
 };
+
+//order status
+export const getOrderStatus = (order) => {
+  return order.status === "done"
+    ? {
+        text: "Выполнен",
+        className: "done text text_type_main-default",
+      }
+    : { text: "Готовится", className: "text text_type_main-default" };
+};

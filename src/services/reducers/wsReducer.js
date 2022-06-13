@@ -1,5 +1,4 @@
 import {
-  WS_USER_NAME_UPDATE,
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
@@ -30,7 +29,6 @@ export const wsReducer = (state = initialState, action) => {
       return {
         ...state,
         wsConnected: false,
-        orders: [],
       };
 
     case WS_GET_MESSAGE:
@@ -38,23 +36,7 @@ export const wsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        orders: state.orders.length
-          ? (() => {
-              action.payload.map((order) => {
-                const id = order._id;
-                if (state.orders.some((o) => o._id != id)) {
-                  return [...state.orders, order];
-                }
-              });
-              console.log(state.orders);
-              return state.orders;
-            })()
-          : [...action.payload],
-      };
-    case WS_USER_NAME_UPDATE:
-      return {
-        ...state,
-        user: action.payload,
+        orders: [...action.payload],
       };
 
     default:

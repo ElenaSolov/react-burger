@@ -18,7 +18,6 @@ function ProfileOrders() {
   useEffect(() => {
     dispatch(getUser());
     dispatch(startConnection("orders"));
-    //     addScroll(".ordersScroll");
   }, [dispatch, user.isAuth]);
 
   useEffect(() => {

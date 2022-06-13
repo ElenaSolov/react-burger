@@ -130,13 +130,19 @@ function App() {
                 </Modal>
               }
             />
-          </Routes>
-        )}
-        {background && (
-          <Routes>
-            {/* Попап с модальным окном */}
             <Route
               path="/feed/:id"
+              element={
+                <Modal onClose={onModalClose}>
+                  <OrderFeedDetails
+                    order={location.state.order}
+                    status={location.state.status}
+                  />
+                </Modal>
+              }
+            />
+            <Route
+              path="/profile/orders/:id"
               element={
                 <Modal onClose={onModalClose}>
                   <OrderFeedDetails
