@@ -13,16 +13,12 @@ function ProfileOrders() {
   const user = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.feed.orders.reverse());
-  console.log(orders);
 
   useEffect(() => {
     dispatch(getUser());
     dispatch(startConnection("orders"));
-  }, [dispatch, user.isAuth]);
-
-  useEffect(() => {
     return () => dispatch(closeConnection());
-  }, [dispatch]);
+  }, [dispatch, user.isAuth]);
 
   return (
     <section className={pagesStyles.page}>
