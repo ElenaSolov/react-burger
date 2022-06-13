@@ -3,33 +3,24 @@ import navItemStyles from "./navItem.module.css";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
-const NavItem = ({
-  type,
-  active,
-  value,
-  Icon,
-  text,
-  onClick,
-  path,
-  margin,
-}) => {
+const NavItem = ({ type, value, Icon, text, path, margin }) => {
   let marginLeft = null;
   if (margin) marginLeft = "ml-2";
-  const classes = active
-    ? `${navItemStyles.navItem} ${marginLeft} mb-4 mt-4 mr-5 pt-4 pb-4`
-    : `${navItemStyles.navItem} ${marginLeft} ${navItemStyles.inactive} mb-4 mt-4 mr-5 pt-4 pb-4`;
+  const className = `${navItemStyles.navItem} ${marginLeft} ${navItemStyles.inactive} mb-4 mt-4 mr-5 pt-4 pb-4`;
+  const activeClassName = `${navItemStyles.navItem} ${marginLeft} mb-4 mt-4 mr-5 pt-4 pb-4`;
 
   return (
-    <NavLink to={path} className={`${classes}`} onClick={() => onClick(value)}>
+    <NavLink
+      to={path}
+      className={({ isActive }) => (isActive ? activeClassName : className)}
+    >
       <Icon type={type} />
       <p className="text text_type_main-default ml-2">{text}</p>
     </NavLink>
   );
 };
 NavItem.propTypes = {
-  active: PropTypes.bool.isRequired,
   Icon: PropTypes.PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
