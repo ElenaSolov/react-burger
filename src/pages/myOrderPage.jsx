@@ -12,16 +12,13 @@ function MyOrderPage() {
   const location = useLocation();
   const locationArr = location.pathname.split("/");
   const number = locationArr[locationArr.length - 1];
-  console.log(number);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(startConnection("orders"));
-    console.log("start");
     return () => dispatch(closeConnection());
   }, [dispatch]);
   const orders = useSelector((store) => store.feed.orders);
   const order = orders.find((order) => order.number.toString() === number);
-  console.log(orders);
 
   return (
     <section className={pagesStyles.page}>

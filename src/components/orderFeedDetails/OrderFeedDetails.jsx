@@ -15,7 +15,6 @@ const OrderFeedDetails = ({ order }) => {
           count: 1,
         });
   });
-  console.log(orderIngredients);
   const date = getDate(order.createdAt);
   const status = getOrderStatus(order);
 

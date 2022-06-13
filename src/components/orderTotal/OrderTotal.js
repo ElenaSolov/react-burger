@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
-  console.log(totalIngredients, bun);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
@@ -47,7 +46,6 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
       setOpen(true);
       return;
     } else if (!bun._id) {
-      console.log(bun);
       setModalContent(noBun);
       setOpen(true);
       return;

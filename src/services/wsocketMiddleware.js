@@ -14,17 +14,14 @@ export const socketMiddleware = (wsActions) => {
       const { type, payload } = action;
       const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
       if (type === wsInit) {
-        console.log(payload);
         const wsUrl =
           payload.wsUrl === "orders"
             ? wsURLS[payload.wsUrl] +
               `?token=${getCookie("accessToken").split("Bearer ")[1]}`
             : wsURLS[payload.wsUrl];
         socket = new WebSocket(wsUrl);
-        console.log(11);
       }
       if (socket) {
-        console.log(22);
         socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });
         };
