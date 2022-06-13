@@ -10,7 +10,8 @@ import propTypesConfig from "../../utils/propTypesConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const OrderTotal = ({ totalIngredients, totalPrice }) => {
+const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
+  console.log(totalIngredients, bun);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
@@ -19,6 +20,11 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
       Пожалуйста, выберете булку и начинки
+    </h2>
+  );
+  const noBun = (
+    <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
+      Пожалуйста, выберете булку
     </h2>
   );
   const sending = (
@@ -40,10 +46,17 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
       setModalContent(noIngredients);
       setOpen(true);
       return;
+    } else if (!bun._id) {
+      console.log(bun);
+      setModalContent(noBun);
+      setOpen(true);
+      return;
     }
     setModalContent(sending);
     setOpen(true);
-    dispatch(sendOrder(totalIngredients, openOrderModal, totalPrice));
+    dispatch(
+      sendOrder([bun, ...totalIngredients, bun], openOrderModal, totalPrice)
+    );
   };
 
   return (

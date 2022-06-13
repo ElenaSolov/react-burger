@@ -113,6 +113,7 @@ const BurgerConstructor = () => {
       </ul>
       <OrderTotal
         totalIngredients={order.orderedIngredients}
+        bun={mainBun}
         totalPrice={totalPrice}
       />
     </section>
