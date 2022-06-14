@@ -49,7 +49,7 @@ const AppHeader = () => {
           value="Кабинет"
           text="Личный кабинет"
           Icon={ProfileIcon}
-          type={pathname === "/profile" ? "primary" : "secondary"}
+          type={pathname.includes("/profile") ? "primary" : "secondary"}
           path="/profile"
         />
         <button
