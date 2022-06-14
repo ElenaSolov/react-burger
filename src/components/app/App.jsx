@@ -37,7 +37,6 @@ function App() {
   const onModalClose = () => {
     navigate(location.state.background);
   };
-
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(getUser());
@@ -70,7 +69,10 @@ function App() {
             path="login"
             exact
             element={
-              <ProtectedRoute type="public" redirectPath="/profile">
+              <ProtectedRoute
+                type="public"
+                redirectPath={location.state || "/profile"}
+              >
                 <LoginPage />
               </ProtectedRoute>
             }

@@ -10,11 +10,10 @@ function ProtectedRoute({
 }) {
   let auth = useSelector((store) => store.auth);
   const location = useLocation();
-
   if (!auth.isAuth && type === "private") {
-    return <Navigate to={redirectPath} replace state={location.pathname} />;
+    return <Navigate to={redirectPath} replace state={location.state} />;
   } else if (auth.isAuth && type === "public") {
-    return <Navigate to={redirectPath} replace state={location.pathname} />;
+    return <Navigate to={redirectPath} replace state={location.state} />;
   }
 
   return children;
