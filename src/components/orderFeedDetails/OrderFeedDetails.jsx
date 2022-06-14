@@ -17,6 +17,10 @@ const OrderFeedDetails = ({ order }) => {
   });
   const date = getDate(order.createdAt);
   const status = getOrderStatus(order);
+  const totalPrice = orderIngredients.reduce(
+    (prev, next) => prev + next.price * next.count,
+    0
+  );
 
   return (
     <div className={orderFeedDetailsStyles.orderContainer}>
@@ -68,7 +72,9 @@ const OrderFeedDetails = ({ order }) => {
           {date}
         </p>
         <div className={orderFeedDetailsStyles.total}>
-          <p className="text text_type_digits-default mr-2 ml-2">510</p>
+          <p className="text text_type_digits-default mr-2 ml-2">
+            {totalPrice}
+          </p>
           <CurrencyIcon type="primary" />
         </div>
       </div>
