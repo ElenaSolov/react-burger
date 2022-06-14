@@ -20,6 +20,7 @@ const OrderCard = ({ order }) => {
   const status = getOrderStatus(order);
 
   const location = useLocation();
+  const rest = order.ingredients.length - 6;
 
   return (
     <li>
@@ -41,9 +42,7 @@ const OrderCard = ({ order }) => {
             <ul className={orderCardStyles.list}>
               {order.ingredients.map((ing, ind) => {
                 const ingredient = ingredientsArray.find((i) => i._id === ing);
-                if (ind === 5) {
-                  const rest = order.ingredients.length - 6;
-                  console.log(rest);
+                if (ind === 5 && rest) {
                   return (
                     <li
                       key={ind}
