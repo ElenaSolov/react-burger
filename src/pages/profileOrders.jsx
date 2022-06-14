@@ -8,6 +8,7 @@ import {
   closeConnection,
 } from "../services/actions/wsActions";
 import ProfileNav from "../components/profileNav/ProfileNav";
+import { addScroll } from "../utils/utils";
 
 function ProfileOrders() {
   const user = useSelector((store) => store.auth);
@@ -20,10 +21,14 @@ function ProfileOrders() {
     return () => dispatch(closeConnection());
   }, [dispatch, user.isAuth]);
 
+  useEffect(() => {
+    if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
+  }, [orders.length]);
+
   return (
     <section className={pagesStyles.page}>
       <ProfileNav />
-      <ul className={`${pagesStyles.myOrders} ml-15`}>
+      <ul className={`${pagesStyles.myOrders} ml-15 ordersScroll`}>
         {orders.map((order) => (
           <OrderCard key={order._id} order={order} />
         ))}
