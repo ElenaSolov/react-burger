@@ -90,7 +90,7 @@ const BurgerConstructor = () => {
             {orderedIngredients.map((ingredient, index) => {
               return (
                 <ConstructorItem
-                  key={ingredient.key}
+                  key={index}
                   ingredient={ingredient}
                   index={index}
                   moveItem={moveItem}

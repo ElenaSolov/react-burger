@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import orderTotalStyles from "./orderTotal.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -16,6 +16,7 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
   const auth = useSelector((store) => store.auth);
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState("");
+
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
       Пожалуйста, выберете булку и начинки
@@ -31,6 +32,13 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
       Пожалуйста, подождите, мы оформляем Ваш заказ...
     </h2>
   );
+
+  useEffect(() => {
+    return () => {
+      setOpen(false);
+      setModalContent("");
+    };
+  }, []);
 
   const openOrderModal = () => {
     setModalContent(<OrderDetails />);

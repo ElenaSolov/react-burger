@@ -24,7 +24,7 @@ function FeedPage() {
   const ordersDone =
     orders && orders.filter((order) => order.status === "done");
   const ordersInprocess =
-    orders && orders.filter((order) => order.status === "created");
+    orders && orders.filter((order) => order.status === "pending");
   const doneToday = ordersDone.filter((order) => {
     const today = new Date().toJSON().slice(0, 10);
     return order.createdAt.slice(0, 10) === today;
