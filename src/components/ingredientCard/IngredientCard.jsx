@@ -56,6 +56,12 @@ const IngredientCard = ({ ingredient }) => {
             </span>
           </p>
           <p className="mt-4 text text_type_main-default">{ingredient.name}</p>
+          <button
+            type="button"
+            className={`${ingredientCardStyles.btn} text text_type_main-default`}
+          >
+            Добавить
+          </button>
         </Link>
       </li>
     )

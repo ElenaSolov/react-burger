@@ -2,6 +2,7 @@
     display: flex;
     justify-content: end;
     align-items: center;
+    padding-right: 16px;
 }
 .priceIcon {
     margin-left: 9.5px;
@@ -11,4 +12,23 @@
     margin-top: 40px;
     line-height: 70px;
 }
-
+.btn_type_mobile{
+    display: none;
+}
+@media screen and (max-width: 991px){
+    .orderTotal{
+        position: absolute;
+        margin: 16px auto;
+        width: 600px;
+        top: 0;
+        margin-left: calc((100% - 600px)/2);
+        left: 0;
+        justify-content: space-between;
+    }
+    .btn{
+    display: none;
+    }
+    .btn_type_mobile{
+        display: block;
+    }
+}

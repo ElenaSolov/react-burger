@@ -73,9 +73,16 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
           <CurrencyIcon type="primary" />
         </span>
       </p>
-      <Button type="primary" size="medium" onClick={makeOrder}>
-        Оформить заказ
-      </Button>
+      <div className={orderTotalStyles.btn}>
+        <Button type="primary" size="medium" onClick={makeOrder}>
+          Оформить заказ
+        </Button>
+      </div>
+      <div className={orderTotalStyles.btn_type_mobile}>
+        <Button type="primary" size="medium" onClick={makeOrder}>
+          Смотреть заказ
+        </Button>
+      </div>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
           {/*<OrderDetails />*/}

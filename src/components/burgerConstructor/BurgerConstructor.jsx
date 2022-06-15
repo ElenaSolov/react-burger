@@ -69,8 +69,10 @@ const BurgerConstructor = () => {
       className={`${constructorStyles.constructor} ml-4`}
     >
       {(!isLoaded || (orderedIngredients.length < 1 && !mainBun.name)) && (
-        <p className="text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive">
-          Пожалуйста, перенесите сюда булку и ингредиенты для создания заказа
+        <p
+          className={`${constructorStyles.text} text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive`}
+        >
+          Перенесите сюда булку и&nbsp;начинки для создания заказа
         </p>
       )}
       <ul className={`${constructorStyles.list} mt-25`}>

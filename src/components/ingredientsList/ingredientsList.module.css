@@ -36,3 +36,22 @@
 .tabLink {
     text-decoration: none;
 }
+@media screen and (max-width: 1239px) {
+    .tabLink div {
+        min-width: unset;
+    }
+    .list{
+        gap: 15px;
+    }
+}
+@media screen and (max-width: 991px){
+    .tabLink div {
+        min-width: 120px;
+    }
+}
+@media screen and (max-width: 640px) {
+    .tabLink div {
+        min-width: unset;
+    }
+}
+

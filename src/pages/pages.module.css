@@ -115,13 +115,7 @@
 .item:first-of-type{
     margin-top: 0;
 }
-/*.orderContainer {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-/*    width: 640px;*/
-/*    min-height: 430px;*/
-/*}*/
+
 .ingredient{
     display: flex;
     align-items: center;

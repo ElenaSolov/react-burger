@@ -20,6 +20,7 @@
   display: grid;
   grid-template-areas:
         'ingredients constructor';
+  margin: 0 16px;
 }
 .imgContainer{
   width: 100%;
@@ -33,4 +34,19 @@
   position: absolute;
   top: 40%;
   left: 40%;
+}
+.bottomBar{
+  display: none;
+}
+@media screen and (max-width: 991px) {
+  .main{
+    margin-bottom: 100px;
+  }
+  .container{
+    grid-template-areas: 'ingredients';
+    width: 100%;
+    justify-items: center;
+    margin: 0;
+  }
+
 }
