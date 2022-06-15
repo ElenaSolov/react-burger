@@ -4,6 +4,7 @@ import orderFeedDetailsStyles from "./orderFeedDetails.module.css";
 import { getDate, getOrderStatus } from "../../utils/utils";
 
 const OrderFeedDetails = ({ order }) => {
+  console.log(order);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const orderIngredients = [];
   order.ingredients.forEach((ingredient) => {

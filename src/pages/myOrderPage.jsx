@@ -8,6 +8,8 @@ import { getOrderDetails } from "../services/actions/actions";
 function MyOrderPage() {
   const location = useLocation();
   location.state = location.pathname;
+  const orderFailed = useSelector((store) => store.order.orderFailed);
+  console.log(orderFailed);
   const locationArr = location.pathname.split("/");
   const number = locationArr[locationArr.length - 1];
   const dispatch = useDispatch();
@@ -15,10 +17,17 @@ function MyOrderPage() {
     dispatch(getOrderDetails(number));
   }, [dispatch, number]);
   const order = useSelector((store) => store.order.order);
-
   return (
     <section className={pagesStyles.page}>
-      {order && <OrderFeedDetails order={order} />}
+      {orderFailed ? (
+        <h1 className="text text_type_main-large">Что-то пошло не так...</h1>
+      ) : order && order.number ? (
+        <OrderFeedDetails order={order} />
+      ) : (
+        <h1 className="text text_type_main-large">
+          Такого заказа нет. Проверьте, пожалуйста, номер
+        </h1>
+      )}
     </section>
   );
 }
