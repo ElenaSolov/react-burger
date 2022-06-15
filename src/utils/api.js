@@ -67,3 +67,7 @@ export const sendUserUpdate = (name, email, password) => {
   const body = JSON.stringify({ name, email, password });
   return sendRequest("PATCH", body, `${baseURL}/auth/user`, headers);
 };
+export const sendOrderDetailsRequest = (number) => {
+  console.log(number);
+  return sendRequest("GET", null, `${baseURL}/orders/${number}`);
+};
