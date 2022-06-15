@@ -3,10 +3,7 @@ import pagesStyles from "./pages.module.css";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import OrderFeedDetails from "../components/orderFeedDetails/OrderFeedDetails";
-import {
-  startConnection,
-  closeConnection,
-} from "../services/actions/wsActions";
+import { getOrderDetails } from "../services/actions/actions";
 
 function OrderPage() {
   const location = useLocation();
@@ -14,16 +11,23 @@ function OrderPage() {
   const number = locationArr[locationArr.length - 1];
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(startConnection("all"));
-    return () => dispatch(closeConnection());
-  }, [dispatch]);
-  const orders = useSelector((store) => store.feed.orders);
-  const order = orders.find((order) => order.number.toString() === number);
+    dispatch(getOrderDetails(number));
+  }, [dispatch, number]);
+  const order = useSelector((store) => store.order.order);
+  const orderFailed = useSelector((store) => store.order.orderFailed);
+  console.log(orderFailed);
 
-  //   const { order } = location.state;
   return (
     <section className={pagesStyles.page}>
-      {order && <OrderFeedDetails order={order} />}
+      {orderFailed ? (
+        <h1 className="text text_type_main-large">Что-то пошло не так...</h1>
+      ) : order && order.number ? (
+        <OrderFeedDetails order={order} />
+      ) : (
+        <h1 className="text text_type_main-large">
+          Такого заказа нет. Проверьте, пожалуйста, номер
+        </h1>
+      )}
     </section>
   );
 }

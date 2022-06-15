@@ -7,7 +7,6 @@ import { getOrderDetails } from "../services/actions/actions";
 
 function MyOrderPage() {
   const location = useLocation();
-  location.state = location.pathname;
   const orderFailed = useSelector((store) => store.order.orderFailed);
   console.log(orderFailed);
   const locationArr = location.pathname.split("/");
