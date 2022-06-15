@@ -10,6 +10,8 @@ import {
 
 function MyOrderPage() {
   const location = useLocation();
+  location.state = location.pathname;
+  console.log(location);
   const locationArr = location.pathname.split("/");
   const number = locationArr[locationArr.length - 1];
   const dispatch = useDispatch();

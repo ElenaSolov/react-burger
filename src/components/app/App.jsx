@@ -41,7 +41,6 @@ function App() {
     dispatch(getIngredients());
     dispatch(getUser());
   }, [dispatch]);
-
   return !isLoaded ? (
     <div className={appStyles.imgContainer}>
       <img className={appStyles.img} src={img} alt="Иконка бургера" />
@@ -52,7 +51,11 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Routes location={background || location}>
           <Route path="/" exact element={<HomePage />} />
-          <Route path="ingredients/:id" element={<IngredientPage />} />
+          <Route
+            path="ingredients/:id"
+            redirectPath={location.pathname}
+            element={<IngredientPage />}
+          />
           <Route path="feed" element={<FeedPage />} />
           <Route path="feed/:id" element={<OrderPage />} />
           <Route path="*" element={<NotFoundPage />} />
