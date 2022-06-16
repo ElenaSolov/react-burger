@@ -16,7 +16,11 @@ const IngredientDetails = () => {
         className={ingredientDetailsStyles.img}
         alt={ingredient.name}
       />
-      <p className="text text_type_main-medium mt-4 mb-8">{ingredient.name}</p>
+      <p
+        className={`${ingredientDetailsStyles.title} text text_type_main-medium mt-4 mb-8`}
+      >
+        {ingredient.name}
+      </p>
       <ul className={`${ingredientDetailsStyles.list} mb-15`}>
         <li className={`${ingredientDetailsStyles.listItem} mr-5`}>
           <p className="text text_type_main-default text_color_inactive mb-2">

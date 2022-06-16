@@ -16,3 +16,24 @@
     min-height: 24px;
     text-align: center;
 }
+
+@media screen and (max-width: 640px){
+.img{
+    width: 300px;
+    height: unset;
+}
+    .list{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin: 0;
+    }
+    .listItem{
+        margin: 0;
+    }
+}
+@media screen and (max-width: 414px){
+    .title{
+        font-size: 18px;
+    }
+}

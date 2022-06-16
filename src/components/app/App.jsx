@@ -27,9 +27,10 @@ import OrderFeedDetails from "../orderFeedDetails/OrderFeedDetails";
 
 function App() {
   const dispatch = useDispatch();
-  const isLoaded = useSelector(
+  let isLoaded = useSelector(
     (store) => store.ingredients.ingredientsRequestStatus
   );
+  isLoaded = false;
   window.history.replaceState({}, document.title);
   const location = useLocation();
   const background = location.state?.background;
