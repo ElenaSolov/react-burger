@@ -67,7 +67,9 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
 
   return (
     <div className={`${orderTotalStyles.orderTotal} mt-10`}>
-      <p className={`text text_type_digits-medium mr-10`}>
+      <p
+        className={`${orderTotalStyles.total} text text_type_digits-medium mr-10`}
+      >
         {totalPrice}
         <span className={orderTotalStyles.priceIcon}>
           <CurrencyIcon type="primary" />

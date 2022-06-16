@@ -37,4 +37,13 @@
         margin: 16px 8px;
         max-width: calc(100% - 16px);
     }
+    .total{
+        font-size: 28px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+    }
+    .priceIcon{
+        height: 28px;
+    }
 }
