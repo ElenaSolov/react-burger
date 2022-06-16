@@ -79,7 +79,7 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
         </Button>
       </div>
       <div className={orderTotalStyles.btn_type_mobile}>
-        <Button type="primary" size="medium" onClick={makeOrder}>
+        <Button type="primary" size="small">
           Смотреть заказ
         </Button>
       </div>

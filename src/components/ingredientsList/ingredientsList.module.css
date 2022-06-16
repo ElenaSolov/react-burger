@@ -54,4 +54,26 @@
         min-width: unset;
     }
 }
+@media screen and (max-width: 414px) {
+  .tabLink span{
+      font-size: 14px;
+  }
+    .tabLink div{
+        min-width: unset;
+        display: flex;
+        justify-content: center;
+        padding: 16px 0;
+        margin: 0 auto;
+        width: 106px;
+    }
+    .ingredientsSection{
+        width: calc(100% - 16px);
+        margin: 0 auto;
+    }
+    .header{
+        font-size: 20px;
+        line-height: 24px;
+
+    }
+}
 

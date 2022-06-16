@@ -9,3 +9,13 @@
     display: flex;
     flex-direction: column;
 }
+@media screen and (max-width: 414px){
+    .ingredients{
+        width: 100%;
+    }
+    .header{
+        font-size: 28px;
+        line-height: 32px;
+        text-align: center;
+    }
+}

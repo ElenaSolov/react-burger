@@ -54,5 +54,7 @@
     .navBar{
         display: none;
     }
-
+.header{
+    margin: 0;
+}
 }

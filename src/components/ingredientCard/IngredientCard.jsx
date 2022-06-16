@@ -55,7 +55,11 @@ const IngredientCard = ({ ingredient }) => {
               <CurrencyIcon />
             </span>
           </p>
-          <p className="mt-4 text text_type_main-default">{ingredient.name}</p>
+          <p
+            className={`${ingredientCardStyles.text} mt-4 text text_type_main-default`}
+          >
+            {ingredient.name}
+          </p>
           <button
             type="button"
             className={`${ingredientCardStyles.btn} text text_type_main-default`}
