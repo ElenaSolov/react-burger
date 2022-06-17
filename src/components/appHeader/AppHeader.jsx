@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import headerStyles from "./appHeader.module.css";
 import NavItem from "../navItem/NavItem";
 import {
@@ -9,11 +9,18 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 import img from "../../images/burger_icon.svg";
+import MobileMenu from "../mobileMenu/MobileMenu";
 
 const AppHeader = () => {
-  const openMobileMenu = () => {};
   const { pathname } = useLocation();
-  return (
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const openMobileMenu = () => {
+    setMenuOpen(true);
+  };
+  return menuOpen ? (
+    <MobileMenu onClose={() => setMenuOpen(false)} />
+  ) : (
     <header className={headerStyles.header}>
       <div className={headerStyles.header__container}>
         <nav className={headerStyles.navBar}>

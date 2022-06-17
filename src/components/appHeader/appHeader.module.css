@@ -29,6 +29,7 @@
     background-image: url("../../images/mobile_menu_icon.svg");
     position: relative;
     margin: 20px 8px;
+    cursor: pointer;
 }
 
 
