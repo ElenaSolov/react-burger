@@ -91,16 +91,21 @@ export const getDate = (date) => {
   const nowDay = now.getDate();
   let day = orderDate.getUTCDate();
   let hour = orderDate.getHours();
+  let month = orderDate.getMonth();
   let min = orderDate.getMinutes();
   const gmt = orderDate.toString().split("GMT")[1];
   if (min < 10) min = "0" + min;
   const time = `${hour}:${min} i-GMT${gmt.slice(0, 1)}${Number(
     gmt.slice(1, 3)
   )}`;
-
+  if (now.getMonth() - month > 0) {
+    return `${day}/${month}, ${time}`;
+  }
   if (nowDay - day > 1) {
     days = nowDay - day;
-    return `${days} дня назад, ${time}`;
+    return days < 5
+      ? `${days} дня назад, ${time}`
+      : `${days} дней назад, ${time}`;
   } else if (nowDay - day === 1) {
     return `Вчера, ${time}`;
   } else return `Сегодня, ${time}`;
