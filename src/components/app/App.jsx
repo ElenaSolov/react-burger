@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import appStyles from "./app.module.css";
+// import appStyles from "./app.module.css";
 import AppHeader from "../appHeader/AppHeader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector, useDispatch } from "react-redux";
-import img from "../../images/burger_icon.svg";
 import { getIngredients } from "../../services/actions/actions.js";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import PreLoader from "../preloader/PreLoader.jsx";
 import LoginPage from "../../pages/login";
 import RegisterPage from "../../pages/register";
 import RestorePasswordPage from "../../pages/restorePassword";
@@ -42,9 +42,7 @@ function App() {
     dispatch(getUser());
   }, [dispatch]);
   return !isLoaded ? (
-    <div className={appStyles.imgContainer}>
-      <img className={appStyles.img} src={img} alt="Иконка бургера" />
-    </div>
+    <PreLoader />
   ) : (
     <>
       <AppHeader />

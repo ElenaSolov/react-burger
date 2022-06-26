@@ -18,6 +18,7 @@ export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 export const LOGOUT = "LOGOUT";
 export const RESTORE_USER_EMAIL_SUCCESS = "RESTORE_USER_EMAIL_SUCCESS";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
+export const AUTH_CHECKED = "AUTH_CHECKED";
 
 export function register(email, password, name) {
   return function (dispatch) {
@@ -29,7 +30,7 @@ export function register(email, password, name) {
             email: res.user.email,
             name: res.user.name,
           });
-          setCookie("accessToken", res.accessToken, 20);
+          setCookie("accessToken", res.accessToken);
           setCookie("refreshToken", res.refreshToken);
         }
       })
@@ -51,7 +52,7 @@ export function login(email, password) {
             accessToken: res.accessToken,
           });
           setCookie("refreshToken", res.refreshToken);
-          setCookie("accessToken", res.accessToken, 20);
+          setCookie("accessToken", res.accessToken);
         }
       })
       .catch((err) => {
@@ -77,6 +78,11 @@ export function getUser() {
         dispatch({
           type: UPDATE_USER_FAIL,
         });
+        if (err.message === "jwt expired") {
+        }
+      })
+      .finally(() => {
+        dispatch({ type: AUTH_CHECKED });
       });
   };
 }

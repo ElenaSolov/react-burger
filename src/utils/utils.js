@@ -45,11 +45,8 @@ export function validateEmail(mail) {
 }
 
 // token
-export function setCookie(name, value, exmins = 120) {
-  const d = new Date();
-  d.setTime(d.getTime() + exmins * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = name + "=" + value + ";" + expires + ";path=/";
+export function setCookie(name, value) {
+  document.cookie = name + "=" + value + ";path=/";
 }
 
 export function getCookie(name) {
