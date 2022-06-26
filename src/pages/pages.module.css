@@ -78,6 +78,15 @@
     text-align: start;
 }
 
+.error{
+    margin-top: 30%;
+    text-align: center;
+    line-height: 2.5;
+}
+.profileError{
+    margin-top: 0;
+}
+
 .orders{
     grid-area: orders;
     max-width: 600px;

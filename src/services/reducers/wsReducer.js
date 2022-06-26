@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   wsConnected: false,
+  wsError: false,
   orders: [],
 };
 
@@ -22,6 +23,7 @@ export const wsReducer = (state = initialState, action) => {
       return {
         ...state,
         wsConnected: false,
+        wsError: true,
       };
 
     case WS_CONNECTION_CLOSED:

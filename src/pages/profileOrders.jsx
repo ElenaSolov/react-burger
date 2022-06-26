@@ -14,6 +14,7 @@ function ProfileOrders() {
   const user = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.feed.orders.reverse());
+  const isError = useSelector((store) => store.feed.wsError);
 
   useEffect(() => {
     dispatch(getUser());
@@ -22,17 +23,25 @@ function ProfileOrders() {
   }, [dispatch, user.isAuth]);
 
   useEffect(() => {
-    if (orders.length > 2) addScroll(".ordersScroll", ".bottom");
-  }, [orders.length]);
+    if (orders.length > 2 && !isError) addScroll(".ordersScroll", ".bottom");
+  }, [orders.length, isError]);
 
   return (
     <section className={pagesStyles.page}>
       <ProfileNav />
-      <ul className={`${pagesStyles.myOrders} ml-15 ordersScroll`}>
-        {orders.map((order) => (
-          <OrderCard key={order._id} order={order} />
-        ))}
-      </ul>
+      {isError ? (
+        <h1
+          className={`${pagesStyles.feedTitle} ${pagesStyles.error} ${pagesStyles.profileError} text text_type_main-large `}
+        >
+          Что-то пошло не так, попробуйте обновить страницу
+        </h1>
+      ) : (
+        <ul className={`${pagesStyles.myOrders} ml-15 ordersScroll`}>
+          {orders.map((order) => (
+            <OrderCard key={order._id} order={order} />
+          ))}
+        </ul>
+      )}
     </section>
   );
 }
