@@ -17,7 +17,6 @@ const IngredientsList = () => {
   const mainsSectionRef = useRef(null);
   const current = useSelector((store) => store.ingredients.currentTab);
   const setCurrent = (ref) => {
-    console.log(ref);
     ref.current.scrollIntoView({
       behavior: "smooth",
       block: "start",

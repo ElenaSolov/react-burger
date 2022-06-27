@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import headerStyles from "./appHeader.module.css";
 import NavItem from "../navItem/NavItem";
 import {
@@ -7,13 +7,20 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import img from "../../images/burger_icon.svg";
+import MobileMenu from "../mobileMenu/MobileMenu";
 
 const AppHeader = () => {
-  const [current, setCurrent] = React.useState("Конструктор");
-  const openMobileMenu = () => {};
-  return (
+  const { pathname } = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const openMobileMenu = () => {
+    setMenuOpen(true);
+  };
+  return menuOpen ? (
+    <MobileMenu onClose={() => setMenuOpen(false)} />
+  ) : (
     <header className={headerStyles.header}>
       <div className={headerStyles.header__container}>
         <nav className={headerStyles.navBar}>
@@ -21,22 +28,18 @@ const AppHeader = () => {
             <li>
               <NavItem
                 value="Конструктор"
-                active={current === "Конструктор"}
-                onClick={setCurrent}
                 text="Конструктор"
                 Icon={BurgerIcon}
-                type={current === "Конструктор" ? "primary" : "secondary"}
+                type={pathname === "/" ? "primary" : "secondary"}
                 path="/"
               />
             </li>
             <li>
               <NavItem
                 value="Лента"
-                active={current === "Лента"}
-                onClick={setCurrent}
                 text="Лента заказов"
                 Icon={ListIcon}
-                type={current === "Лента" ? "primary" : "secondary"}
+                type={pathname === "/feed" ? "primary" : "secondary"}
                 path="/feed"
                 margin={true}
               />
@@ -51,11 +54,9 @@ const AppHeader = () => {
         </Link>
         <NavItem
           value="Кабинет"
-          active={current === "Кабинет"}
-          onClick={setCurrent}
           text="Личный кабинет"
           Icon={ProfileIcon}
-          type={current === "Кабинет" ? "primary" : "secondary"}
+          type={pathname.includes("/profile") ? "primary" : "secondary"}
           path="/profile"
         />
         <button

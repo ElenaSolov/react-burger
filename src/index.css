@@ -5,6 +5,7 @@
   align-items: center;
   top: 50%;
   left: 50%;
+  z-index: 100;
 }
 body{
   margin: 0;
@@ -14,4 +15,7 @@ body{
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+.done{
+  color: #00CCCC;
 }

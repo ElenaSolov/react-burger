@@ -1,4 +1,8 @@
-import { getIngredientsRequest, sendOrderRequest } from "../../utils/api";
+import {
+  getIngredientsRequest,
+  sendOrderRequest,
+  sendOrderDetailsRequest,
+} from "../../utils/api";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
@@ -14,6 +18,9 @@ export const DELETE_FROM_ORDER = "DELETE_FROM_ORDER";
 export const SET_CURRENT_INGREDIENT = "SET_CURRENT_INGREDIENT";
 export const RESET_CURRENT_INGREDIENT = "RESET_CURRENT_INGREDIENT";
 export const SET_CURRENT_TAB = "SET_CURRENT_TAB";
+export const GET_ORDER_DETAILS_REQUEST = "GET_ORDER_DETAILS_REQUEST";
+export const GET_ORDER_DETAILS_SUCCESS = "GET_ORDER_DETAILS_SUCCESS";
+export const GET_ORDER_DETAILS_FAILED = "GET_ORDER_DETAILS_FAILED";
 
 export function orderIngredient(ingredient, key) {
   return {
@@ -80,6 +87,20 @@ export function sendOrder(ingredients, openOrderModal, totalPrice) {
       })
       .catch((err) => {
         dispatch({ type: SEND_ORDER_FAILED });
+        console.log(err);
+      });
+  };
+}
+export function getOrderDetails(number) {
+  return function (dispatch) {
+    dispatch({ type: GET_ORDER_DETAILS_REQUEST, number });
+    sendOrderDetailsRequest(number)
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: GET_ORDER_DETAILS_SUCCESS, res });
+      })
+      .catch((err) => {
+        dispatch({ type: GET_ORDER_DETAILS_FAILED });
         console.log(err);
       });
   };

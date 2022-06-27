@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import orderTotalStyles from "./orderTotal.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -10,15 +10,21 @@ import propTypesConfig from "../../utils/propTypesConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const OrderTotal = ({ totalIngredients, totalPrice }) => {
+const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState("");
+
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
       Пожалуйста, выберете булку и начинки
+    </h2>
+  );
+  const noBun = (
+    <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
+      Пожалуйста, выберете булку
     </h2>
   );
   const sending = (
@@ -26,6 +32,13 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
       Пожалуйста, подождите, мы оформляем Ваш заказ...
     </h2>
   );
+
+  useEffect(() => {
+    return () => {
+      setOpen(false);
+      setModalContent("");
+    };
+  }, []);
 
   const openOrderModal = () => {
     setModalContent(<OrderDetails />);
@@ -40,23 +53,38 @@ const OrderTotal = ({ totalIngredients, totalPrice }) => {
       setModalContent(noIngredients);
       setOpen(true);
       return;
+    } else if (!bun._id) {
+      setModalContent(noBun);
+      setOpen(true);
+      return;
     }
     setModalContent(sending);
     setOpen(true);
-    dispatch(sendOrder(totalIngredients, openOrderModal, totalPrice));
+    dispatch(
+      sendOrder([bun, ...totalIngredients, bun], openOrderModal, totalPrice)
+    );
   };
 
   return (
     <div className={`${orderTotalStyles.orderTotal} mt-10`}>
-      <p className={`text text_type_digits-medium mr-10`}>
+      <p
+        className={`${orderTotalStyles.total} text text_type_digits-medium mr-10`}
+      >
         {totalPrice}
         <span className={orderTotalStyles.priceIcon}>
           <CurrencyIcon type="primary" />
         </span>
       </p>
-      <Button type="primary" size="medium" onClick={makeOrder}>
-        Оформить заказ
-      </Button>
+      <div className={orderTotalStyles.btn}>
+        <Button type="primary" size="medium" onClick={makeOrder}>
+          Оформить заказ
+        </Button>
+      </div>
+      <div className={orderTotalStyles.btn_type_mobile}>
+        <Button type="primary" size="small">
+          Смотреть заказ
+        </Button>
+      </div>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
           {/*<OrderDetails />*/}

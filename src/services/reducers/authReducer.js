@@ -8,6 +8,7 @@ import {
   UPDATE_USER_FAIL,
   RESTORE_USER_EMAIL_SUCCESS,
   RESET_PASSWORD_SUCCESS,
+  AUTH_CHECKED,
 } from "../actions/authActions";
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   name: "",
   email: "",
   resetPassword: false,
+  isAuthChecked: false,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -47,6 +49,12 @@ export const authReducer = (state = initialState, action) => {
     case LOGOUT: {
       return {
         ...initialState,
+      };
+    }
+    case AUTH_CHECKED: {
+      return {
+        ...state,
+        isAuthChecked: true,
       };
     }
     default: {

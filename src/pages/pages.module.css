@@ -18,7 +18,6 @@
     align-items: center;
     width: 480px;
     height: 430px;
-
 }
 .title {
     margin: 0 auto;
@@ -35,21 +34,6 @@
     text-decoration: none;
     margin-left: 7px;
     color: #4C4CFF;
-}
-.profile{
-    display: grid;
-    grid-template-columns: 320px 480px;
-}
-.profileLink{
-    display: block;
-    line-height: 64px;
-    text-decoration: none;
-}
-.profileLinkActive{
-    color: #F2F2F3;
-}
-.profileLink:hover{
-    color: #F2F2F3;
 }
 .text{
     color: #8585AD;
@@ -94,11 +78,24 @@
     text-align: start;
 }
 
+.error{
+    margin-top: 30%;
+    text-align: center;
+    line-height: 2.5;
+}
+.profileError{
+    margin-top: 0;
+}
+
 .orders{
     grid-area: orders;
     max-width: 600px;
     display: flex;
     flex-direction: column;
+    overflow: auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 .info{
     grid-area: info;
@@ -118,11 +115,59 @@
     list-style-type: none;
     margin: 24px 0 60px;
     padding: 0;
+    align-self: start;
+    width: 100%;
 }
 .done{
     color: #00CCCC;
-
 }
 .item:first-of-type{
     margin-top: 0;
+}
+
+.ingredient{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.img{
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 100px;
+    border: 2px solid #801AB2;
+    box-sizing: border-box;
+    padding: 2px;
+}
+/*.orderText{*/
+/*    align-self: start;*/
+/*}*/
+/*.orderTotalContainer{*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    width: 100%;*/
+/*}*/
+.ingredientsList{
+    list-style-type: none;
+    margin: 24px 0 60px;
+    padding: 0;
+    align-self: start;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: 8px;
+    scrollbar-color: #8585AD;
+    max-height: 360px;
+}
+.price{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+.myOrders{
+    overflow-y: auto;
+    width: 844px;
+    max-height: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 0;
 }

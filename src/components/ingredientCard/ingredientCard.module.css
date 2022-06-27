@@ -7,6 +7,7 @@
     position: relative;
     text-decoration: none;
     color: inherit;
+    margin: 0 auto;
 }
 
 .img{
@@ -21,4 +22,57 @@
 }
 .priceIcon{
     margin-left: 9px;
+}
+.btn {
+    display: none;
+}
+@media  screen and (max-width: 1239px){
+    .card{
+        max-width: 144px;
+    }
+    .img {
+        height: 72px;
+    }
+}
+@media screen and (max-width: 991px){
+    .card{
+        max-width: 272px;
+    }
+    .img{
+        height: 120px;
+    }
+    .btn {
+        display: flex;
+        background-color: transparent;
+        margin: auto auto 0;
+        color: #4C4CFF;
+        border: none;
+        outline: none;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 640px){
+    .card{
+        max-width: 144px;
+        height: 245px;
+    }
+    .card div{
+        width: 24px;
+        box-sizing: border-box;
+        height: 24px;
+        font-size: 14px;
+    }
+    .img {
+        height: 72px;
+    }
+    .text{
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
 }

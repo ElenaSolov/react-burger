@@ -29,6 +29,7 @@
     background-image: url("../../images/mobile_menu_icon.svg");
     position: relative;
     margin: 20px 8px;
+    cursor: pointer;
 }
 
 
@@ -38,17 +39,23 @@
     height: 40px;
     margin: 12px 8px;
 }
-@media  screen and (max-width: 470px){
-    .burger{
-        display: block;
-    }
-    .navBar{
-        display: none;
-    }
+@media  screen and (max-width: 1024px){
     .smallLogo{
         display: block;
     }
     .mainLogo{
         display: none;
     }
+}
+
+@media  screen and (max-width: 768px){
+    .burger{
+        display: block;
+    }
+    .navBar{
+        display: none;
+    }
+.header{
+    margin: 0;
+}
 }
