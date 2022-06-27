@@ -6,6 +6,7 @@ import {
   sendLogoutRequest,
   sendUserUpdate,
   sendRestorePasswordRequest,
+  refreshToken,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
 
@@ -37,6 +38,9 @@ export function register(email, password, name) {
       .catch((err) => {
         dispatch({ type: REGISTER_FAIL });
         console.log(err);
+      })
+      .finally(() => {
+        dispatch({ type: AUTH_CHECKED });
       });
   };
 }
@@ -58,6 +62,9 @@ export function login(email, password) {
       .catch((err) => {
         dispatch({ type: LOGIN_FAIL });
         console.log(err);
+      })
+      .finally(() => {
+        dispatch({ type: AUTH_CHECKED });
       });
   };
 }
@@ -78,8 +85,6 @@ export function getUser() {
         dispatch({
           type: UPDATE_USER_FAIL,
         });
-        if (err.message === "jwt expired") {
-        }
       })
       .finally(() => {
         dispatch({ type: AUTH_CHECKED });

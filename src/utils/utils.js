@@ -59,16 +59,8 @@ export function getCookie(name) {
   );
   if (matches) {
     return decodeURIComponent(matches[1]);
-  } else {
-    if (name === "refreshToken") return;
-    refreshCookie()
-      .then((res) => {
-        setCookie("refreshToken", res.refreshToken);
-        setCookie("accessToken", res.accessToken);
-        return getCookie(name);
-      })
-      .catch((err) => console.log(err));
   }
+  return null;
 }
 export function deleteCookie(name) {
   setCookie(name, null, { expires: -1 });

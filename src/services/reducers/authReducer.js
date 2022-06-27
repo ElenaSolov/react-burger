@@ -29,26 +29,34 @@ export const authReducer = (state = initialState, action) => {
         isAuth: true,
         name: action.name,
         email: action.email,
+        isAuthChecked: true,
       };
     }
     case RESTORE_USER_EMAIL_SUCCESS: {
       return {
         ...state,
         email: action.email,
+        isAuthChecked: true,
       };
     }
     case RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
         resetPassword: true,
+        isAuthChecked: true,
       };
     }
     case REGISTER_FAIL:
     case LOGIN_FAIL:
-    case UPDATE_USER_FAIL:
+    case UPDATE_USER_FAIL: {
+      return {
+        ...initialState,
+      };
+    }
     case LOGOUT: {
       return {
         ...initialState,
+        isAuthChecked: true,
       };
     }
     case AUTH_CHECKED: {

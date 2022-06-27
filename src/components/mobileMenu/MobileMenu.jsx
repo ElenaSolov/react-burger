@@ -38,7 +38,6 @@ const MobileMenu = ({ onClose }) => {
 
   const isMobile = windowDimension <= 768;
   if (!isMobile) onClose();
-  console.log(mobileMenuStyles.label);
   return ReactDOM.createPortal(
     <section className={mobileMenuStyles.mobileMenu}>
       <div className={mobileMenuStyles.headerContainer}>
