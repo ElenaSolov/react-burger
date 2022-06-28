@@ -96,7 +96,6 @@ export function getOrderDetails(number) {
     dispatch({ type: GET_ORDER_DETAILS_REQUEST, number });
     sendOrderDetailsRequest(number)
       .then((res) => {
-        console.log(res);
         dispatch({ type: GET_ORDER_DETAILS_SUCCESS, res });
       })
       .catch((err) => {

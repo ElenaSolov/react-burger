@@ -9,7 +9,6 @@ function ProtectedRoute({
   redirectPath = "/login",
   type = "private",
 }) {
-  console.log(typeof redirectPath);
   let auth = useSelector((store) => store.auth);
   const location = useLocation();
   const isAuthChecked = useSelector((store) => store.auth.isAuthChecked);

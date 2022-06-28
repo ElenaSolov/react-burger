@@ -101,7 +101,6 @@ export const orderReducer = (state = initialState, action) => {
       };
     }
     case GET_ORDER_DETAILS_SUCCESS: {
-      console.log(action);
       return {
         ...state,
         order: action.res.orders[0],
