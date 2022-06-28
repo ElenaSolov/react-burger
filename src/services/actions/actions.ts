@@ -58,13 +58,17 @@ export interface ISetCurrentTab {
   readonly type: typeof SET_CURRENT_TAB;
   readonly currentTab: string;
 }
+export interface IGetIngredientsRequestAction {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
+}
 export type TIngredientsActions =
   | IOrderIngredientAction
   | ISetCurrentTab
   | IDeleteFromOrder
   | IOrderBun
   | IMoveIngredient
-  | IDecreaseIngredient;
+  | IDecreaseIngredient
+  | IGetIngredientsRequestAction;
 
 export function orderIngredient(
   ingredient: TIngredient,
@@ -109,9 +113,14 @@ export function setCurrentTab(currentTab: string): ISetCurrentTab {
     currentTab,
   };
 }
+function getIngredientsRequestAction(): IGetIngredientsRequestAction {
+  return {
+    type: GET_INGREDIENTS_REQUEST,
+  };
+}
 export const getIngredients: AppThunk = () => {
   return function (dispatch: AppDispatch) {
-    dispatch({ type: GET_INGREDIENTS_REQUEST });
+    dispatch(getIngredientsRequestAction());
     getIngredientsRequest()
       .then((res) => {
         if (res && res.success) {

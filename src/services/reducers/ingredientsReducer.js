@@ -4,6 +4,7 @@ import {
   GET_INGREDIENTS_SUCCESS,
   SET_CURRENT_TAB,
 } from "../actions/actions";
+import { TIngredient } from "../types/data";
 
 const initialState = {
   ingredients: [],

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import { ingredientsReducer } from "./ingredientsReducer.js";
-import { orderReducer } from "./orderReducer.js";
+import { orderReducer } from "./orderReducer.ts";
 import { authReducer } from "./authReducer.ts";
 import { wsReducer } from "./wsReducer";
 

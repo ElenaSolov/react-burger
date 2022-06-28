@@ -9,3 +9,7 @@ export type TIngredient = {
   readonly type: string;
   readonly _id: string;
 };
+export type TOrder = {
+  readonly totalPrice: number;
+  readonly ingredients: Array<TIngredient>;
+};
