@@ -9,9 +9,17 @@ import {
   RESTORE_USER_EMAIL_SUCCESS,
   RESET_PASSWORD_SUCCESS,
   AUTH_CHECKED,
+  TAuthActions,
 } from "../actions/authActions";
+type TAuthState = {
+  isAuth: boolean;
+  name: string;
+  email: string;
+  resetPassword: boolean;
+  isAuthChecked: boolean;
+};
 
-const initialState = {
+const initialState: TAuthState = {
   isAuth: false,
   name: "",
   email: "",
@@ -19,7 +27,10 @@ const initialState = {
   isAuthChecked: false,
 };
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (
+  state = initialState,
+  action: { type: TAuthActions }
+) => {
   switch (action.type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:

@@ -4,7 +4,7 @@ import {
   sendOrderDetailsRequest,
 } from "../../utils/api";
 import { TIngredient } from "../types/data.js";
-import { AppDispatch } from "../store.js";
+import { AppDispatch, AppThunk } from "../store.js";
 
 export const GET_INGREDIENTS_REQUEST: "GET_INGREDIENTS_REQUEST" =
   "GET_INGREDIENTS_REQUEST";
@@ -109,7 +109,7 @@ export function setCurrentTab(currentTab: string): ISetCurrentTab {
     currentTab,
   };
 }
-export function getIngredients() {
+export const getIngredients: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
     getIngredientsRequest()
@@ -123,12 +123,12 @@ export function getIngredients() {
         console.log(err);
       });
   };
-}
-export function sendOrder(
+};
+export const sendOrder: AppThunk = (
   ingredients: Array<string>,
   openOrderModal: any,
   totalPrice: number
-) {
+) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: SEND_ORDER_REQUEST, ingredients });
     sendOrderRequest(ingredients)
@@ -143,8 +143,8 @@ export function sendOrder(
         console.log(err);
       });
   };
-}
-export function getOrderDetails(number: string) {
+};
+export const getOrderDetails: AppThunk = (number: string) => {
   return function (dispatch: AppDispatch) {
     dispatch({ type: GET_ORDER_DETAILS_REQUEST, number });
     sendOrderDetailsRequest(number)
@@ -156,4 +156,4 @@ export function getOrderDetails(number: string) {
         console.log(err);
       });
   };
-}
+};

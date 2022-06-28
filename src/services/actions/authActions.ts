@@ -9,7 +9,7 @@ import {
   refreshToken,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
-import { AppDispatch } from "../store.js";
+import { AppDispatch, AppThunk } from "../store.js";
 
 export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
 export const REGISTER_FAIL: "REGISTER_FAIL" = "REGISTER_FAIL";
@@ -24,7 +24,23 @@ export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" =
   "RESET_PASSWORD_SUCCESS";
 export const AUTH_CHECKED: "AUTH_CHECKED" = "AUTH_CHECKED";
 
-export function register(email: string, password: string, name: string) {
+export type TAuthActions =
+  | typeof REGISTER_SUCCESS
+  | typeof REGISTER_FAIL
+  | typeof LOGIN_SUCCESS
+  | typeof LOGIN_FAIL
+  | typeof UPDATE_USER_SUCCESS
+  | typeof UPDATE_USER_FAIL
+  | typeof LOGOUT
+  | typeof RESTORE_USER_EMAIL_SUCCESS
+  | typeof RESET_PASSWORD_SUCCESS
+  | typeof AUTH_CHECKED;
+
+export const register: AppThunk = (
+  email: string,
+  password: string,
+  name: string
+) => {
   return function (dispatch: AppDispatch) {
     sendAuthRequest(email, password, name)
       .then((res) => {
@@ -46,8 +62,8 @@ export function register(email: string, password: string, name: string) {
         dispatch({ type: AUTH_CHECKED });
       });
   };
-}
-export function login(email: string, password: string) {
+};
+export const login: AppThunk = (email: string, password: string) => {
   return function (dispatch: AppDispatch) {
     sendLoginRequest(email, password)
       .then((res) => {
@@ -70,8 +86,8 @@ export function login(email: string, password: string) {
         dispatch({ type: AUTH_CHECKED });
       });
   };
-}
-export function getUser() {
+};
+export const getUser: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     getUserInfo()
       .then((res) => {
@@ -93,8 +109,8 @@ export function getUser() {
         dispatch({ type: AUTH_CHECKED });
       });
   };
-}
-export function restorePassword(email: string) {
+};
+export const restorePassword: AppThunk = (email: string) => {
   return function (dispatch: AppDispatch) {
     sendRestorePasswordRequest(email)
       .then((res) => {
@@ -109,8 +125,8 @@ export function restorePassword(email: string) {
         console.log(err);
       });
   };
-}
-export function resetPassword(password: string, token: string) {
+};
+export const resetPassword: AppThunk = (password: string, token: string) => {
   return function (dispatch: AppDispatch) {
     sendResetPasswordRequest(password, token)
       .then((res) => {
@@ -124,8 +140,8 @@ export function resetPassword(password: string, token: string) {
         console.log(err);
       });
   };
-}
-export function logout() {
+};
+export const logout: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     sendLogoutRequest()
       .then(() => {
@@ -139,8 +155,12 @@ export function logout() {
         console.log(err);
       });
   };
-}
-export function updateUserInfo(name: string, email: string, password: string) {
+};
+export const updateUserInfo: AppThunk = (
+  name: string,
+  email: string,
+  password: string
+) => {
   return function (dispatch: AppDispatch) {
     sendUserUpdate(name, email, password)
       .then(() => {
@@ -154,4 +174,4 @@ export function updateUserInfo(name: string, email: string, password: string) {
         console.log(err);
       });
   };
-}
+};
