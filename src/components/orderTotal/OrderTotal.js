@@ -4,7 +4,7 @@ import orderTotalStyles from "./orderTotal.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modals/modal/Modal";
 import OrderDetails from "../orderDetails/OrderDetails";
-import { sendOrder } from "../../services/actions/actions.js";
+import { sendOrder } from "../../services/actions/actions.ts";
 import PropTypes from "prop-types";
 import propTypesConfig from "../../utils/propTypesConfig";
 import { useDispatch, useSelector } from "react-redux";

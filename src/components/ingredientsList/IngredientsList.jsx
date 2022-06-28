@@ -6,7 +6,7 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentTab } from "../../services/actions/actions.js";
+import { setCurrentTab } from "../../services/actions/actions.ts";
 import { getCurrentTab, addScroll } from "../../utils/utils.js";
 
 const IngredientsList = () => {

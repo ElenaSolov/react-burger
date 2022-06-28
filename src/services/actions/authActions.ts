@@ -10,16 +10,18 @@ import {
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
 
-export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
-export const REGISTER_FAIL = "REGISTER_FAIL";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAIL = "LOGIN_FAIL";
-export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
-export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
-export const LOGOUT = "LOGOUT";
-export const RESTORE_USER_EMAIL_SUCCESS = "RESTORE_USER_EMAIL_SUCCESS";
-export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
-export const AUTH_CHECKED = "AUTH_CHECKED";
+export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
+export const REGISTER_FAIL: "REGISTER_FAIL" = "REGISTER_FAIL";
+export const LOGIN_SUCCESS: "LOGIN_SUCCESS" = "LOGIN_SUCCESS";
+export const LOGIN_FAIL: "LOGIN_FAIL" = "LOGIN_FAIL";
+export const UPDATE_USER_SUCCESS: "UPDATE_USER_SUCCESS" = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_FAIL: "UPDATE_USER_FAIL" = "UPDATE_USER_FAIL";
+export const LOGOUT: "LOGOUT" = "LOGOUT";
+export const RESTORE_USER_EMAIL_SUCCESS: "RESTORE_USER_EMAIL_SUCCESS" =
+  "RESTORE_USER_EMAIL_SUCCESS";
+export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" =
+  "RESET_PASSWORD_SUCCESS";
+export const AUTH_CHECKED: "AUTH_CHECKED" = "AUTH_CHECKED";
 
 export function register(email, password, name) {
   return function (dispatch) {

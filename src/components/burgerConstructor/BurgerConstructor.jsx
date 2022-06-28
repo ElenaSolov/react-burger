@@ -8,7 +8,7 @@ import {
   orderIngredient,
   orderBun,
   moveIngredient,
-} from "../../services/actions/actions.js";
+} from "../../services/actions/actions.ts";
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
 import { v4 as uuidv4 } from "uuid";
