@@ -3,6 +3,8 @@ import {
   sendOrderRequest,
   sendOrderDetailsRequest,
 } from "../../utils/api";
+import { TIngredient } from "../types/data.js";
+import { AppDispatch } from "../store.js";
 
 export const GET_INGREDIENTS_REQUEST: "GET_INGREDIENTS_REQUEST" =
   "GET_INGREDIENTS_REQUEST";
@@ -30,46 +32,85 @@ export const GET_ORDER_DETAILS_SUCCESS: "GET_ORDER_DETAILS_SUCCESS" =
 export const GET_ORDER_DETAILS_FAILED: "GET_ORDER_DETAILS_FAILED" =
   "GET_ORDER_DETAILS_FAILED";
 
-export function orderIngredient(ingredient, key) {
+//TS Interfaces
+export interface IOrderIngredientAction {
+  readonly type: typeof ORDER_INGREDIENT;
+  readonly ingredient: TIngredient;
+  readonly key: string;
+}
+export interface IDecreaseIngredient {
+  readonly type: typeof DECREASE_INGREDIENT;
+  readonly index: number;
+}
+export interface IMoveIngredient {
+  readonly type: typeof MOVE_INGREDIENT;
+  readonly updatedIngredients: Array<TIngredient>;
+}
+export interface IOrderBun {
+  readonly type: typeof ORDER_BUN;
+  readonly ingredient: TIngredient;
+}
+export interface IDeleteFromOrder {
+  readonly type: typeof DELETE_FROM_ORDER;
+  readonly ingredient: TIngredient;
+}
+export interface ISetCurrentTab {
+  readonly type: typeof SET_CURRENT_TAB;
+  readonly currentTab: string;
+}
+export type TIngredientsActions =
+  | IOrderIngredientAction
+  | ISetCurrentTab
+  | IDeleteFromOrder
+  | IOrderBun
+  | IMoveIngredient
+  | IDecreaseIngredient;
+
+export function orderIngredient(
+  ingredient: TIngredient,
+  key: string
+): IOrderIngredientAction {
   return {
     type: ORDER_INGREDIENT,
     ingredient,
     key,
   };
 }
-export function decreaseIngredient(index) {
+export function decreaseIngredient(index: number): IDecreaseIngredient {
   return {
     type: DECREASE_INGREDIENT,
     index,
   };
 }
-export function moveIngredient(updatedIngredients) {
+export function moveIngredient(
+  updatedIngredients: Array<TIngredient>
+): IMoveIngredient {
   return {
     type: MOVE_INGREDIENT,
     updatedIngredients,
   };
 }
-export function orderBun(ingredient) {
+export function orderBun(ingredient: TIngredient): IOrderBun {
   return {
     type: ORDER_BUN,
     ingredient,
   };
 }
-export function deleteFromOrder(ingredient) {
+export function deleteFromOrder(ingredient: TIngredient): IDeleteFromOrder {
   return {
     type: DELETE_FROM_ORDER,
     ingredient,
   };
 }
 
-export function setCurrentTab(currentTab) {
+export function setCurrentTab(currentTab: string): ISetCurrentTab {
   return {
     type: SET_CURRENT_TAB,
     currentTab,
   };
 }
 export function getIngredients() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
     getIngredientsRequest()
       .then((res) => {
@@ -83,8 +124,12 @@ export function getIngredients() {
       });
   };
 }
-export function sendOrder(ingredients, openOrderModal, totalPrice) {
-  return function (dispatch) {
+export function sendOrder(
+  ingredients: Array<string>,
+  openOrderModal: any,
+  totalPrice: number
+) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: SEND_ORDER_REQUEST, ingredients });
     sendOrderRequest(ingredients)
       .then((res) => {
@@ -99,8 +144,8 @@ export function sendOrder(ingredients, openOrderModal, totalPrice) {
       });
   };
 }
-export function getOrderDetails(number) {
-  return function (dispatch) {
+export function getOrderDetails(number: string) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: GET_ORDER_DETAILS_REQUEST, number });
     sendOrderDetailsRequest(number)
       .then((res) => {

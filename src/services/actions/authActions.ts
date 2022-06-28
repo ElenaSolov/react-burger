@@ -9,6 +9,7 @@ import {
   refreshToken,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
+import { AppDispatch } from "../store.js";
 
 export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
 export const REGISTER_FAIL: "REGISTER_FAIL" = "REGISTER_FAIL";
@@ -23,8 +24,8 @@ export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" =
   "RESET_PASSWORD_SUCCESS";
 export const AUTH_CHECKED: "AUTH_CHECKED" = "AUTH_CHECKED";
 
-export function register(email, password, name) {
-  return function (dispatch) {
+export function register(email: string, password: string, name: string) {
+  return function (dispatch: AppDispatch) {
     sendAuthRequest(email, password, name)
       .then((res) => {
         if (res && res.success) {
@@ -46,8 +47,8 @@ export function register(email, password, name) {
       });
   };
 }
-export function login(email, password) {
-  return function (dispatch) {
+export function login(email: string, password: string) {
+  return function (dispatch: AppDispatch) {
     sendLoginRequest(email, password)
       .then((res) => {
         if (res && res.success) {
@@ -71,7 +72,7 @@ export function login(email, password) {
   };
 }
 export function getUser() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     getUserInfo()
       .then((res) => {
         if (res && res.success) {
@@ -93,8 +94,8 @@ export function getUser() {
       });
   };
 }
-export function restorePassword(email) {
-  return function (dispatch) {
+export function restorePassword(email: string) {
+  return function (dispatch: AppDispatch) {
     sendRestorePasswordRequest(email)
       .then((res) => {
         if (res && res.success) {
@@ -109,8 +110,8 @@ export function restorePassword(email) {
       });
   };
 }
-export function resetPassword(password, token) {
-  return function (dispatch) {
+export function resetPassword(password: string, token: string) {
+  return function (dispatch: AppDispatch) {
     sendResetPasswordRequest(password, token)
       .then((res) => {
         if (res && res.success) {
@@ -125,7 +126,7 @@ export function resetPassword(password, token) {
   };
 }
 export function logout() {
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     sendLogoutRequest()
       .then(() => {
         dispatch({
@@ -139,8 +140,8 @@ export function logout() {
       });
   };
 }
-export function updateUserInfo(name, email, password) {
-  return function (dispatch) {
+export function updateUserInfo(name: string, email: string, password: string) {
+  return function (dispatch: AppDispatch) {
     sendUserUpdate(name, email, password)
       .then(() => {
         dispatch({
