@@ -4,7 +4,7 @@ import AppHeader from "../appHeader/AppHeader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector, useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions/actions.js";
+import { getIngredients } from "../../services/actions/actions";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import PreLoader from "../preloader/PreLoader.jsx";
 import LoginPage from "../../pages/login";

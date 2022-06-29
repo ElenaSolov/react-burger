@@ -1,5 +1,5 @@
 import { compose, createStore, applyMiddleware } from "redux";
-import { rootReducer } from "./reducers/reducers.js";
+import { rootReducer } from "./reducers/reducers";
 import thunk from "redux-thunk";
 import {
   WS_CONNECTION_START,
@@ -7,10 +7,10 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
-} from "./actions/wsActions.js";
+} from "./actions/wsActions";
 import { TIngredientsActions } from "./actions/actions";
 import { TWsActions } from "./actions/wsActions";
-import { socketMiddleware } from "./wsocketMiddleware.js";
+import { socketMiddleware } from "./wsocketMiddleware";
 import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 

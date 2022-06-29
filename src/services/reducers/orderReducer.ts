@@ -53,36 +53,36 @@ export const orderReducer = (
         orderedIngredients: [...state.orderedIngredients, action.ingredient],
       };
     }
-    // case SEND_ORDER_REQUEST: {
-    //   return {
-    //     ...state,
-    //     orderRequest: true,
-    //     orderedIngredients: action.ingredients,
-    //   };
-    // }
-    // case SEND_ORDER_SUCCESS: {
-    //   const newOrder = {
-    //     ...state,
-    //     orderRequest: false,
-    //     orderFailed: false,
-    //     orderStatus: "success",
-    //     orderNum: action.res.order.number,
-    //     totalPrice: action.totalPrice,
-    //   };
-    //   return {
-    //     ...initialState,
-    //     orders: [...state.orders, newOrder],
-    //   };
-    // }
-    // case SEND_ORDER_FAILED: {
-    //   return {
-    //     ...state,
-    //     orderRequest: false,
-    //     orderFailed: true,
-    //     orderStatus: "failed",
-    //     orderedIngredients: [],
-    //   };
-    // }
+    case SEND_ORDER_REQUEST: {
+      return {
+        ...state,
+        orderRequest: true,
+        orderedIngredients: action.ingredients,
+      };
+    }
+    case SEND_ORDER_SUCCESS: {
+      const newOrder = {
+        ...state,
+        orderRequest: false,
+        orderFailed: false,
+        orderStatus: "success",
+        orderNum: action.res.order.number,
+        totalPrice: action.totalPrice,
+      };
+      return {
+        ...initialState,
+        orders: [...state.orders, newOrder],
+      };
+    }
+    case SEND_ORDER_FAILED: {
+      return {
+        ...state,
+        orderRequest: false,
+        orderFailed: true,
+        orderStatus: "failed",
+        orderedIngredients: [],
+      };
+    }
     case DELETE_FROM_ORDER: {
       return {
         ...state,
@@ -104,24 +104,24 @@ export const orderReducer = (
         orderedIngredients: action.updatedIngredients,
       };
     }
-    // case GET_ORDER_DETAILS_REQUEST: {
-    //   return {
-    //     ...state,
-    //     orderRequest: true,
-    //   };
-    // }
-    // case GET_ORDER_DETAILS_FAILED: {
-    //   return {
-    //     ...state,
-    //     orderFailed: true,
-    //   };
-    // }
-    // case GET_ORDER_DETAILS_SUCCESS: {
-    //   return {
-    //     ...state,
-    //     order: action.res.orders[0],
-    //   };
-    // }
+    case GET_ORDER_DETAILS_REQUEST: {
+      return {
+        ...state,
+        orderRequest: true,
+      };
+    }
+    case GET_ORDER_DETAILS_FAILED: {
+      return {
+        ...state,
+        orderFailed: true,
+      };
+    }
+    case GET_ORDER_DETAILS_SUCCESS: {
+      return {
+        ...state,
+        order: action.res.orders[0],
+      };
+    }
     default: {
       return state;
     }

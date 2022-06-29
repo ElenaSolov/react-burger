@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
   const orders = useSelector((store) => store.order.orders);
-
+  console.log(orders);
   return (
     <>
       <p

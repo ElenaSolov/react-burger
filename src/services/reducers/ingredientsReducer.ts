@@ -3,17 +3,28 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   SET_CURRENT_TAB,
+  TIngredientsActions,
 } from "../actions/actions";
 import { TIngredient } from "../types/data";
 
-const initialState = {
+interface IIngredientsState {
+  ingredients: Array<TIngredient>;
+  currentTab: string;
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+  ingredientsRequestStatus: boolean;
+}
+const initialState: IIngredientsState = {
   ingredients: [],
   currentTab: "Булки",
   ingredientsRequest: false,
   ingredientsFailed: false,
   ingredientsRequestStatus: false,
 };
-export const ingredientsReducer = (state = initialState, action) => {
+export const ingredientsReducer = (
+  state = initialState,
+  action: TIngredientsActions
+) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
