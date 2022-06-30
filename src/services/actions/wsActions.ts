@@ -1,4 +1,5 @@
 import { AppDispatch } from "../store.js";
+import { IWsSuccessResponse, IOrder } from "../types/data";
 
 export const WS_CONNECTION_START: "WS_CONNECTION_START" = "WS_CONNECTION_START";
 export const WS_CONNECTION_SUCCESS: "WS_CONNECTION_SUCCESS" =
@@ -11,32 +12,40 @@ export const WS_SEND_MESSAGE: "WS_SEND_MESSAGE" = "WS_SEND_MESSAGE";
 export const WS_USER_NAME_UPDATE: "WS_USER_NAME_UPDATE" = "WS_USER_NAME_UPDATE";
 
 // TS Interfaces
-export interface IWsConnectionSuccess {
+interface IWsConnectionSuccess {
   readonly type: typeof WS_CONNECTION_SUCCESS;
 }
-export interface IWsConnectionError {
+interface IWsConnectionError {
   readonly type: typeof WS_CONNECTION_ERROR;
 }
-export interface ICloseConnection {
+interface ICloseConnection {
   readonly type: typeof WS_CONNECTION_CLOSED;
 }
-export interface IWsGetMessage {
+interface IWsGetMessage {
   readonly type: typeof WS_GET_MESSAGE;
-  readonly payload: object;
+  readonly payload: Array<IOrder>;
+}
+interface IStartConnection {
+  readonly type: typeof WS_CONNECTION_START;
+  readonly payload: string;
 }
 export type TWsActions =
   | IWsConnectionSuccess
   | IWsGetMessage
   | ICloseConnection
-  | IWsConnectionError;
+  | IWsConnectionError
+  | IStartConnection;
 
 //Action creators
+function createStartConnectionAction(wsUrl: string): IStartConnection {
+  return {
+    type: WS_CONNECTION_START,
+    payload: wsUrl,
+  };
+}
 export const startConnection = (wsUrl: string) => {
   return function (dispatch: AppDispatch) {
-    dispatch({
-      type: WS_CONNECTION_START,
-      payload: { wsUrl },
-    });
+    dispatch(createStartConnectionAction(wsUrl));
   };
 };
 
@@ -58,9 +67,9 @@ export const closeConnection = (): ICloseConnection => {
   };
 };
 
-export const wsGetMessage = (message: object): IWsGetMessage => {
+export const wsGetMessage = (message: IWsSuccessResponse): IWsGetMessage => {
   return {
     type: WS_GET_MESSAGE,
-    payload: message,
+    payload: message.orders,
   };
 };

@@ -14,6 +14,13 @@ import { socketMiddleware } from "./wsocketMiddleware";
 import { Action, ActionCreator } from "redux";
 import { ThunkAction } from "redux-thunk";
 
+export interface IWsActions {
+  wsInit: typeof WS_CONNECTION_START;
+  onOpen: typeof WS_CONNECTION_SUCCESS;
+  onClose: typeof WS_CONNECTION_CLOSED;
+  onError: typeof WS_CONNECTION_ERROR;
+  onMessage: typeof WS_GET_MESSAGE;
+}
 const wsActions = {
   wsInit: WS_CONNECTION_START,
   onOpen: WS_CONNECTION_SUCCESS,

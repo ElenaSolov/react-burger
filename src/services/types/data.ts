@@ -13,7 +13,7 @@ export type TOrder = {
   readonly totalPrice: number;
   readonly ingredients: Array<TIngredient>;
 };
-interface IOrder {
+export interface IOrder {
   createdAt: string;
   ingredients: Array<TIngredient>;
   name: string;
@@ -58,4 +58,12 @@ export interface IRegisterOrLoginSuccessResponse
 export interface IResetPasswordSuccessResponse {
   message: "Password successfully reset";
   success: true;
+}
+
+//WS types
+export interface IWsSuccessResponse {
+  orders: Array<IOrder>;
+  success: true;
+  total: number;
+  totalToday: number;
 }

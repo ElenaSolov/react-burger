@@ -3,15 +3,22 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
+  TWsActions,
 } from "../actions/wsActions";
+import { IOrder } from "../types/data";
 
-const initialState = {
+interface IWsState {
+  wsConnected: boolean;
+  wsError: boolean;
+  orders: Array<IOrder>;
+}
+const initialState: IWsState = {
   wsConnected: false,
   wsError: false,
   orders: [],
 };
 
-export const wsReducer = (state = initialState, action) => {
+export const wsReducer = (state = initialState, action: TWsActions) => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {
