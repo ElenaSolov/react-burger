@@ -1,12 +1,11 @@
-import React, { useEffect } from "react";
-// import appStyles from "./app.module.css";
+import { useEffect } from "react";
 import AppHeader from "../appHeader/AppHeader";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks";
 import { getIngredients } from "../../services/actions/actions";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import PreLoader from "../preloader/PreLoader.jsx";
+import PreLoader from "../preloader/PreLoader";
 import LoginPage from "../../pages/login";
 import RegisterPage from "../../pages/register";
 import RestorePasswordPage from "../../pages/restorePassword";
@@ -24,14 +23,14 @@ import OrderPage from "../../pages/order";
 import MyOrderPage from "../../pages/myOrderPage";
 import ProfileOrders from "../../pages/profileOrders";
 import OrderFeedDetails from "../orderFeedDetails/OrderFeedDetails";
-
-function App() {
+import { TLocationState } from "../../services/types/data";
+function App(): JSX.Element {
   const dispatch = useDispatch();
-  const isLoaded = useSelector(
+  const isLoaded: boolean = useSelector(
     (store) => store.ingredients.ingredientsRequestStatus
   );
   window.history.replaceState({}, document.title);
-  const location = useLocation();
+  const location = useLocation() as TLocationState;
   const background = location.state?.background;
   const navigate = useNavigate();
   const onModalClose = () => {
@@ -48,18 +47,13 @@ function App() {
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
         <Routes location={background || location}>
-          <Route path="/" exact element={<HomePage />} />
-          <Route
-            path="ingredients/:id"
-            redirectPath={location.pathname}
-            element={<IngredientPage />}
-          />
+          <Route path="/" element={<HomePage />} />
+          <Route path="ingredients/:id" element={<IngredientPage />} />
           <Route path="feed" element={<FeedPage />} />
           <Route path="feed/:id" element={<OrderPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route
             path="register"
-            exact
             element={
               <ProtectedRoute type="public" redirectPath="/profile">
                 <RegisterPage />
@@ -68,11 +62,14 @@ function App() {
           />
           <Route
             path="login"
-            exact
             element={
               <ProtectedRoute
                 type="public"
-                redirectPath={location.state || "/profile"}
+                redirectPath={
+                  typeof location.state === "string"
+                    ? location.state
+                    : "/profile"
+                }
               >
                 <LoginPage />
               </ProtectedRoute>
@@ -80,7 +77,6 @@ function App() {
           />
           <Route
             path="forgot-password"
-            exact
             element={
               <ProtectedRoute type="public" redirectPath="/profile">
                 <RestorePasswordPage />
@@ -89,7 +85,6 @@ function App() {
           />
           <Route
             path="forgot-password/reset"
-            exact
             element={
               <ProtectedRoute type="public" redirectPath="/profile">
                 <ResetPasswordPage />
@@ -98,7 +93,6 @@ function App() {
           />
           <Route
             path="profile"
-            exact
             element={
               <ProtectedRoute>
                 <Profile />
@@ -107,7 +101,6 @@ function App() {
           />
           <Route
             path="profile/orders"
-            exact
             element={
               <ProtectedRoute>
                 <ProfileOrders />
@@ -125,7 +118,6 @@ function App() {
         </Routes>
         {background && (
           <Routes>
-            {/* Попап с модальным окном */}
             <Route
               path="/ingredients/:id"
               element={
@@ -138,10 +130,7 @@ function App() {
               path="/feed/:id"
               element={
                 <Modal onClose={onModalClose}>
-                  <OrderFeedDetails
-                    order={location.state.order}
-                    status={location.state.status}
-                  />
+                  <OrderFeedDetails order={location.state.order} />
                 </Modal>
               }
             />
@@ -149,10 +138,7 @@ function App() {
               path="/profile/orders/:id"
               element={
                 <Modal onClose={onModalClose}>
-                  <OrderFeedDetails
-                    order={location.state.order}
-                    status={location.state.status}
-                  />
+                  <OrderFeedDetails order={location.state.order} />
                 </Modal>
               }
             />

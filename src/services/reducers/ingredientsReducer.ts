@@ -37,7 +37,7 @@ export const ingredientsReducer = (
         ...state,
         ingredients: action.ingredients,
         ingredientsRequest: false,
-        ingredientsRequestStatus: "success",
+        ingredientsRequestStatus: true,
         ingredientsFailed: false,
       };
     }
@@ -46,7 +46,7 @@ export const ingredientsReducer = (
         ...state,
         ingredientsRequest: false,
         ingredientsFailed: false,
-        ingredientsRequestStatus: "failed",
+        ingredientsRequestStatus: false,
       };
     }
 

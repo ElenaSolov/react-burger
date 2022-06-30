@@ -67,3 +67,11 @@ export interface IWsSuccessResponse {
   total: number;
   totalToday: number;
 }
+// location
+export type TLocationState = {
+  pathname: string;
+  state: {
+    background?: string;
+    order?: IOrder;
+  };
+};
