@@ -27,10 +27,7 @@ const initialState: TAuthState = {
   isAuthChecked: false,
 };
 
-export const authReducer = (
-  state = initialState,
-  action: { type: TAuthActions }
-) => {
+export const authReducer = (state = initialState, action: TAuthActions) => {
   switch (action.type) {
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:

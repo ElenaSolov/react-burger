@@ -57,6 +57,9 @@ interface IRestoreUserEmailSuccess {
 interface IResetPasswordSuccess {
   readonly type: typeof RESET_PASSWORD_SUCCESS;
 }
+interface ILogout {
+  readonly type: typeof LOGOUT;
+}
 export type TAuthActions =
   | IRegisterSuccessAction
   | IRegisterFail
@@ -65,7 +68,7 @@ export type TAuthActions =
   | ILoginFail
   | IUpdateUserSuccess
   | IUpdateUserFail
-  | typeof LOGOUT
+  | ILogout
   | IRestoreUserEmailSuccess
   | IResetPasswordSuccess;
 
@@ -109,6 +112,9 @@ function createUpdateUserSuccessAction(
 
 function createUpdateUserFailAction(): IUpdateUserFail {
   return { type: UPDATE_USER_FAIL };
+}
+function createLogoutAction(): ILogout {
+  return { type: LOGOUT };
 }
 function createRestoreUserEmailSuccessAction(
   email: string
@@ -213,9 +219,7 @@ export const logout: AppThunk = () => {
   return function (dispatch: AppDispatch) {
     sendLogoutRequest()
       .then(() => {
-        dispatch({
-          type: LOGOUT,
-        });
+        dispatch(createLogoutAction());
         deleteCookie("refreshToken");
         deleteCookie("accessToken");
       })
