@@ -34,7 +34,7 @@ function App(): JSX.Element {
   const background = location.state?.background;
   const navigate = useNavigate();
   const onModalClose = () => {
-    navigate(location.state.background);
+    background ? navigate(background.pathname) : navigate("/");
   };
   useEffect(() => {
     dispatch(getIngredients());
@@ -66,8 +66,8 @@ function App(): JSX.Element {
               <ProtectedRoute
                 type="public"
                 redirectPath={
-                  typeof location.state === "string"
-                    ? location.state
+                  location.state != null
+                    ? location.state.background.pathname
                     : "/profile"
                 }
               >

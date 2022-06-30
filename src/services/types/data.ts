@@ -71,7 +71,7 @@ export interface IWsSuccessResponse {
 export type TLocationState = {
   pathname: string;
   state: {
-    background?: string;
+    background?: { pathname: string };
     order?: IOrder;
   };
 };

@@ -1,14 +1,18 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
+import { useSelector } from "../services/hooks";
 import Preloader from "./preloader/PreLoader.jsx";
 
+type TProtectedRoot = {
+  children: JSX.Element;
+  redirectPath?: string;
+  type?: string;
+};
 function ProtectedRoute({
   children,
   redirectPath = "/login",
   type = "private",
-}) {
+}: TProtectedRoot): JSX.Element {
   let auth = useSelector((store) => store.auth);
   const location = useLocation();
   const isAuthChecked = useSelector((store) => store.auth.isAuthChecked);
@@ -24,8 +28,5 @@ function ProtectedRoute({
 
   return children;
 }
-ProtectedRoute.propTypes = {
-  redirectPath: PropTypes.string,
-  children: PropTypes.element.isRequired,
-};
+
 export default ProtectedRoute;
