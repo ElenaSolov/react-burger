@@ -65,11 +65,7 @@ function App(): JSX.Element {
             element={
               <ProtectedRoute
                 type="public"
-                redirectPath={
-                  location.state != null
-                    ? location.state.background.pathname
-                    : "/profile"
-                }
+                redirectPath={background ? background.pathname : "/profile"}
               >
                 <LoginPage />
               </ProtectedRoute>
