@@ -6,10 +6,14 @@ import {
   sendLogoutRequest,
   sendUserUpdate,
   sendRestorePasswordRequest,
-  refreshToken,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
 import { AppDispatch, AppThunk } from "../store.js";
+import {
+  IUserData,
+  IRegisterOrLoginSuccessResponse,
+  IUpdateUserSuccessResponse,
+} from "../types/data";
 
 export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
 export const REGISTER_FAIL: "REGISTER_FAIL" = "REGISTER_FAIL";
@@ -24,18 +28,101 @@ export const RESET_PASSWORD_SUCCESS: "RESET_PASSWORD_SUCCESS" =
   "RESET_PASSWORD_SUCCESS";
 export const AUTH_CHECKED: "AUTH_CHECKED" = "AUTH_CHECKED";
 
+//Action creators types
+interface IRegisterSuccessAction extends IUserData {
+  readonly type: typeof REGISTER_SUCCESS;
+}
+interface IRegisterFail {
+  readonly type: typeof REGISTER_FAIL;
+}
+interface IAuthChecked {
+  readonly type: typeof AUTH_CHECKED;
+}
+interface ILoginSuccess extends IUserData {
+  readonly type: typeof LOGIN_SUCCESS;
+}
+interface ILoginFail {
+  readonly type: typeof LOGIN_FAIL;
+}
+interface IUpdateUserSuccess extends IUserData {
+  readonly type: typeof UPDATE_USER_SUCCESS;
+}
+interface IUpdateUserFail {
+  readonly type: typeof UPDATE_USER_FAIL;
+}
+interface IRestoreUserEmailSuccess {
+  readonly type: typeof RESTORE_USER_EMAIL_SUCCESS;
+  email: string;
+}
+interface IResetPasswordSuccess {
+  readonly type: typeof RESET_PASSWORD_SUCCESS;
+}
 export type TAuthActions =
-  | typeof REGISTER_SUCCESS
-  | typeof REGISTER_FAIL
-  | typeof LOGIN_SUCCESS
-  | typeof LOGIN_FAIL
-  | typeof UPDATE_USER_SUCCESS
-  | typeof UPDATE_USER_FAIL
+  | IRegisterSuccessAction
+  | IRegisterFail
+  | IAuthChecked
+  | ILoginSuccess
+  | ILoginFail
+  | IUpdateUserSuccess
+  | IUpdateUserFail
   | typeof LOGOUT
-  | typeof RESTORE_USER_EMAIL_SUCCESS
-  | typeof RESET_PASSWORD_SUCCESS
-  | typeof AUTH_CHECKED;
+  | IRestoreUserEmailSuccess
+  | IResetPasswordSuccess;
 
+//action creators
+function createRegisterSuccessAction(
+  res: IRegisterOrLoginSuccessResponse
+): IRegisterSuccessAction {
+  return {
+    type: REGISTER_SUCCESS,
+    email: res.user.email,
+    name: res.user.name,
+  };
+}
+function createRegisterFailAction(): IRegisterFail {
+  return { type: REGISTER_FAIL };
+}
+function createAuthCheckedAction(): IAuthChecked {
+  return { type: AUTH_CHECKED };
+}
+function createLoginSuccessAction(
+  res: IRegisterOrLoginSuccessResponse
+): ILoginSuccess {
+  return {
+    type: LOGIN_SUCCESS,
+    email: res.user.email,
+    name: res.user.name,
+  };
+}
+function createLoginFailAction(): ILoginFail {
+  return { type: LOGIN_FAIL };
+}
+function createUpdateUserSuccessAction(
+  res: IUpdateUserSuccessResponse
+): IUpdateUserSuccess {
+  return {
+    type: UPDATE_USER_SUCCESS,
+    email: res.user.email,
+    name: res.user.name,
+  };
+}
+
+function createUpdateUserFailAction(): IUpdateUserFail {
+  return { type: UPDATE_USER_FAIL };
+}
+function createRestoreUserEmailSuccessAction(
+  email: string
+): IRestoreUserEmailSuccess {
+  return {
+    type: RESTORE_USER_EMAIL_SUCCESS,
+    email,
+  };
+}
+function createResetPasswordSuccessAction(): IResetPasswordSuccess {
+  return {
+    type: RESET_PASSWORD_SUCCESS,
+  };
+}
 export const register: AppThunk = (
   email: string,
   password: string,
@@ -45,21 +132,17 @@ export const register: AppThunk = (
     sendAuthRequest(email, password, name)
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: REGISTER_SUCCESS,
-            email: res.user.email,
-            name: res.user.name,
-          });
+          dispatch(createRegisterSuccessAction(res));
           setCookie("accessToken", res.accessToken);
           setCookie("refreshToken", res.refreshToken);
         }
       })
       .catch((err) => {
-        dispatch({ type: REGISTER_FAIL });
+        dispatch(createRegisterFailAction());
         console.log(err);
       })
       .finally(() => {
-        dispatch({ type: AUTH_CHECKED });
+        dispatch(createAuthCheckedAction());
       });
   };
 };
@@ -68,22 +151,17 @@ export const login: AppThunk = (email: string, password: string) => {
     sendLoginRequest(email, password)
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: LOGIN_SUCCESS,
-            email: res.user.email,
-            name: res.user.name,
-            accessToken: res.accessToken,
-          });
+          dispatch(createLoginSuccessAction(res));
           setCookie("refreshToken", res.refreshToken);
           setCookie("accessToken", res.accessToken);
         }
       })
       .catch((err) => {
-        dispatch({ type: LOGIN_FAIL });
+        dispatch(createLoginFailAction());
         console.log(err);
       })
       .finally(() => {
-        dispatch({ type: AUTH_CHECKED });
+        dispatch(createAuthCheckedAction());
       });
   };
 };
@@ -92,33 +170,25 @@ export const getUser: AppThunk = () => {
     getUserInfo()
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: UPDATE_USER_SUCCESS,
-            email: res.user.email,
-            name: res.user.name,
-          });
+          dispatch(createUpdateUserSuccessAction(res));
         }
       })
       .catch((err) => {
         console.log(err);
-        dispatch({
-          type: UPDATE_USER_FAIL,
-        });
+        dispatch(createUpdateUserFailAction());
       })
       .finally(() => {
-        dispatch({ type: AUTH_CHECKED });
+        dispatch(createAuthCheckedAction());
       });
   };
 };
 export const restorePassword: AppThunk = (email: string) => {
+  console.log(email);
   return function (dispatch: AppDispatch) {
     sendRestorePasswordRequest(email)
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: RESTORE_USER_EMAIL_SUCCESS,
-            email: email,
-          });
+          dispatch(createRestoreUserEmailSuccessAction(email));
         }
       })
       .catch((err) => {
@@ -131,9 +201,7 @@ export const resetPassword: AppThunk = (password: string, token: string) => {
     sendResetPasswordRequest(password, token)
       .then((res) => {
         if (res && res.success) {
-          dispatch({
-            type: RESET_PASSWORD_SUCCESS,
-          });
+          dispatch(createResetPasswordSuccessAction());
         }
       })
       .catch((err) => {
@@ -163,12 +231,10 @@ export const updateUserInfo: AppThunk = (
 ) => {
   return function (dispatch: AppDispatch) {
     sendUserUpdate(name, email, password)
-      .then(() => {
-        dispatch({
-          type: UPDATE_USER_SUCCESS,
-          name,
-          email,
-        });
+      .then((res) => {
+        if (res && res.success) {
+          dispatch(createUpdateUserSuccessAction(res));
+        }
       })
       .catch((err) => {
         console.log(err);

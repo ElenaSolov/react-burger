@@ -38,15 +38,15 @@ export const authReducer = (
       return {
         ...state,
         isAuth: true,
-        // name: action.name,
-        // email: action.email,
-        // isAuthChecked: true,
+        name: action.name,
+        email: action.email,
+        isAuthChecked: true,
       };
     }
     case RESTORE_USER_EMAIL_SUCCESS: {
       return {
         ...state,
-        // email: action.email,
+        email: action.email,
         isAuthChecked: true,
       };
     }

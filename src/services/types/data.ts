@@ -18,7 +18,7 @@ interface IOrder {
   ingredients: Array<TIngredient>;
   name: string;
   number: number;
-  owner: { name: string; email: string; createdAt: string };
+  owner: IUserData & { createdAt: string };
   price: number;
   status: string;
   updatedAt: string;
@@ -39,4 +39,23 @@ export interface IGetOrderDetailsSuccessResponse {
 export interface IGetIngredientsSuccessResponse {
   readonly success: boolean;
   readonly data: Array<TIngredient>;
+}
+
+//auth types
+export interface IUserData {
+  email: string;
+  name: string;
+}
+export interface IUpdateUserSuccessResponse {
+  success: true;
+  user: IUserData;
+}
+export interface IRegisterOrLoginSuccessResponse
+  extends IUpdateUserSuccessResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+export interface IResetPasswordSuccessResponse {
+  message: "Password successfully reset";
+  success: true;
 }
