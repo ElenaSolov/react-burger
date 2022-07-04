@@ -8,6 +8,11 @@ export type TIngredient = {
   readonly proteins: number;
   readonly type: string;
   readonly _id: string;
+  readonly start?: string;
+};
+export type TOrderedIngredient = TIngredient & {
+  key: string;
+  index: number;
 };
 export type TOrder = {
   readonly totalPrice: number;

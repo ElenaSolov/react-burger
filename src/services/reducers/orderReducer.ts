@@ -5,41 +5,38 @@ import {
   ORDER_BUN,
   ORDER_INGREDIENT,
   SEND_ORDER_FAILED,
-  SEND_ORDER_REQUEST,
   SEND_ORDER_SUCCESS,
   GET_ORDER_DETAILS_REQUEST,
   GET_ORDER_DETAILS_FAILED,
   GET_ORDER_DETAILS_SUCCESS,
   TIngredientsActions,
 } from "../actions/actions";
-import { TIngredient, TOrder } from "../types/data";
+import { TIngredient, TOrder, TOrderedIngredient } from "../types/data";
 
 interface IOrderState {
   totalPrice: number;
-  orderedIngredients: Array<TIngredient>;
+  orderedIngredients: Array<TOrderedIngredient>;
   orderedBun: TIngredient | object;
-  orderRequest: boolean;
   orderFailed: boolean;
-  orderStatus: boolean;
+  orderStatus: string;
   orderNum: null | number;
-  orders: Array<TOrder>;
   order: TOrder | object;
 }
+
 const initialState: IOrderState = {
   totalPrice: 0,
   orderedIngredients: [],
   orderedBun: {},
-  orderRequest: false,
   orderFailed: false,
-  orderStatus: false,
+  orderStatus: "",
   orderNum: null,
-  orders: [],
   order: {},
 };
+
 export const orderReducer = (
   state = initialState,
   action: TIngredientsActions
-) => {
+): IOrderState => {
   switch (action.type) {
     case ORDER_BUN: {
       return {
@@ -48,36 +45,27 @@ export const orderReducer = (
       };
     }
     case ORDER_INGREDIENT: {
+      console.log(state.orderedIngredients);
+      const newIngredient = {
+        ...action.ingredient,
+        key: action.key,
+        index: state.orderedIngredients.length,
+      };
       return {
         ...state,
-        orderedIngredients: [...state.orderedIngredients, action.ingredient],
+        orderedIngredients: [...state.orderedIngredients, newIngredient],
       };
     }
-    case SEND_ORDER_REQUEST: {
-      return {
-        ...state,
-        orderRequest: true,
-        orderedIngredients: action.ingredients,
-      };
-    }
+
     case SEND_ORDER_SUCCESS: {
-      const newOrder = {
-        ...state,
-        orderRequest: false,
-        orderFailed: false,
-        orderStatus: "success",
-        orderNum: action.res.order.number,
-        totalPrice: action.totalPrice,
-      };
       return {
         ...initialState,
-        orders: [...state.orders, newOrder],
+        orderNum: action.orderNum,
       };
     }
     case SEND_ORDER_FAILED: {
       return {
         ...state,
-        orderRequest: false,
         orderFailed: true,
         orderStatus: "failed",
         orderedIngredients: [],
@@ -107,7 +95,6 @@ export const orderReducer = (
     case GET_ORDER_DETAILS_REQUEST: {
       return {
         ...state,
-        orderRequest: true,
       };
     }
     case GET_ORDER_DETAILS_FAILED: {

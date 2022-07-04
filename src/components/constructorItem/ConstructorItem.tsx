@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { FunctionComponent, useRef } from "react";
 import {
   ConstructorElement,
   DragIcon,
@@ -6,27 +6,28 @@ import {
 import {
   deleteFromOrder,
   decreaseIngredient,
-} from "../../services/actions/actions.ts";
+} from "../../services/actions/actions";
 import constructorItemStyles from "./constructorItem.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks";
 import { useDrag, useDrop } from "react-dnd";
-import propTypesConfig from "../../utils/propTypesConfig";
-import PropTypes from "prop-types";
+import { TIngredient, TOrderedIngredient } from "../../services/types/data";
 
-const ConstructorItem = ({ index, ingredient, moveItem }) => {
+interface TConstructorItemProps {
+  index: number;
+  ingredient: TIngredient;
+  moveItem: (a: number, b: number) => void;
+}
+const ConstructorItem: FunctionComponent<TConstructorItemProps> = ({
+  index,
+  ingredient,
+  moveItem,
+}) => {
   const orderedIngredients = useSelector(
     (store) => store.order.orderedIngredients
   );
   const dispatch = useDispatch();
 
-  const handleClose = (e, index) => {
-    const ingredient = orderedIngredients.find(
-      (i) =>
-        i.name ===
-        e.target
-          .closest(".constructor-element")
-          .querySelector(".constructor-element__text").textContent
-    );
+  const handleDeleteClick = (index: number) => {
     const count = orderedIngredients.filter(
       (i) => i._id === ingredient._id
     ).length;
@@ -38,7 +39,7 @@ const ConstructorItem = ({ index, ingredient, moveItem }) => {
   };
   const [, dropRef] = useDrop({
     accept: "ingredient",
-    hover(item, monitor) {
+    hover(item: TOrderedIngredient, monitor) {
       if (!ref.current) {
         return;
       }
@@ -55,6 +56,7 @@ const ConstructorItem = ({ index, ingredient, moveItem }) => {
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
+      if (clientOffset === null) return;
       // Get pixels to the top
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height
@@ -79,40 +81,29 @@ const ConstructorItem = ({ index, ingredient, moveItem }) => {
       } else return;
     },
   });
-  const [{ isDragging }, dragRef] = useDrag({
+  const [, dragRef] = useDrag({
     type: "ingredient",
     item: { ...ingredient, start: "constructor", index },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
-  const ref = useRef(null);
-  const dragDropRef = dragRef(dropRef(ref));
+  const ref = useRef<HTMLLIElement>(null);
+  dragRef(dropRef(ref));
   return (
-    !isDragging && (
-      <li
-        ref={dragDropRef}
-        className={`${constructorItemStyles.item} ml-8 mr-4 mb-4`}
-      >
-        <span className={constructorItemStyles.dragIcon}>
-          <DragIcon type="primary" />
-        </span>
-        <ConstructorElement
-          isLocked={false}
-          text={`${ingredient.name}`}
-          price={`${ingredient.price}`}
-          thumbnail={`${ingredient.image}`}
-          handleClose={(e) => handleClose(e, index)}
-        />
-      </li>
-    )
+    <li ref={ref} className={`${constructorItemStyles.item} ml-8 mr-4 mb-4`}>
+      <span className={constructorItemStyles.dragIcon}>
+        <DragIcon type="primary" />
+      </span>
+      <ConstructorElement
+        isLocked={false}
+        text={`${ingredient.name}`}
+        price={ingredient.price}
+        thumbnail={`${ingredient.image}`}
+        handleClose={() => handleDeleteClick(index)}
+      />
+    </li>
   );
-};
-
-ConstructorItem.propTypes = {
-  index: PropTypes.number.isRequired,
-  ingredient: PropTypes.shape(propTypesConfig).isRequired,
-  moveItem: PropTypes.func.isRequired,
 };
 
 export default ConstructorItem;

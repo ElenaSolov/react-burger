@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import headerStyles from "./appHeader.module.css";
 import NavItem from "../navItem/NavItem";
 import {
@@ -11,11 +11,12 @@ import { Link, useLocation } from "react-router-dom";
 import img from "../../images/burger_icon.svg";
 import MobileMenu from "../mobileMenu/MobileMenu";
 
-const AppHeader = () => {
+const AppHeader: FunctionComponent = () => {
   const { pathname } = useLocation();
-  const [menuOpen, setMenuOpen] = useState(false);
+  console.log(pathname);
+  const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
-  const openMobileMenu = () => {
+  const openMobileMenu = (): void => {
     setMenuOpen(true);
   };
   return menuOpen ? (

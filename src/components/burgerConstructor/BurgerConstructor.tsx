@@ -1,19 +1,20 @@
-import React, { useMemo, useEffect } from "react";
+import React, { useMemo, useEffect, FunctionComponent } from "react";
 import constructorStyles from "./burgerConstructor.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderTotal from "../orderTotal/OrderTotal";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks";
 import { addScroll } from "../../utils/utils";
 import {
   orderIngredient,
   orderBun,
   moveIngredient,
-} from "../../services/actions/actions.ts";
+} from "../../services/actions/actions";
 import { useDrop } from "react-dnd";
-import ConstructorItem from "../constructorItem/ConstructorItem.jsx";
+import ConstructorItem from "../constructorItem/ConstructorItem";
 import { v4 as uuidv4 } from "uuid";
+import { TIngredient } from "../../services/types/data";
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FunctionComponent = () => {
   const isLoaded = useSelector(
     (store) => store.ingredients.ingredientsRequestStatus
   );
@@ -23,7 +24,7 @@ const BurgerConstructor = () => {
   const order = useSelector((store) => store.order);
   const dispatch = useDispatch();
   const mainBun = useSelector((store) => store.order.orderedBun);
-  const moveItem = (dragIndex, hoverIndex) => {
+  const moveItem = (dragIndex: number, hoverIndex: number): void => {
     const dragItem = orderedIngredients[dragIndex];
     const hoverItem = orderedIngredients[hoverIndex];
     // Swap places of dragItem and hoverItem in the ingredients array
@@ -35,25 +36,33 @@ const BurgerConstructor = () => {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop: (item) => onDropHandler(item),
+    drop: (item: TIngredient) => {
+      console.log(item);
+      onDropHandler(item);
+    },
   });
-  const onDropHandler = (ingredient) => {
+  const onDropHandler = (ingredient: TIngredient) => {
     if (ingredient.type === "bun") {
       dispatch(orderBun(ingredient));
     } else if (ingredient.start === "constructor") {
       return;
     } else {
       const key = uuidv4();
-      dispatch(orderIngredient({ ...ingredient, key }));
+      console.log(ingredient);
+      dispatch(orderIngredient({ ...ingredient }, key));
     }
   };
   useEffect(() => {
     orderedIngredients.length > 5 && addScroll(".constructorScroll", ".bottom");
+    console.log(orderedIngredients);
   }, [orderedIngredients]);
 
+  function isNotEmpty(obj: TIngredient | object): obj is TIngredient {
+    return "price" in obj;
+  }
   const totalPrice = useMemo(() => {
     if (!isLoaded) return 0;
-    const bunCost = mainBun.price ? mainBun.price * 2 : 0;
+    const bunCost = isNotEmpty(mainBun) ? mainBun.price * 2 : 0;
     if (orderedIngredients.length > 0) {
       return (
         orderedIngredients.reduce((prev, next) => prev + next.price, 0) +
@@ -68,7 +77,8 @@ const BurgerConstructor = () => {
       ref={dropTarget}
       className={`${constructorStyles.constructor} ml-4`}
     >
-      {(!isLoaded || (orderedIngredients.length < 1 && !mainBun.name)) && (
+      {(!isLoaded ||
+        (orderedIngredients.length < 1 && !isNotEmpty(mainBun))) && (
         <p
           className={`${constructorStyles.text} text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive`}
         >
@@ -76,13 +86,13 @@ const BurgerConstructor = () => {
         </p>
       )}
       <ul className={`${constructorStyles.list} mt-25`}>
-        {mainBun.name && (
+        {isNotEmpty(mainBun) && (
           <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
             <ConstructorElement
               type="top"
               isLocked={true}
               text={`${mainBun.name} (верх)`}
-              price={`${mainBun.price}`}
+              price={mainBun.price}
               thumbnail={`${mainBun.image}`}
             />
           </li>
@@ -90,6 +100,7 @@ const BurgerConstructor = () => {
         {orderedIngredients.length > 0 && (
           <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
             {orderedIngredients.map((ingredient, index) => {
+              console.log(orderedIngredients);
               return (
                 <ConstructorItem
                   key={index}
@@ -101,13 +112,13 @@ const BurgerConstructor = () => {
             })}
           </ul>
         )}
-        {mainBun.name && (
+        {isNotEmpty(mainBun) && (
           <li className={`${constructorStyles.bun} ml-8 mr-4 pt-4 bottom`}>
             <ConstructorElement
               type="bottom"
               isLocked={true}
               text={`${mainBun.name} (низ)`}
-              price={`${mainBun.price}`}
+              price={mainBun.price}
               thumbnail={`${mainBun.image}`}
             />
           </li>

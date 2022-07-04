@@ -7,7 +7,7 @@ import {
   TIngredient,
   IGetIngredientsSuccessResponse,
   IGetOrderDetailsSuccessResponse,
-  ISendOrderSuccessResponse,
+  TOrderedIngredient,
 } from "../types/data.js";
 import { AppDispatch, AppThunk } from "../store.js";
 
@@ -17,7 +17,6 @@ export const GET_INGREDIENTS_SUCCESS: "GET_INGREDIENTS_SUCCESS" =
   "GET_INGREDIENTS_SUCCESS";
 export const GET_INGREDIENTS_FAILED: "GET_INGREDIENTS_FAILED" =
   "GET_INGREDIENTS_FAILED";
-export const SEND_ORDER_REQUEST: "SEND_ORDER_REQUEST" = "SEND_ORDER_REQUEST";
 export const SEND_ORDER_SUCCESS: "SEND_ORDER_SUCCESS" = "SEND_ORDER_SUCCESS";
 export const SEND_ORDER_FAILED: "SEND_ORDER_FAILED" = "SEND_ORDER_FAILED";
 export const ORDER_INGREDIENT: "ORDER_INGREDIENT" = "ORDER_INGREDIENT";
@@ -49,7 +48,7 @@ export interface IDecreaseIngredient {
 }
 export interface IMoveIngredient {
   readonly type: typeof MOVE_INGREDIENT;
-  readonly updatedIngredients: Array<TIngredient>;
+  readonly updatedIngredients: Array<TOrderedIngredient>;
 }
 export interface IOrderBun {
   readonly type: typeof ORDER_BUN;
@@ -66,10 +65,6 @@ export interface ISetCurrentTab {
 export interface IGetIngredientsRequestAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
 }
-interface ISendOrderRequestAction {
-  readonly type: typeof SEND_ORDER_REQUEST;
-  readonly ingredients: Array<string>;
-}
 interface IGetIngredientsSuccessAction {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
   readonly ingredients: Array<TIngredient>;
@@ -79,8 +74,7 @@ interface IGetIngredientsFailedAction {
 }
 interface ISendOrderSuccessAction {
   readonly type: typeof SEND_ORDER_SUCCESS;
-  readonly res: ISendOrderSuccessResponse;
-  readonly totalPrice: number;
+  readonly orderNum: number;
 }
 interface ISendOrderFailedAction {
   readonly type: typeof SEND_ORDER_FAILED;
@@ -106,7 +100,6 @@ export type TIngredientsActions =
   | IGetIngredientsRequestAction
   | IGetIngredientsSuccessAction
   | IGetIngredientsFailedAction
-  | ISendOrderRequestAction
   | ISendOrderSuccessAction
   | ISendOrderFailedAction
   | IGetOrderDetailsRequest
@@ -130,7 +123,7 @@ export function decreaseIngredient(index: number): IDecreaseIngredient {
   };
 }
 export function moveIngredient(
-  updatedIngredients: Array<TIngredient>
+  updatedIngredients: Array<TOrderedIngredient>
 ): IMoveIngredient {
   return {
     type: MOVE_INGREDIENT,
@@ -171,19 +164,9 @@ function getIngredientsFailedAction(): IGetIngredientsFailedAction {
     type: GET_INGREDIENTS_FAILED,
   };
 }
-function sendOrderRequestAction(
-  ingredients: Array<string>
-): ISendOrderRequestAction {
-  return {
-    type: SEND_ORDER_REQUEST,
-    ingredients,
-  };
-}
-function sendOrderSuccessAction(
-  res: ISendOrderSuccessResponse,
-  totalPrice: number
-): ISendOrderSuccessAction {
-  return { type: SEND_ORDER_SUCCESS, res, totalPrice };
+
+function sendOrderSuccessAction(orderNum: number): ISendOrderSuccessAction {
+  return { type: SEND_ORDER_SUCCESS, orderNum };
 }
 function sendOrderFailedAction(): ISendOrderFailedAction {
   return { type: SEND_ORDER_FAILED };
@@ -216,24 +199,24 @@ export const getIngredients: AppThunk = () => {
   };
 };
 export const sendOrder: AppThunk = (
-  ingredients: Array<string>,
-  //!!ANY
+  ingredients: Array<TIngredient>,
   openOrderModal: any,
-  totalPrice: number
+  totalPrice: number,
+  setDisabled
 ) => {
   return function (dispatch: AppDispatch) {
-    dispatch(sendOrderRequestAction(ingredients));
     sendOrderRequest(ingredients)
       .then((res) => {
         if (res && res.success) {
-          dispatch(sendOrderSuccessAction(res, totalPrice));
+          dispatch(sendOrderSuccessAction(res.order.number));
           openOrderModal();
         }
       })
       .catch((err) => {
         dispatch(sendOrderFailedAction());
         console.log(err);
-      });
+      })
+      .finally(setDisabled(false));
   };
 };
 export const getOrderDetails: AppThunk = (number: string) => {

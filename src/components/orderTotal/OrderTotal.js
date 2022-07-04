@@ -17,6 +17,8 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState("");
 
+  const [disabled, setDisabled] = React.useState(false);
+
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
       Пожалуйста, выберете булку и начинки
@@ -37,6 +39,7 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
     return () => {
       setOpen(false);
       setModalContent("");
+      // setDisabled(false);
     };
   }, []);
 
@@ -59,9 +62,18 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
       return;
     }
     setModalContent(sending);
+    setDisabled(true);
+    console.log(disabled);
     setOpen(true);
+
+    console.log(totalIngredients);
     dispatch(
-      sendOrder([bun, ...totalIngredients, bun], openOrderModal, totalPrice)
+      sendOrder(
+        [bun, ...totalIngredients, bun],
+        openOrderModal,
+        totalPrice,
+        setDisabled
+      )
     );
   };
 
@@ -76,7 +88,12 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
         </span>
       </p>
       <div className={orderTotalStyles.btn}>
-        <Button type="primary" size="medium" onClick={makeOrder}>
+        <Button
+          type="primary"
+          size="medium"
+          onClick={makeOrder}
+          disabled={disabled}
+        >
           Оформить заказ
         </Button>
       </div>
@@ -87,7 +104,6 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
       </div>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
-          {/*<OrderDetails />*/}
           {modalContent}
         </Modal>
       )}
