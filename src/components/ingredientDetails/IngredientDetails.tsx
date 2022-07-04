@@ -1,16 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 import ingredientDetailsStyles from "./ingredientDetails.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { useParams } from "react-router-dom";
 
-const IngredientDetails = () => {
+const IngredientDetails: FC = () => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  console.log(ingredients);
   const { id } = useParams();
-
   const ingredient = ingredients.find((ing) => ing._id === id);
 
-  return (
+  return ingredient ? (
     <>
       <img
         src={ingredient.image}
@@ -57,6 +55,8 @@ const IngredientDetails = () => {
         </li>
       </ul>
     </>
+  ) : (
+    <h1>Ингредиент не найден</h1>
   );
 };
 
