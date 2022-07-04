@@ -1,8 +1,8 @@
-import React from "react";
+import React, { FunctionComponent } from "react";
 import burgerIngredientsStyles from "./burgerIngredients.module.css";
 import IngredientsList from "../ingredientsList/IngredientsList";
 
-const BurgerIngredients = () => {
+const BurgerIngredients: FunctionComponent = () => {
   return (
     <section className={burgerIngredientsStyles.ingredients}>
       <h1
