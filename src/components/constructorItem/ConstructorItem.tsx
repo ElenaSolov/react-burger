@@ -12,12 +12,12 @@ import { useSelector, useDispatch } from "../../services/hooks";
 import { useDrag, useDrop } from "react-dnd";
 import { TIngredient, TOrderedIngredient } from "../../services/types/data";
 
-interface TConstructorItemProps {
+interface IConstructorItemProps {
   index: number;
   ingredient: TIngredient;
   moveItem: (a: number, b: number) => void;
 }
-const ConstructorItem: FunctionComponent<TConstructorItemProps> = ({
+const ConstructorItem: FunctionComponent<IConstructorItemProps> = ({
   index,
   ingredient,
   moveItem,
