@@ -1,8 +1,10 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, FC } from "react";
 import modalOverlayStyles from "./modalOverlay.module.css";
-import PropTypes from "prop-types";
 
-const ModalOverlay = ({ onClick }) => {
+interface IModalOverlay {
+  onClick: () => void;
+}
+const ModalOverlay: FC<IModalOverlay> = ({ onClick }) => {
   const closeByEsc = useCallback(
     (evt) => {
       if (evt.key === "Escape") {
@@ -19,8 +21,9 @@ const ModalOverlay = ({ onClick }) => {
     };
   }, [closeByEsc]);
 
-  const closeByClick = (evt) => {
-    if (evt.target.classList.contains("overlay")) {
+  const closeByClick = (evt: React.SyntheticEvent) => {
+    const target = evt.target as HTMLDivElement;
+    if (target.classList.contains("overlay")) {
       onClick();
     }
   };
@@ -29,12 +32,8 @@ const ModalOverlay = ({ onClick }) => {
     <div
       className={`${modalOverlayStyles.overlay} overlay`}
       onClick={closeByClick}
-    ></div>
+    />
   );
-};
-
-ModalOverlay.propTypes = {
-  onClick: PropTypes.func.isRequired,
 };
 
 export default ModalOverlay;
