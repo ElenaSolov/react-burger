@@ -7,10 +7,10 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 interface IIngredientCardProps {
-  ingredient: TIngredient;
+  ingredient: IIngredient;
 }
 const IngredientCard: FC<IIngredientCardProps> = ({ ingredient }) => {
   const id = ingredient._id;
@@ -22,7 +22,7 @@ const IngredientCard: FC<IIngredientCardProps> = ({ ingredient }) => {
         .length
   );
 
-  function isNotEmpty(obj: TIngredient | object): obj is TIngredient {
+  function isNotEmpty(obj: IIngredient | object): obj is IIngredient {
     return "price" in obj;
   }
   const mainBun = useSelector((store) => store.order.orderedBun);

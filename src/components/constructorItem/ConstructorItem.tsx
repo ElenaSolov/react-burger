@@ -10,11 +10,11 @@ import {
 import constructorItemStyles from "./constructorItem.module.css";
 import { useSelector, useDispatch } from "../../services/hooks";
 import { useDrag, useDrop } from "react-dnd";
-import { TIngredient, TOrderedIngredient } from "../../services/types/data";
+import { IIngredient, IOrderedIngredient } from "../../services/types/data";
 
 interface IConstructorItemProps {
   index: number;
-  ingredient: TIngredient;
+  ingredient: IIngredient;
   moveItem: (a: number, b: number) => void;
 }
 const ConstructorItem: FunctionComponent<IConstructorItemProps> = ({
@@ -39,7 +39,7 @@ const ConstructorItem: FunctionComponent<IConstructorItemProps> = ({
   };
   const [, dropRef] = useDrop({
     accept: "ingredient",
-    hover(item: TOrderedIngredient, monitor) {
+    hover(item: IOrderedIngredient, monitor) {
       if (!ref.current) {
         return;
       }

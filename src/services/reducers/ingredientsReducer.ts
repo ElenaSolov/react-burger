@@ -5,10 +5,10 @@ import {
   SET_CURRENT_TAB,
   TIngredientsActions,
 } from "../actions/actions";
-import { TIngredient } from "../types/data";
+import { IIngredient } from "../types/data";
 
 interface IIngredientsState {
-  ingredients: Array<TIngredient>;
+  ingredients: Array<IIngredient>;
   currentTab: string;
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;

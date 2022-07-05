@@ -7,12 +7,12 @@ import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../services/actions/actions";
 import { useDispatch, useSelector } from "../../services/hooks";
 import { useNavigate } from "react-router-dom";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 interface IOrderTotal {
   totalPrice: number;
-  totalIngredients: Array<TIngredient>;
-  bun: TIngredient;
+  totalIngredients: Array<IIngredient>;
+  bun: IIngredient;
 }
 const OrderTotal: FC<IOrderTotal> = ({ totalIngredients, totalPrice, bun }) => {
   const dispatch = useDispatch();

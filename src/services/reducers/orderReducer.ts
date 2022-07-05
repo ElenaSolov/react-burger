@@ -11,12 +11,12 @@ import {
   GET_ORDER_DETAILS_SUCCESS,
   TIngredientsActions,
 } from "../actions/actions";
-import { TIngredient, TOrder, TOrderedIngredient } from "../types/data";
+import { IIngredient, TOrder, IOrderedIngredient } from "../types/data";
 
 interface IOrderState {
   totalPrice: number;
-  orderedIngredients: Array<TOrderedIngredient>;
-  orderedBun: TIngredient | object;
+  orderedIngredients: Array<IOrderedIngredient>;
+  orderedBun: IIngredient | object;
   orderFailed: boolean;
   orderStatus: string;
   orderNum: null | number;
