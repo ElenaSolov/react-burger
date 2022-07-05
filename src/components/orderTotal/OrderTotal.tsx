@@ -1,27 +1,29 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import orderTotalStyles from "./orderTotal.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modals/modal/Modal";
 import OrderDetails from "../orderDetails/OrderDetails";
-import { sendOrder } from "../../services/actions/actions.ts";
-import PropTypes from "prop-types";
-import propTypesConfig from "../../utils/propTypesConfig";
-import { useDispatch, useSelector } from "react-redux";
+import { sendOrder } from "../../services/actions/actions";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useNavigate } from "react-router-dom";
+import { TIngredient } from "../../services/types/data";
 
-const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
+interface IOrderTotal {
+  totalPrice: number;
+  totalIngredients: Array<TIngredient>;
+  bun: TIngredient;
+}
+const OrderTotal: FC<IOrderTotal> = ({ totalIngredients, totalPrice, bun }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
   const [open, setOpen] = React.useState(false);
-  const [modalContent, setModalContent] = React.useState("");
-
   const [disabled, setDisabled] = React.useState(false);
 
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
-      Пожалуйста, выберете булку и начинки
+      Пожалуйста, выберете начинки
     </h2>
   );
   const noBun = (
@@ -35,15 +37,19 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
     </h2>
   );
 
+  const [modalContent, setModalContent] =
+    React.useState<JSX.Element>(noIngredients);
+
   useEffect(() => {
     return () => {
       setOpen(false);
-      setModalContent("");
+      setModalContent(noIngredients);
       // setDisabled(false);
     };
   }, []);
 
   const openOrderModal = () => {
+    setOpen(true);
     setModalContent(<OrderDetails />);
   };
 
@@ -102,20 +108,9 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
           Смотреть заказ
         </Button>
       </div>
-      {open && (
-        <Modal isOpen={open} onClose={() => setOpen(false)}>
-          {modalContent}
-        </Modal>
-      )}
+      {open && <Modal onClose={() => setOpen(false)}>{modalContent}</Modal>}
     </div>
   );
-};
-
-OrderTotal.propTypes = {
-  totalPrice: PropTypes.number.isRequired,
-  totalIngredients: PropTypes.arrayOf(
-    PropTypes.shape(propTypesConfig).isRequired
-  ),
 };
 
 export default OrderTotal;
