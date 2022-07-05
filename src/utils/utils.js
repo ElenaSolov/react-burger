@@ -1,5 +1,3 @@
-import { refreshCookie } from "./api.js";
-
 //vertical scroll
 const body = document.querySelector("body");
 function setElementHeight(el, bottomEl) {
