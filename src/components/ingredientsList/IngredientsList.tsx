@@ -1,28 +1,27 @@
-import React, { useEffect, useRef } from "react";
+import React, { FC, RefObject, useEffect, useRef } from "react";
 import IngredientCard from "../ingredientCard/IngredientCard";
 import ingredientsListStyles from "./ingredientsList.module.css";
-import {
-  Tab,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentTab } from "../../services/actions/actions.ts";
-import { getCurrentTab, addScroll } from "../../utils/utils.js";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector, useDispatch } from "../../services/hooks";
+import { setCurrentTab } from "../../services/actions/actions";
+import { getCurrentTab, addScroll } from "../../utils/utils";
 
-const IngredientsList = () => {
+const IngredientsList: FC = () => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
   const dispatch = useDispatch();
-  const bunsSectionRef = useRef(null);
-  const saucesSectionRef = useRef(null);
-  const mainsSectionRef = useRef(null);
+  const bunsSectionRef = useRef<HTMLUListElement>(null);
+  const saucesSectionRef = useRef<HTMLUListElement>(null);
+  const mainsSectionRef = useRef<HTMLUListElement>(null);
   const current = useSelector((store) => store.ingredients.currentTab);
-  const setCurrent = (ref) => {
-    ref.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-      inline: "nearest",
-    });
-    dispatch(setCurrentTab(ref.current.id));
+  const setCurrent = (ref: RefObject<HTMLUListElement>) => {
+    if (ref.current !== null) {
+      ref.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+      dispatch(setCurrentTab(ref.current.id));
+    }
   };
 
   useEffect(() => {
@@ -101,11 +100,7 @@ const IngredientsList = () => {
             .filter((ingredient) => ingredient["type"] === "sauce")
             .map((ingredient) => {
               return (
-                <IngredientCard
-                  key={ingredient._id}
-                  ingredient={ingredient}
-                  CurrencyIcon={CurrencyIcon}
-                />
+                <IngredientCard key={ingredient._id} ingredient={ingredient} />
               );
             })}
         </ul>
