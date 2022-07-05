@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "../services/hooks";
-import Preloader from "./preloader/PreLoader.jsx";
+import Preloader from "./preloader/PreLoader.js";
 
 interface IProtectedRoot {
   children: JSX.Element;
