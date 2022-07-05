@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import mobileMenuStyles from "./mobileMenu.module.css";
@@ -16,9 +16,8 @@ import { logout } from "../../services/actions/authActions";
 
 interface IMobileMenu {
   onClose: () => void;
-  children: JSX.Element;
 }
-const MobileMenu = ({ onClose }: IMobileMenu): JSX.Element => {
+const MobileMenu: FC<IMobileMenu> = ({ onClose }) => {
   const menuRoot = document.getElementById("root") as HTMLElement;
   const [windowDimension, setWindowDimension] = useState<number>(0);
   const { pathname } = useLocation();
@@ -72,7 +71,7 @@ const MobileMenu = ({ onClose }: IMobileMenu): JSX.Element => {
               className={mobileMenuStyles.input}
               type="checkbox"
               id="touch"
-            ></input>
+            />
           </div>
           <ul className={mobileMenuStyles.sublist}>
             <li>
@@ -111,7 +110,6 @@ const MobileMenu = ({ onClose }: IMobileMenu): JSX.Element => {
         </li>
         <li>
           <NavItem
-            value="Конструктор"
             text="Конструктор"
             Icon={BurgerIcon}
             type={pathname === "/" ? "primary" : "secondary"}
@@ -120,7 +118,6 @@ const MobileMenu = ({ onClose }: IMobileMenu): JSX.Element => {
         </li>
         <li>
           <NavItem
-            value="Лента"
             text="Лента заказов"
             Icon={ListIcon}
             type={pathname === "/feed" ? "primary" : "secondary"}

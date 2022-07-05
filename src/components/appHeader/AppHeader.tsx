@@ -28,7 +28,6 @@ const AppHeader: FunctionComponent = () => {
           <ul className={headerStyles.navlist}>
             <li>
               <NavItem
-                value="Конструктор"
                 text="Конструктор"
                 Icon={BurgerIcon}
                 type={pathname === "/" ? "primary" : "secondary"}
@@ -37,7 +36,6 @@ const AppHeader: FunctionComponent = () => {
             </li>
             <li>
               <NavItem
-                value="Лента"
                 text="Лента заказов"
                 Icon={ListIcon}
                 type={pathname === "/feed" ? "primary" : "secondary"}
@@ -54,7 +52,6 @@ const AppHeader: FunctionComponent = () => {
           <img className={headerStyles.smallLogo} src={img} alt="Логотип" />
         </Link>
         <NavItem
-          value="Кабинет"
           text="Личный кабинет"
           Icon={ProfileIcon}
           type={pathname.includes("/profile") ? "primary" : "secondary"}
@@ -64,7 +61,7 @@ const AppHeader: FunctionComponent = () => {
           type="button"
           className={headerStyles.burger}
           onClick={openMobileMenu}
-        ></button>
+        />
       </div>
     </header>
   );

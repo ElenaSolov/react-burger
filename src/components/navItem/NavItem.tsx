@@ -7,7 +7,7 @@ interface INavItem {
   Icon: React.ElementType;
   text: string;
   path: string;
-  margin?: number;
+  margin?: boolean;
 }
 const NavItem: FC<INavItem> = ({ type, Icon, text, path, margin }) => {
   let marginLeft: string | null = null;
