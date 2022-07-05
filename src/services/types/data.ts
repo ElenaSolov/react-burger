@@ -1,4 +1,4 @@
-export type TIngredient = {
+export interface IIngredient {
   readonly name: string;
   readonly calories: number;
   readonly carbohydrates: number;
@@ -9,15 +9,14 @@ export type TIngredient = {
   readonly type: string;
   readonly _id: string;
   readonly start?: string;
-};
-export type TOrderedIngredient = TIngredient & {
+}
+export interface IOrderedIngredient extends IIngredient {
   key: string;
   index: number;
-};
-export type TOrder = {
-  readonly totalPrice: number;
-  readonly ingredients: Array<TIngredient>;
-};
+}
+export interface IOrderWithCount extends IIngredient {
+  count: number;
+}
 export interface IOrder {
   createdAt: string;
   ingredients: Array<string>;
@@ -31,11 +30,11 @@ export interface IOrder {
   success: true;
 }
 
-export interface ISendOrderSuccessResponse {
-  success: boolean;
-  name: string;
-  order: IOrder;
-}
+export type TOrder = {
+  readonly totalPrice: number;
+  readonly ingredients: Array<IIngredient>;
+};
+
 export interface IGetOrderDetailsSuccessResponse {
   orders: Array<IOrder>;
   success: true;
@@ -43,7 +42,7 @@ export interface IGetOrderDetailsSuccessResponse {
 
 export interface IGetIngredientsSuccessResponse {
   readonly success: boolean;
-  readonly data: Array<TIngredient>;
+  readonly data: Array<IIngredient>;
 }
 
 //auth types

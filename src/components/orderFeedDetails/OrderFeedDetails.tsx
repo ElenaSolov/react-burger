@@ -1,15 +1,20 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import orderFeedDetailsStyles from "./orderFeedDetails.module.css";
 import { getDate, getOrderStatus } from "../../utils/utils";
+import { IOrder, IOrderWithCount } from "../../services/types/data";
+import { FC } from "react";
 
-const OrderFeedDetails = ({ order }) => {
+interface IOrderFeedDetails {
+  order: IOrder;
+}
+const OrderFeedDetails: FC<IOrderFeedDetails> = ({ order }) => {
   console.log(order);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  const orderIngredients = [];
+  const orderIngredients: Array<IOrderWithCount> = [];
   order.ingredients.forEach((ingredient) => {
     const index = orderIngredients.findIndex((el) => el._id === ingredient);
-    return index >= 0
+    return index > -1
       ? orderIngredients[index].count++
       : orderIngredients.push({
           ...ingredients.find((i) => i._id === ingredient),
