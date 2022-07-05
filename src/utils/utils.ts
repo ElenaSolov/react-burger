@@ -1,19 +1,26 @@
+import React from "react";
 //vertical scroll
-const body = document.querySelector("body");
-function setElementHeight(el, bottomEl) {
+import { IOrder } from "../services/types/data";
+
+const body = document.querySelector("body") as HTMLBodyElement;
+function setElementHeight(el: HTMLElement, bottomEl: HTMLElement | null) {
   const marginBottom = 40;
   const top = el.getBoundingClientRect().top;
-  const bottomHeight = bottomEl
-    ? body.offsetHeight - bottomEl.getBoundingClientRect().top
-    : marginBottom;
+  const bottomHeight =
+    bottomEl != null
+      ? body.offsetHeight - bottomEl.getBoundingClientRect().top
+      : marginBottom;
   el.style.maxHeight =
     Math.floor(document.documentElement.clientHeight - top - bottomHeight) +
     "px";
 }
-export function addScroll(selector, bottomSelector = null) {
-  const el = document.querySelector(selector);
+export function addScroll(
+  selector: string,
+  bottomSelector: string | null = null
+) {
+  const el = document.querySelector(selector) as HTMLElement;
   const bottomEl = bottomSelector
-    ? document.querySelector(bottomSelector)
+    ? (document.querySelector(bottomSelector) as HTMLElement)
     : null;
   setElementHeight(el, bottomEl);
 }
@@ -21,14 +28,16 @@ export function addScroll(selector, bottomSelector = null) {
 // switch tabs
 
 export const getCurrentTab = () => {
-  const triggerLine = body
-    .querySelector(".tabs")
-    .getBoundingClientRect().bottom;
+  let tabs;
+  if (body !== null) {
+    tabs = body.querySelector(".tabs");
+  }
+  const triggerLine = tabs ? tabs.getBoundingClientRect().bottom : null;
   const ingredientsLists = body.querySelectorAll(".ingredients__list");
   let currentList = ingredientsLists[0];
   for (let i = 0; i <= 2; i++) {
     const listBottom = ingredientsLists[i].getBoundingClientRect().bottom;
-    if (listBottom > triggerLine) {
+    if (triggerLine && listBottom > triggerLine) {
       currentList = ingredientsLists[i];
       break;
     }
@@ -38,21 +47,19 @@ export const getCurrentTab = () => {
 
 //email validation
 
-export function validateEmail(mail) {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
+export function validateEmail(mail: string) {
+  return /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(mail);
 }
 
 // token
-export function setCookie(name, value) {
+export function setCookie(name: string, value: string) {
   document.cookie = name + "=" + value + ";path=/";
 }
 
-export function getCookie(name) {
+export function getCookie(name: string) {
   const matches = document.cookie.match(
     new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)"
+      "(?:^|; )" + name.replace(/([$?*|{}[\]\\/^])/g, "\\$1") + "=([^;]*)"
     )
   );
   if (matches) {
@@ -60,18 +67,21 @@ export function getCookie(name) {
   }
   return null;
 }
-export function deleteCookie(name) {
-  setCookie(name, null, { expires: -1 });
+export function deleteCookie(name: string) {
+  document.cookie = name + "=; expires=-1";
 }
 
 //input values
-export const onInputChange = (e, setValue) => {
+export const onInputChange = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  setValue: (a: string) => void
+) => {
   setValue(e.target.value);
 };
 
 //date converter
 
-export const getDate = (date) => {
+export const getDate = (date: string) => {
   const orderDate = new Date(date);
   let days;
   const now = new Date();
@@ -79,7 +89,7 @@ export const getDate = (date) => {
   let day = orderDate.getUTCDate();
   let hour = orderDate.getHours();
   let month = orderDate.getMonth();
-  let min = orderDate.getMinutes();
+  let min: number | string = orderDate.getMinutes();
   const gmt = orderDate.toString().split("GMT")[1];
   if (min < 10) min = "0" + min;
   const time = `${hour}:${min} i-GMT${gmt.slice(0, 1)}${Number(
@@ -99,7 +109,7 @@ export const getDate = (date) => {
 };
 
 //order status
-export const getOrderStatus = (order) => {
+export const getOrderStatus = (order: IOrder) => {
   return order.status === "done"
     ? {
         text: "Выполнен",

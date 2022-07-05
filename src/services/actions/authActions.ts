@@ -220,8 +220,8 @@ export const logout: AppThunk = () => {
     sendLogoutRequest()
       .then(() => {
         dispatch(createLogoutAction());
-        deleteCookie("refreshToken");
         deleteCookie("accessToken");
+        deleteCookie("refreshToken");
       })
       .catch((err) => {
         console.log(err);
