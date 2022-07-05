@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { logout } from "../../services/actions/authActions";
 import profileNavStyles from "./profileNav.module.css";
+import { FC } from "react";
 
-const ProfileNav = () => {
+const ProfileNav: FC = () => {
   const dispatch = useDispatch();
   const className = `${profileNavStyles.profileLink} text text_type_main-medium text_color_inactive`;
   const activeClassName = `${profileNavStyles.profileLink} ${profileNavStyles.profileLinkActive} text text_type_main-medium`;
