@@ -3,16 +3,16 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "../services/hooks";
 import Preloader from "./preloader/PreLoader.jsx";
 
-type TProtectedRoot = {
+interface IProtectedRoot {
   children: JSX.Element;
   redirectPath?: string;
   type?: string;
-};
+}
 function ProtectedRoute({
   children,
   redirectPath = "/login",
   type = "private",
-}: TProtectedRoot): JSX.Element {
+}: IProtectedRoot): JSX.Element {
   let auth = useSelector((store) => store.auth);
   const location = useLocation();
   const isAuthChecked = useSelector((store) => store.auth.isAuthChecked);

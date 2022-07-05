@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import mobileMenuStyles from "./mobileMenu.module.css";
 import NavItem from "../navItem/NavItem";
 import {
@@ -15,9 +14,13 @@ import { useLocation, NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../services/actions/authActions";
 
-const MobileMenu = ({ onClose }) => {
-  const menuRoot = document.getElementById("root");
-  const [windowDimension, setWindowDimension] = useState(null);
+interface IMobileMenu {
+  onClose: () => void;
+  children: JSX.Element;
+}
+const MobileMenu = ({ onClose }: IMobileMenu): JSX.Element => {
+  const menuRoot = document.getElementById("root") as HTMLElement;
+  const [windowDimension, setWindowDimension] = useState<number>(0);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const className = `${mobileMenuStyles.link} text text_type_main-small text_color_inactive`;
@@ -44,7 +47,7 @@ const MobileMenu = ({ onClose }) => {
         <h2 className={`${mobileMenuStyles.title} text text_type_main-medium`}>
           Меню
         </h2>
-        <CloseIcon onClick={onClose} />
+        <CloseIcon type="primary" onClick={onClose} />
       </div>
       <nav className={mobileMenuStyles.list}>
         <li>
@@ -129,7 +132,5 @@ const MobileMenu = ({ onClose }) => {
     menuRoot
   );
 };
-MobileMenu.propTypes = {
-  onClose: PropTypes.func.isRequired,
-};
+
 export default MobileMenu;
