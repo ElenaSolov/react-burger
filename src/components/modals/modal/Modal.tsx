@@ -6,7 +6,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface IModal {
   children: JSX.Element;
-  header: string;
+  header?: string;
   onClose: () => void;
 }
 const Modal = ({ children, header, onClose }: IModal): JSX.Element => {

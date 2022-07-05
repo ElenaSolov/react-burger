@@ -1,15 +1,19 @@
-import React from "react";
+import React, { FC } from "react";
 import orderCardStyles from "./orderCard.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 import { getDate, getOrderStatus } from "../../utils/utils";
+import { IOrder } from "../../services/types/data";
 
-const OrderCard = ({ order }) => {
+interface IOrderCard {
+  order: IOrder;
+}
+const OrderCard: FC<IOrderCard> = ({ order }) => {
   const ingredientsArray = useSelector(
     (store) => store.ingredients.ingredients
   );
-  const price = order.ingredients.reduce((prev, next) => {
+  const price = order.ingredients.reduce((prev: number, next) => {
     const ingredient = ingredientsArray.find((ing) => {
       return next === ing._id;
     });
@@ -42,37 +46,40 @@ const OrderCard = ({ order }) => {
             <ul className={orderCardStyles.list}>
               {order.ingredients.map((ing, ind) => {
                 const ingredient = ingredientsArray.find((i) => i._id === ing);
-                if (ind === 5 && rest) {
-                  return (
-                    <li
-                      key={ind}
-                      className={`${orderCardStyles.item} ${orderCardStyles.itemLast}`}
-                    >
-                      <span
-                        className={`${orderCardStyles.rest} text text_type_main-default`}
+                if (ingredient !== undefined) {
+                  if (ind === 5 && rest) {
+                    return (
+                      <li
+                        key={ind}
+                        className={`${orderCardStyles.item} ${orderCardStyles.itemLast}`}
                       >
-                        +{rest}
-                      </span>
-                      <img
-                        src={ingredient.image}
-                        alt={ingredient.name}
-                        className={orderCardStyles.img}
-                      />
-                    </li>
+                        <span
+                          className={`${orderCardStyles.rest} text text_type_main-default`}
+                        >
+                          +{rest}
+                        </span>
+                        <img
+                          src={ingredient.image}
+                          alt={ingredient.name}
+                          className={orderCardStyles.img}
+                        />
+                      </li>
+                    );
+                  }
+                  if (ind > 5) return null;
+                  return (
+                    ingredient && (
+                      <li key={ind} className={orderCardStyles.item}>
+                        <img
+                          src={ingredient.image}
+                          alt={ingredient.name}
+                          className={orderCardStyles.img}
+                        />
+                      </li>
+                    )
                   );
                 }
-                if (ind > 5) return null;
-                return (
-                  ingredient && (
-                    <li key={ind} className={orderCardStyles.item}>
-                      <img
-                        src={ingredient.image}
-                        alt={ingredient.name}
-                        className={orderCardStyles.img}
-                      />
-                    </li>
-                  )
-                );
+                return null;
               })}
             </ul>
             <div

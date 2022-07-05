@@ -20,10 +20,10 @@ export type TOrder = {
 };
 export interface IOrder {
   createdAt: string;
-  ingredients: Array<TIngredient>;
+  ingredients: Array<string>;
   name: string;
   number: number;
-  owner: IUserData & { createdAt: string };
+  owner?: IUserData & { createdAt: string };
   price: number;
   status: string;
   updatedAt: string;
