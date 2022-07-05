@@ -43,7 +43,9 @@ export const getCurrentTab = () => {
       break;
     }
   }
-  return currentList.getAttribute("id");
+  let result = currentList.getAttribute("id");
+  if (result === null) result = "Buns";
+  return result;
 };
 
 //email validation

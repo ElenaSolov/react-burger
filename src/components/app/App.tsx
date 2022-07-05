@@ -122,22 +122,26 @@ function App(): JSX.Element {
                 </Modal>
               }
             />
-            <Route
-              path="/feed/:id"
-              element={
-                <Modal onClose={onModalClose}>
-                  <OrderFeedDetails order={location.state.order} />
-                </Modal>
-              }
-            />
-            <Route
-              path="/profile/orders/:id"
-              element={
-                <Modal onClose={onModalClose}>
-                  <OrderFeedDetails order={location.state.order} />
-                </Modal>
-              }
-            />
+            {location.state.order && (
+              <Route
+                path="/feed/:id"
+                element={
+                  <Modal onClose={onModalClose}>
+                    <OrderFeedDetails order={location.state.order} />
+                  </Modal>
+                }
+              />
+            )}
+            {location.state.order && (
+              <Route
+                path="/profile/orders/:id"
+                element={
+                  <Modal onClose={onModalClose}>
+                    <OrderFeedDetails order={location.state.order} />
+                  </Modal>
+                }
+              />
+            )}
           </Routes>
         )}
       </DndProvider>

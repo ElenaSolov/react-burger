@@ -13,8 +13,8 @@ const IngredientsList: FC = () => {
   const saucesSectionRef = useRef<HTMLUListElement>(null);
   const mainsSectionRef = useRef<HTMLUListElement>(null);
   const current = useSelector((store) => store.ingredients.currentTab);
-  const setCurrent = (ref: RefObject<HTMLUListElement>) => {
-    if (ref.current !== null) {
+  const setCurrent = (ref: RefObject<HTMLUListElement> | null) => {
+    if (ref !== null && ref.current !== null) {
       ref.current.scrollIntoView({
         behavior: "smooth",
         block: "start",

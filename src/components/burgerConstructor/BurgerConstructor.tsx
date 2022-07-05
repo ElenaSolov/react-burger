@@ -12,7 +12,7 @@ import {
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem";
 import { v4 as uuidv4 } from "uuid";
-import { TIngredient } from "../../services/types/data";
+import { IIngredient } from "../../services/types/data";
 
 const BurgerConstructor: FunctionComponent = () => {
   const isLoaded = useSelector(
@@ -36,12 +36,12 @@ const BurgerConstructor: FunctionComponent = () => {
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    drop: (item: TIngredient) => {
+    drop: (item: IIngredient) => {
       console.log(item);
       onDropHandler(item);
     },
   });
-  const onDropHandler = (ingredient: TIngredient) => {
+  const onDropHandler = (ingredient: IIngredient) => {
     if (ingredient.type === "bun") {
       dispatch(orderBun(ingredient));
     } else if (ingredient.start === "constructor") {
@@ -57,7 +57,7 @@ const BurgerConstructor: FunctionComponent = () => {
     console.log(orderedIngredients);
   }, [orderedIngredients]);
 
-  function isNotEmpty(obj: TIngredient | object): obj is TIngredient {
+  function isNotEmpty(obj: IIngredient | object): obj is IIngredient {
     return "price" in obj;
   }
   const totalPrice = useMemo(() => {
