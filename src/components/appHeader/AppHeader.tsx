@@ -13,7 +13,6 @@ import MobileMenu from "../mobileMenu/MobileMenu";
 
 const AppHeader: FunctionComponent = () => {
   const { pathname } = useLocation();
-  console.log(pathname);
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
 
   const openMobileMenu = (): void => {

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import pageStyles from "./pages.module.css";
 import OrderCard from "../components/orderCard/OrderCard";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../services/hooks";
 import {
   startConnection,
   closeConnection,
 } from "../services/actions/wsActions";
 import { addScroll } from "../utils/utils";
 
-function FeedPage() {
+function FeedPage(): JSX.Element {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.feed.orders);
   const isError = useSelector((store) => store.feed.wsError);
@@ -19,7 +19,9 @@ function FeedPage() {
 
   useEffect(() => {
     dispatch(startConnection("all"));
-    return () => dispatch(closeConnection());
+    return () => {
+      dispatch(closeConnection());
+    };
   }, [dispatch]);
 
   const ordersDone =
