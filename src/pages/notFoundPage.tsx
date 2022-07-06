@@ -3,7 +3,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import notFoundStyles from "./pages.module.css";
 
-function NotFoundPage() {
+function NotFoundPage(): JSX.Element {
   const navigate = useNavigate();
   const goHome = () => {
     navigate("/");
