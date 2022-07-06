@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../services/hooks";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import pagesStyles from "./pages.module.css";
 import {
@@ -18,7 +18,7 @@ function RegisterPage() {
   const [emailValue, setEmailValue] = React.useState("");
   const [passwordValue, setPasswordValue] = React.useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(register(emailValue, passwordValue, name));
   };
@@ -40,14 +40,14 @@ function RegisterPage() {
           </div>
           <div className={`${pagesStyles.input} mt-6`}>
             <EmailInput
+              name="email"
               value={emailValue}
               onChange={(e) => onInputChange(e, setEmailValue)}
             />
           </div>
           <div className={`${pagesStyles.input} mt-6`}>
             <PasswordInput
-              type="password"
-              placeholder="Пароль"
+              name="password"
               value={passwordValue}
               onChange={(e) => onInputChange(e, setPasswordValue)}
             />
