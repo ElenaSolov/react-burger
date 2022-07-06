@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import {
   Button,
   Input,
@@ -6,10 +6,10 @@ import {
 import pagesStyles from "./pages.module.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { onInputChange } from "../utils/utils";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../services/hooks";
 import { resetPassword } from "../services/actions/authActions";
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage: FC = () => {
   const dispatch = useDispatch();
   const auth = useSelector((store) => store.auth);
   const location = useLocation();
@@ -29,7 +29,7 @@ const ResetPasswordPage = () => {
     }
   }, [auth, location, navigate]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(resetPassword(passwordValue, codeValue));
   };
