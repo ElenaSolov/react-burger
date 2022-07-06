@@ -10,12 +10,12 @@ import { login } from "../services/actions/authActions";
 import { useDispatch } from "react-redux";
 import { onInputChange } from "../utils/utils";
 
-function LoginPage() {
+function LoginPage(): JSX.Element {
   const dispatch = useDispatch();
   const [emailValue, setEmailValue] = React.useState("");
   const [passwordValue, setPasswordValue] = React.useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     dispatch(login(emailValue, passwordValue));
   };
@@ -29,14 +29,15 @@ function LoginPage() {
         <form onSubmit={onSubmit} className={pagesStyles.form}>
           <div className={`${pagesStyles.input} mt-6`}>
             <EmailInput
+              name="email"
               value={emailValue}
               onChange={(e) => onInputChange(e, setEmailValue)}
             />
           </div>
           <div className={`${pagesStyles.input} mt-6`}>
             <PasswordInput
+              name="password"
               value={passwordValue}
-              placeholder="Пароль"
               onChange={(e) => onInputChange(e, setPasswordValue)}
             />
           </div>
