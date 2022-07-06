@@ -7,9 +7,9 @@ import pagesStyles from "./pages.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { restorePassword } from "../services/actions/authActions";
 import { validateEmail, onInputChange } from "../utils/utils";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../services/hooks";
 
-function RestorePasswordPage() {
+function RestorePasswordPage(): JSX.Element {
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ function RestorePasswordPage() {
       navigate("reset", { state: "forgot-password" });
   }, [auth, navigate]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (validateEmail(emailValue)) {
