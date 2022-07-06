@@ -2,7 +2,7 @@ import React from "react";
 import pagesStyles from "./pages.module.css";
 import IngredientDetails from "./../components/ingredientDetails/IngredientDetails";
 
-const IngredientPage = () => {
+const IngredientPage = (): JSX.Element => {
   return (
     <section className={pagesStyles.ingredientMain}>
       <div className={`${pagesStyles.header} mt-10`}>
