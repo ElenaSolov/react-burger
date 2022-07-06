@@ -11,7 +11,7 @@ import {
   GET_ORDER_DETAILS_SUCCESS,
   TIngredientsActions,
 } from "../actions/actions";
-import { IIngredient, TOrder, IOrderedIngredient } from "../types/data";
+import { IIngredient, IOrderedIngredient, IOrder } from "../types/data";
 
 interface IOrderState {
   totalPrice: number;
@@ -20,7 +20,7 @@ interface IOrderState {
   orderFailed: boolean;
   orderStatus: string;
   orderNum: null | number;
-  order: TOrder | object;
+  order: IOrder | object;
 }
 
 const initialState: IOrderState = {
