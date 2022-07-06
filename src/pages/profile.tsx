@@ -5,12 +5,12 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { getUser, updateUserInfo } from "../services/actions/authActions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../services/hooks";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { onInputChange } from "../utils/utils";
 import ProfileNav from "../components/profileNav/ProfileNav";
 
-function Profile() {
+function Profile(): JSX.Element {
   const user = useSelector((store) => store.auth);
   const [name, setName] = React.useState(user.name);
   const [emailValue, setEmailValue] = React.useState(user.email);
@@ -21,9 +21,12 @@ function Profile() {
     dispatch(getUser());
   }, [dispatch, user.isAuth]);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (document.activeElement.textContent === "Отмена") {
+    if (
+      document.activeElement !== null &&
+      document.activeElement.textContent === "Отмена"
+    ) {
       onCancel();
     } else {
       dispatch(updateUserInfo(name, emailValue, passwordValue));
@@ -59,8 +62,7 @@ function Profile() {
           </div>
           <div className={`${pagesStyles.input} mt-6`}>
             <PasswordInput
-              type="password"
-              placeholder="Пароль"
+              name="password"
               value={passwordValue}
               onChange={(e) => onInputChange(e, setPasswordValue)}
             />
