@@ -7,12 +7,12 @@ import OrderDetails from "../orderDetails/OrderDetails";
 import { sendOrder } from "../../services/actions/actions";
 import { useDispatch, useSelector } from "../../services/hooks";
 import { useNavigate } from "react-router-dom";
-import { IIngredient } from "../../services/types/data";
+import { IIngredient, isIngredient } from "../../services/types/data";
 
 interface IOrderTotal {
   totalPrice: number;
   totalIngredients: Array<IIngredient>;
-  bun: IIngredient;
+  bun: IIngredient | object;
 }
 const OrderTotal: FC<IOrderTotal> = ({ totalIngredients, totalPrice, bun }) => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const OrderTotal: FC<IOrderTotal> = ({ totalIngredients, totalPrice, bun }) => {
       setModalContent(noIngredients);
       setOpen(true);
       return;
-    } else if (!bun._id) {
+    } else if (!isIngredient(bun)) {
       setModalContent(noBun);
       setOpen(true);
       return;

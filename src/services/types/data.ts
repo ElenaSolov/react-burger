@@ -79,3 +79,7 @@ export type TLocationState = {
     order?: IOrder;
   };
 };
+
+export function isIngredient(obj: IIngredient | object): obj is IIngredient {
+  return "price" in obj;
+}

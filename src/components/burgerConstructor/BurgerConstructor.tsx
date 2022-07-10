@@ -12,7 +12,7 @@ import {
 import { useDrop } from "react-dnd";
 import ConstructorItem from "../constructorItem/ConstructorItem";
 import { v4 as uuidv4 } from "uuid";
-import { IIngredient } from "../../services/types/data";
+import { IIngredient, isIngredient } from "../../services/types/data";
 
 const BurgerConstructor: FunctionComponent = () => {
   const isLoaded = useSelector(
@@ -57,12 +57,10 @@ const BurgerConstructor: FunctionComponent = () => {
     console.log(orderedIngredients);
   }, [orderedIngredients]);
 
-  function isNotEmpty(obj: IIngredient | object): obj is IIngredient {
-    return "price" in obj;
-  }
+
   const totalPrice = useMemo(() => {
     if (!isLoaded) return 0;
-    const bunCost = isNotEmpty(mainBun) ? mainBun.price * 2 : 0;
+    const bunCost = isIngredient(mainBun) ? mainBun.price * 2 : 0;
     if (orderedIngredients.length > 0) {
       return (
         orderedIngredients.reduce((prev, next) => prev + next.price, 0) +
@@ -78,7 +76,7 @@ const BurgerConstructor: FunctionComponent = () => {
       className={`${constructorStyles.constructor} ml-4`}
     >
       {(!isLoaded ||
-        (orderedIngredients.length < 1 && !isNotEmpty(mainBun))) && (
+        (orderedIngredients.length < 1 && !isIngredient(mainBun))) && (
         <p
           className={`${constructorStyles.text} text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive`}
         >
@@ -86,7 +84,7 @@ const BurgerConstructor: FunctionComponent = () => {
         </p>
       )}
       <ul className={`${constructorStyles.list} mt-25`}>
-        {isNotEmpty(mainBun) && (
+        {isIngredient(mainBun) && (
           <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
             <ConstructorElement
               type="top"
@@ -112,7 +110,7 @@ const BurgerConstructor: FunctionComponent = () => {
             })}
           </ul>
         )}
-        {isNotEmpty(mainBun) && (
+        {isIngredient(mainBun) && (
           <li className={`${constructorStyles.bun} ml-8 mr-4 pt-4 bottom`}>
             <ConstructorElement
               type="bottom"

@@ -7,7 +7,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
-import { IIngredient } from "../../services/types/data";
+import { IIngredient, isIngredient } from "../../services/types/data";
 
 interface IIngredientCardProps {
   ingredient: IIngredient;
@@ -22,11 +22,9 @@ const IngredientCard: FC<IIngredientCardProps> = ({ ingredient }) => {
         .length
   );
 
-  function isNotEmpty(obj: IIngredient | object): obj is IIngredient {
-    return "price" in obj;
-  }
+
   const mainBun = useSelector((store) => store.order.orderedBun);
-  if (isNotEmpty(mainBun) && ingredient._id === mainBun._id) {
+  if (isIngredient(mainBun) && ingredient._id === mainBun._id) {
     count = 2;
   }
 
