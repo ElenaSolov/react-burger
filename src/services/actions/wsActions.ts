@@ -27,7 +27,7 @@ interface IWsGetMessage {
 }
 interface IStartConnection {
   readonly type: typeof WS_CONNECTION_START;
-  readonly payload: string;
+  readonly payload: string | null;
 }
 export type TWsActions =
   | IWsConnectionSuccess
@@ -37,15 +37,17 @@ export type TWsActions =
   | IStartConnection;
 
 //Action creators
-function createStartConnectionAction(wsUrl: string): IStartConnection {
+function createStartConnectionAction(
+  token: string | null
+): IStartConnection {
   return {
     type: WS_CONNECTION_START,
-    payload: wsUrl,
+    payload: token,
   };
 }
-export const startConnection = (wsUrl: string) => {
+export const startConnection = (token: string | null) => {
   return function (dispatch: AppDispatch) {
-    dispatch(createStartConnectionAction(wsUrl));
+    dispatch(createStartConnectionAction(token));
   };
 };
 

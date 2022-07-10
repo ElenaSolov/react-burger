@@ -1,4 +1,3 @@
-import { getCookie } from "../utils/utils";
 import { IWsActions } from "./store";
 import type { Middleware, MiddlewareAPI } from "redux";
 
@@ -20,17 +19,11 @@ export const socketMiddleware = (wsActions: IWsActions): Middleware => {
       const { type, payload } = action;
       const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
       if (type === wsInit) {
+        console.log(payload)
         const wsUrl =
-          payload === "orders"
-            ? (()=>{
-              const accessToken = getCookie("accessToken");
-              if(!accessToken){
-                return;
-              } else {
-                return wsURLS["orders"] +
-                    `?token=${accessToken.split("Bearer ")[1]}`;
-              }
-              })()
+          payload !== null
+            ? wsURLS.orders +
+                    `?token=${payload.split("Bearer ")[1]}`
             : wsURLS["all"];
 
         if(!wsUrl){

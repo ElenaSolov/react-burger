@@ -18,7 +18,7 @@ function FeedPage(): JSX.Element {
   }, [orders.length, isError]);
 
   useEffect(() => {
-    dispatch(startConnection("all"));
+    dispatch(startConnection(null));
     return () => {
       dispatch(closeConnection());
     };

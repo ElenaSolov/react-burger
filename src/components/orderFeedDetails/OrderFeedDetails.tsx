@@ -9,9 +9,7 @@ interface IOrderFeedDetails {
   order: IOrder;
 }
 const OrderFeedDetails: FC<IOrderFeedDetails> = ({ order }) => {
-  console.log(order);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  console.log(ingredients)
   const orderIngredients: Array<IOrderWithCount> = [];
   order.ingredients.forEach((ingredient) => {
     const index = orderIngredients.findIndex((el) => el._id === ingredient);
