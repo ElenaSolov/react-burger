@@ -11,7 +11,7 @@ import {
   ArrowDownIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useLocation, NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { logout } from "../../services/actions/authActions";
 
 interface IMobileMenu {

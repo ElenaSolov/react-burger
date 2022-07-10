@@ -7,7 +7,7 @@ import {
 import pagesStyles from "./pages.module.css";
 import { Link } from "react-router-dom";
 import { login } from "../services/actions/authActions";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../services/hooks";
 import { onInputChange } from "../utils/utils";
 
 function LoginPage(): JSX.Element {
