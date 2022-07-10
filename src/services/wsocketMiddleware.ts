@@ -22,10 +22,23 @@ export const socketMiddleware = (wsActions: IWsActions): Middleware => {
       if (type === wsInit) {
         const wsUrl =
           payload === "orders"
-            ? wsURLS["orders"] +
-              `?token=${getCookie("accessToken").split("Bearer ")[1]}`
+            ? (()=>{
+              const accessToken = getCookie("accessToken");
+              if(!accessToken){
+                return;
+              } else {
+                return wsURLS["orders"] +
+                    `?token=${accessToken.split("Bearer ")[1]}`;
+              }
+              })()
             : wsURLS["all"];
-        socket = new WebSocket(wsUrl);
+
+        if(!wsUrl){
+          dispatch({ type: onOpen, payload: {message: "Что-то пошло не так, пожалуйста, авторизуйтесь"} });
+        } else {
+          socket = new WebSocket(wsUrl);
+        }
+
       }
       if (socket != null) {
         socket.onopen = (event) => {
