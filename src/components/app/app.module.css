@@ -1,41 +1,41 @@
 .app {
-  text-align: center;
-  background-color: #131316;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 2000px;
-  margin: 0 auto;
-  color: #F2F2F3;
+    text-align: center;
+    background-color: #131316;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 2000px;
+    margin: 0 auto;
+    color: #F2F2F3;
 }
 .main {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
 }
 .container{
-  max-width: 1240px;
-  display: grid;
-  grid-template-areas:
+    max-width: 1240px;
+    display: grid;
+    grid-template-areas:
         'ingredients constructor';
-  margin: 0 16px;
+    margin: 0 16px;
 }
 
 
 .bottomBar{
-  display: none;
+    display: none;
 }
 @media screen and (max-width: 991px) {
-  .main{
-    margin-bottom: 100px;
-  }
-  .container{
-    grid-template-areas: 'ingredients';
-    width: 100%;
-    justify-items: center;
-    margin: 0;
-  }
+    .main{
+        margin-bottom: 100px;
+    }
+    .container{
+        grid-template-areas: 'ingredients';
+        width: 100%;
+        justify-items: center;
+        margin: 0;
+    }
 
 }
