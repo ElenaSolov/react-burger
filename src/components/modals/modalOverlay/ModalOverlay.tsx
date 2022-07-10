@@ -6,7 +6,7 @@ interface IModalOverlay {
 }
 const ModalOverlay: FC<IModalOverlay> = ({ onClick }) => {
   const closeByEsc = useCallback(
-    (evt) => {
+    (evt : KeyboardEvent ) => {
       if (evt.key === "Escape") {
         onClick();
       }
