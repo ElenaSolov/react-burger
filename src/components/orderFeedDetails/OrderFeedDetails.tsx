@@ -11,15 +11,24 @@ interface IOrderFeedDetails {
 const OrderFeedDetails: FC<IOrderFeedDetails> = ({ order }) => {
   console.log(order);
   const ingredients = useSelector((store) => store.ingredients.ingredients);
+  console.log(ingredients)
   const orderIngredients: Array<IOrderWithCount> = [];
   order.ingredients.forEach((ingredient) => {
     const index = orderIngredients.findIndex((el) => el._id === ingredient);
     return index > -1
       ? orderIngredients[index].count++
-      : orderIngredients.push({
-          ...ingredients.find((i) => i._id === ingredient),
-          count: 1,
-        });
+      : (() => {
+          const ing = ingredients.find((i) => i._id === ingredient);
+          if (typeof ing === 'undefined'){
+              return;
+          } else {
+              orderIngredients.push({
+                  ...ing,
+                  count: 1,
+              });
+          }
+        })();
+
   });
   const date = getDate(order.createdAt);
   const status = getOrderStatus(order);
