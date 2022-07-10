@@ -189,7 +189,6 @@ export const getUser: AppThunk = () => {
   };
 };
 export const restorePassword: AppThunk = (email: string) => {
-  console.log(email);
   return function (dispatch: AppDispatch) {
     sendRestorePasswordRequest(email)
       .then((res) => {

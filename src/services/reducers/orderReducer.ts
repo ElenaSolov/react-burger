@@ -45,7 +45,6 @@ export const orderReducer = (
       };
     }
     case ORDER_INGREDIENT: {
-      console.log(state.orderedIngredients);
       const newIngredient = {
         ...action.ingredient,
         key: action.key,

@@ -19,7 +19,6 @@ export const socketMiddleware = (wsActions: IWsActions): Middleware => {
       const { type, payload } = action;
       const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
       if (type === wsInit) {
-        console.log(payload)
         const wsUrl =
           payload !== null
             ? wsURLS.orders +

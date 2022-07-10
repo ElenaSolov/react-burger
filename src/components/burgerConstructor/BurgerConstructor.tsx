@@ -54,7 +54,6 @@ const BurgerConstructor: FunctionComponent = () => {
   };
   useEffect(() => {
     orderedIngredients.length > 5 && addScroll(".constructorScroll", ".bottom");
-    console.log(orderedIngredients);
   }, [orderedIngredients]);
 
 
@@ -98,7 +97,6 @@ const BurgerConstructor: FunctionComponent = () => {
         {orderedIngredients.length > 0 && (
           <ul className={`${constructorStyles.list} constructorScroll mb-4`}>
             {orderedIngredients.map((ingredient, index) => {
-              console.log(orderedIngredients);
               return (
                 <ConstructorItem
                   key={index}

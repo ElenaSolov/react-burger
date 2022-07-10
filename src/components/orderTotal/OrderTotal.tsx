@@ -69,10 +69,8 @@ const OrderTotal: FC<IOrderTotal> = ({ totalIngredients, totalPrice, bun }) => {
     }
     setModalContent(sending);
     setDisabled(true);
-    console.log(disabled);
     setOpen(true);
 
-    console.log(totalIngredients);
     dispatch(
       sendOrder(
         [bun, ...totalIngredients, bun],
