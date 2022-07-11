@@ -20,6 +20,7 @@ const BurgerConstructor = () => {
   const orderedIngredients = useSelector(
     (store) => store.order.orderedIngredients
   );
+
   const order = useSelector((store) => store.order);
   const dispatch = useDispatch();
   const mainBun = useSelector((store) => store.order.orderedBun);
@@ -48,6 +49,7 @@ const BurgerConstructor = () => {
     }
   };
   useEffect(() => {
+    console.log(orderedIngredients)
     orderedIngredients.length > 5 && addScroll(".constructorScroll", ".bottom");
   }, [orderedIngredients]);
 

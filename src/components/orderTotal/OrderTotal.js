@@ -14,12 +14,11 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
-  const [open, setOpen] = React.useState(false);
-  const [modalContent, setModalContent] = React.useState("");
+
 
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
-      Пожалуйста, выберете булку и начинки
+      Пожалуйста, выберете начинки
     </h2>
   );
   const noBun = (
@@ -33,6 +32,21 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
     </h2>
   );
 
+  const [open, setOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState(noIngredients);
+  const [isDisabled, setDisabled] = React.useState(false);
+  const [buttonText, setButtonText] = React.useState('Оформить заказ');
+
+  const changeButton = (disable) => {
+    if(disable){
+      setDisabled(true);
+      setButtonText('Оформляем...')
+    } else {
+      setDisabled(false);
+      setButtonText('Оформить заказ')
+    }
+  }
+
   useEffect(() => {
     return () => {
       setOpen(false);
@@ -41,6 +55,7 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
   }, []);
 
   const openOrderModal = () => {
+    setOpen(true);
     setModalContent(<OrderDetails />);
   };
 
@@ -60,8 +75,9 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
     }
     setModalContent(sending);
     setOpen(true);
+
     dispatch(
-      sendOrder([bun, ...totalIngredients, bun], openOrderModal, totalPrice)
+      sendOrder([bun, ...totalIngredients, bun], openOrderModal, totalPrice, changeButton)
     );
   };
 
@@ -76,8 +92,8 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
         </span>
       </p>
       <div className={orderTotalStyles.btn}>
-        <Button type="primary" size="medium" onClick={makeOrder}>
-          Оформить заказ
+        <Button type="primary" size="medium" onClick={makeOrder}  disabled={isDisabled}>
+          {buttonText}
         </Button>
       </div>
       <div className={orderTotalStyles.btn_type_mobile}>
@@ -87,7 +103,6 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
       </div>
       {open && (
         <Modal isOpen={open} onClose={() => setOpen(false)}>
-          {/*<OrderDetails />*/}
           {modalContent}
         </Modal>
       )}
