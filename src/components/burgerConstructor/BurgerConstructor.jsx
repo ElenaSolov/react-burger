@@ -19,7 +19,7 @@ const BurgerConstructor = () => {
   );
   const orderedIngredients = useSelector(
     (store) => store.order.orderedIngredients
-  );
+  ).filter(ing => ing.type !== 'bun');
 
   const order = useSelector((store) => store.order);
   const dispatch = useDispatch();
