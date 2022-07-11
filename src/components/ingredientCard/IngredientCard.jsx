@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ingredientCardStyles from "./ingredientCard.module.css";
 import {
   Counter,
-  CurrencyIcon,
+  CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
@@ -33,6 +33,8 @@ const IngredientCard = ({ ingredient }) => {
     }),
   });
 
+
+
   return (
       <li ref={dragRef}>
         <Link
@@ -59,12 +61,6 @@ const IngredientCard = ({ ingredient }) => {
           >
             {ingredient.name}
           </p>
-          <button
-            type="button"
-            className={`${ingredientCardStyles.btn} text text_type_main-default`}
-          >
-            Добавить
-          </button>
         </Link>
       </li>
   );

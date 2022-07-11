@@ -49,7 +49,6 @@ const BurgerConstructor = () => {
     }
   };
   useEffect(() => {
-    console.log(orderedIngredients)
     orderedIngredients.length > 5 && addScroll(".constructorScroll", ".bottom");
   }, [orderedIngredients]);
 
