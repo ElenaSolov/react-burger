@@ -11,6 +11,7 @@
 .mobileMenu a{
     display: flex;
 }
+
 .headerContainer{
     display: flex;
     justify-content: space-between;
@@ -26,13 +27,14 @@
     margin: 0;
     padding: 0;
 }
+
 .sublist{
     list-style-type: none;
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    height:0px;
+    height:0;
     overflow: hidden;
     text-align: center;
     transition: height .4s ease;
@@ -41,28 +43,37 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 30px;
     align-items: center;
+    position: relative;
 }
+
 .link{
     text-decoration: none;
     margin: 10px 0 10px 40px;
+    color: #F2F2F3;
+}
+.link:hover{
+    color: #F2F2F3;
+}
+.inactive {
+    color: #8585AD;
 }
 .input{
     position: absolute;
     right: 0;
+    top: 0;
     width: 24px;
     height: 24px;
-    margin-right: 15px;
     opacity: 0;
 }
+
 .input:checked + .sublist {
-    height: 300px;
+    height: 120px;
+    margin-top: 10px
 }
-.input:checked{
-    opacity: 1;
-}
+
 
 .label{
     margin: 0;

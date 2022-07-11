@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
@@ -20,11 +20,29 @@ const MobileMenu = ({ onClose }) => {
   const [windowDimension, setWindowDimension] = useState(null);
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const className = `${mobileMenuStyles.link} text text_type_main-small text_color_inactive`;
+  const className = `${mobileMenuStyles.link} ${mobileMenuStyles.inactive} text text_type_main-small`;
   const activeClassName = `${mobileMenuStyles.link} text text_type_main-small`;
 
+  const [active, setActive] = useState(false);
+  const toggleActive = () => {
+    setActive(!active);
+  }
+
+  const closeByEsc = useCallback(
+      (evt) => {
+        if (evt.key === "Escape") {
+          onClose();
+        }
+      },
+      [onClose]
+  );
   useEffect(() => {
     setWindowDimension(window.innerWidth);
+    document.addEventListener("keydown", closeByEsc);
+    return () => {
+      document.removeEventListener("keydown", closeByEsc);
+      onClose();
+    };
   }, []);
 
   useEffect(() => {
@@ -44,7 +62,7 @@ const MobileMenu = ({ onClose }) => {
         <h2 className={`${mobileMenuStyles.title} text text_type_main-medium`}>
           Меню
         </h2>
-        <CloseIcon onClick={onClose} />
+        <CloseIcon onClick={onClose} type='primary' />
       </div>
       <nav className={mobileMenuStyles.list}>
         <li>
@@ -62,62 +80,77 @@ const MobileMenu = ({ onClose }) => {
               />
               Личный кабинет
             </label>
-            <ArrowDownIcon
-              type={pathname.includes("/profile") ? "primary" : "secondary"}
+            {active
+                ? <ArrowUpIcon
+                type={pathname.includes("/profile") ? "primary" : "secondary"}
             />
+            : <ArrowDownIcon
+                    type={pathname.includes("/profile") ? "primary" : "secondary"}
+                />}
             <input
               className={mobileMenuStyles.input}
               type="checkbox"
               id="touch"
+              onClick={toggleActive}
             ></input>
+            <ul className={mobileMenuStyles.sublist}>
+              <li>
+                <NavLink
+                    end
+                    onClick={() => {
+                      onClose();
+                    }}
+                    to="/profile"
+                    className={({ isActive }) =>
+                        isActive ? activeClassName : className
+                    }
+                >
+                  Профиль
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                    to="/profile/orders"
+                    onClick={() => {
+                      onClose();
+                    }}
+                    className={({ isActive }) =>
+                        isActive ? activeClassName : className
+                    }
+                >
+                  История заказов
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                    to="/"
+                    onClick={() => {
+                      dispatch(logout());
+                      onClose();
+                    }}
+                    className={className}
+                >
+                  Выход
+                </NavLink>
+              </li>
+            </ul>
           </div>
-          <ul className={mobileMenuStyles.sublist}>
-            <li>
-              <NavLink
-                end
-                to="/profile"
-                className={({ isActive }) =>
-                  isActive ? activeClassName : className
-                }
-              >
-                Профиль
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/profile/orders"
-                className={({ isActive }) =>
-                  isActive ? activeClassName : className
-                }
-              >
-                История заказов
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/"
-                onClick={() => {
-                  dispatch(logout());
-                }}
-                className={className}
-              >
-                Выход
-              </NavLink>
-            </li>
-          </ul>
+
         </li>
-        <li>
+        <li onClick={() => {
+          onClose();
+        }}>
           <NavItem
-            value="Конструктор"
             text="Конструктор"
             Icon={BurgerIcon}
             type={pathname === "/" ? "primary" : "secondary"}
             path="/"
           />
         </li>
-        <li>
+        <li onClick={() => {
+          onClose();
+        }}>
           <NavItem
-            value="Лента"
             text="Лента заказов"
             Icon={ListIcon}
             type={pathname === "/feed" ? "primary" : "secondary"}
