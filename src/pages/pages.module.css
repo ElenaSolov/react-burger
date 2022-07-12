@@ -3,6 +3,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  padding: 16px 8px;
+
 }
 .main {
   padding: 0 16px;
@@ -169,6 +171,9 @@
   margin-top: 0;
   padding: 0;
 }
+.mobileTitle{
+  display: none;
+}
 @media screen and (max-width: 991px) {
   .tab {
     display: grid;
@@ -188,7 +193,6 @@
 }
 @media screen and (max-width: 640px) {
   .page{
-    padding: 16px 8px;
     align-items: baseline;
   }
   .tableColumn {
@@ -197,6 +201,15 @@
   }
   .tableColumn:last-of-type {
     margin-right: 0;
+  }
+  .formContainer{
+    margin: 0;
+  }
+  .centeredText{
+    text-align: center;
+  }
+  .mobileTitle{
+    display: block;
   }
 }
 
@@ -213,9 +226,5 @@
   .info {
     margin: 0 auto;
     max-width: calc(100% - 16px);
-  }
-
-  .centeredText{
-      text-align: center;
   }
 }

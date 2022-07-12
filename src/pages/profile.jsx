@@ -39,7 +39,8 @@ function Profile() {
   return (
     <section className={pagesStyles.page}>
       <ProfileNav />
-      <div className="ml-15">
+      <div className={`${pagesStyles.formContainer} ml-15`}>
+        <h2 className={`${pagesStyles.mobileTitle} ${pagesStyles.centeredText} text text_type_main-medium`}>Профиль</h2>
         <form className={pagesStyles.form} onSubmit={onSubmit}>
           <div className={`${pagesStyles.input} mt-6`}>
             <Input
@@ -59,7 +60,7 @@ function Profile() {
           </div>
           <div className={`${pagesStyles.input} mt-6`}>
             <PasswordInput
-              type="password"
+              name="password"
               placeholder="Пароль"
               value={passwordValue}
               onChange={(e) => onInputChange(e, setPasswordValue)}
