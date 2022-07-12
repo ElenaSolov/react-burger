@@ -46,7 +46,7 @@ export function validateEmail(mail) {
 
 // token
 export function setCookie(name, value) {
-  document.cookie = name + "=" + value + ";path=/";
+  document.cookie = name + "=" + value + "; path=/";
 }
 
 export function getCookie(name) {
