@@ -10,11 +10,16 @@ import propTypesConfig from "../../utils/propTypesConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const OrderTotal = ({ totalIngredients, totalPrice, bun, showOrderMode, setShowOrderMode }) => {
+const OrderTotal = ({
+  totalIngredients,
+  totalPrice,
+  bun,
+  showOrderMode,
+  setShowOrderMode,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
-
 
   const noIngredients = (
     <h2 className={`${orderTotalStyles.text} text text_type_main-large`}>
@@ -35,17 +40,17 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun, showOrderMode, setShowO
   const [open, setOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(noIngredients);
   const [isDisabled, setDisabled] = React.useState(false);
-  const [buttonText, setButtonText] = React.useState('Оформить заказ');
+  const [buttonText, setButtonText] = React.useState("Оформить заказ");
 
   const changeButton = (disable) => {
-    if(disable){
+    if (disable) {
       setDisabled(true);
-      setButtonText('Оформляем...')
+      setButtonText("Оформляем...");
     } else {
       setDisabled(false);
-      setButtonText('Оформить заказ')
+      setButtonText("Оформить заказ");
     }
-  }
+  };
 
   useEffect(() => {
     return () => {
@@ -77,12 +82,21 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun, showOrderMode, setShowO
     setOpen(true);
 
     dispatch(
-      sendOrder([bun, ...totalIngredients, bun], openOrderModal, totalPrice, changeButton)
+      sendOrder(
+        [bun, ...totalIngredients, bun],
+        openOrderModal,
+        totalPrice,
+        changeButton
+      )
     );
   };
 
   return (
-    <div className={`${orderTotalStyles.orderTotal} mt-10 ${showOrderMode? orderTotalStyles.showOrderMode : ''}`}>
+    <div
+      className={`${orderTotalStyles.orderTotal} mt-10 ${
+        showOrderMode ? orderTotalStyles.showOrderMode : ""
+      }`}
+    >
       <p
         className={`${orderTotalStyles.total} text text_type_digits-medium mr-10`}
       >
@@ -92,11 +106,19 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun, showOrderMode, setShowO
         </span>
       </p>
       <div className={orderTotalStyles.btn}>
-        <Button type="primary" size={showOrderMode? 'small' : 'medium'} onClick={makeOrder}  disabled={isDisabled}>
+        <Button
+          type="primary"
+          size={showOrderMode ? "small" : "medium"}
+          onClick={makeOrder}
+          disabled={isDisabled}
+        >
           {buttonText}
         </Button>
       </div>
-      <div className={orderTotalStyles.btn_type_mobile} onClick={()=>setShowOrderMode(true)}>
+      <div
+        className={orderTotalStyles.btn_type_mobile}
+        onClick={() => setShowOrderMode(true)}
+      >
         <Button type="primary" size="small">
           Смотреть заказ
         </Button>
