@@ -5,6 +5,8 @@
     height: 100%;
 }
 .main {
+    padding: 0 16px;
+    box-sizing: border-box;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -22,7 +24,9 @@
 .title {
     margin: 0 auto;
 }
-
+.tab{
+    display: none;
+}
 .form{
     display: flex;
     flex-direction: column;
@@ -69,14 +73,15 @@
 .feedContent{
     max-width: 1240px;
     display: grid;
-    grid-template-areas: "title title""orders info";
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: "title title""tabs tabs""orders info";
+    grid-template-columns: 50% 50%;
 }
 .feedTitle{
     grid-area: title;
     margin: 40px 0 4px;
     text-align: start;
 }
+
 
 .error{
     margin-top: 30%;
@@ -139,14 +144,7 @@
     box-sizing: border-box;
     padding: 2px;
 }
-/*.orderText{*/
-/*    align-self: start;*/
-/*}*/
-/*.orderTotalContainer{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    width: 100%;*/
-/*}*/
+
 .ingredientsList{
     list-style-type: none;
     margin: 24px 0 60px;
@@ -170,4 +168,47 @@
     margin-bottom: 0;
     margin-top: 0;
     padding: 0;
+}
+@media screen and (max-width: 991px){
+    .tab{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-area: tabs;
+    }
+    .inactive{
+        display: none;
+    }
+    .feedContent{
+        display: flex;
+        flex-direction: column;
+    }
+    .info{
+        margin: 0;
+    }
+}
+@media screen and (max-width: 640px){
+    .tableColumn{
+        width: 140px;
+        margin-right: 35px;
+    }
+    .tableColumn:last-of-type{
+        margin-right: 0;
+    }
+
+}
+
+@media screen and (max-width: 414px){
+    .tab div {
+        min-width: unset;
+    }
+    .orders{
+        overflow: unset;
+    }
+.tableColumn{
+    margin-right: 24px;
+}
+.info{
+    margin: 0 auto;
+    max-width: calc(100% - 16px);
+}
 }

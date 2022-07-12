@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import pageStyles from "./pages.module.css";
 import OrderCard from "../components/orderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,11 +7,13 @@ import {
   closeConnection,
 } from "../services/actions/wsActions";
 import { addScroll } from "../utils/utils";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function FeedPage() {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.feed.orders);
   const isError = useSelector((store) => store.feed.wsError);
+  const [current, setCurrent] = useState("Заказы");
 
   useEffect(() => {
     if (orders.length > 2 && !isError) addScroll(".ordersScroll", ".bottom");
@@ -45,12 +47,28 @@ function FeedPage() {
             <h1 className={`${pageStyles.feedTitle} text text_type_main-large`}>
               Лента заказов
             </h1>
-            <ul className={`${pageStyles.orders} ordersScroll`}>
+            <div className={pageStyles.tab}>
+              <Tab
+                value="Заказы"
+                active={current === "Заказы"}
+                onClick={() => setCurrent("Заказы")}
+              >
+                Заказы
+              </Tab>
+              <Tab
+                value="Статистика"
+                active={current === "Статистика"}
+                onClick={() => setCurrent("Статистика")}
+              >
+                Статистика
+              </Tab>
+            </div>
+            <ul className={`${pageStyles.orders} ordersScroll  ${current === 'Заказы' ? '' : pageStyles.inactive}`}>
               {orders.map((order) => (
                 <OrderCard key={order._id} order={order} />
               ))}
             </ul>
-            <section className={`${pageStyles.info} ml-15`}>
+            <section className={`${pageStyles.info} ml-15 ${current === 'Статистика' ? '' : pageStyles.inactive}`}>
               <div className={pageStyles.table}>
                 <div className={pageStyles.tableColumn}>
                   <p className="text text_type_main-medium mt-16px">Готовы:</p>

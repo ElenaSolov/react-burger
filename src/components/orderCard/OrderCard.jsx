@@ -31,12 +31,12 @@ const OrderCard = ({ order }) => {
       >
         <article className={orderCardStyles.order}>
           <div className={orderCardStyles.header}>
-            <p className="text text_type_digits-default">#{order.number}</p>
-            <p className="text text_type_main-default text_color_inactive">
+            <p className={`${orderCardStyles.number} text text_type_digits-default`}>#{order.number}</p>
+            <p className={`${orderCardStyles.text} text text_type_main-default text_color_inactive`}>
               {date}
             </p>
           </div>
-          <h3 className="text text_type_main-medium">{order.name}</h3>
+          <h3 className={`${orderCardStyles.title} text text_type_main-medium`}>{order.name}</h3>
           {order.status && <p className={status.className}>{status.text}</p>}
           <div className={orderCardStyles.header}>
             <ul className={orderCardStyles.list}>
@@ -76,7 +76,7 @@ const OrderCard = ({ order }) => {
               })}
             </ul>
             <div
-              className={`${orderCardStyles.price} text text_type_digits-default`}
+              className={`${orderCardStyles.price} ${orderCardStyles.number} text text_type_digits-default`}
             >
               {price}
               <span className="ml-2 mt-1">
