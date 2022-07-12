@@ -187,6 +187,10 @@
   }
 }
 @media screen and (max-width: 640px) {
+  .page{
+    padding: 16px 8px;
+    align-items: baseline;
+  }
   .tableColumn {
     width: 140px;
     margin-right: 35px;
@@ -209,5 +213,9 @@
   .info {
     margin: 0 auto;
     max-width: calc(100% - 16px);
+  }
+
+  .centeredText{
+      text-align: center;
   }
 }
