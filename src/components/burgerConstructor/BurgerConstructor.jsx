@@ -1,6 +1,6 @@
-import React, { useMemo, useEffect } from "react";
+import React, {useMemo, useEffect, useState} from "react";
 import constructorStyles from "./burgerConstructor.module.css";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import OrderTotal from "../orderTotal/OrderTotal";
 import { useSelector, useDispatch } from "react-redux";
 import { addScroll } from "../../utils/utils";
@@ -20,6 +20,8 @@ const BurgerConstructor = () => {
   const orderedIngredients = useSelector(
     (store) => store.order.orderedIngredients
   ).filter(ing => ing.type !== 'bun');
+
+  const [showOrderMode, setShowOrderMode] = useState(false);
 
   const order = useSelector((store) => store.order);
   const dispatch = useDispatch();
@@ -67,8 +69,12 @@ const BurgerConstructor = () => {
   return (
     <section
       ref={dropTarget}
-      className={`${constructorStyles.constructor} ml-4`}
+      className={`${constructorStyles.constructor} ml-4 ${showOrderMode?constructorStyles.active : '' }`}
     >
+      {showOrderMode&&<div className={constructorStyles.header}>
+        <h2 className='text text_type_main-medium'>Заказ</h2>
+        <CloseIcon type='primary' onClick={()=>setShowOrderMode(false)} />
+      </div>}
       {(!isLoaded || (orderedIngredients.length < 1 && !mainBun.name)) && (
         <p
           className={`${constructorStyles.text} text text_type_main-large ml-4 mt-25 pt-15 text_color_inactive`}
@@ -80,7 +86,7 @@ const BurgerConstructor = () => {
         {mainBun.name && (
           <li className={`${constructorStyles.bun} ml-8 mr-4 mb-4`}>
             <ConstructorElement
-              type="top"
+              type={showOrderMode? "" :"top"}
               isLocked={true}
               text={`${mainBun.name} (верх)`}
               price={`${mainBun.price}`}
@@ -105,7 +111,7 @@ const BurgerConstructor = () => {
         {mainBun.name && (
           <li className={`${constructorStyles.bun} ml-8 mr-4 pt-4 bottom`}>
             <ConstructorElement
-              type="bottom"
+              type={showOrderMode? '' : "bottom"}
               isLocked={true}
               text={`${mainBun.name} (низ)`}
               price={`${mainBun.price}`}
@@ -118,6 +124,8 @@ const BurgerConstructor = () => {
         totalIngredients={order.orderedIngredients}
         bun={mainBun}
         totalPrice={totalPrice}
+        showOrderMode={showOrderMode}
+        setShowOrderMode = {setShowOrderMode}
       />
     </section>
   );

@@ -18,25 +18,35 @@
 @media screen and (max-width: 991px){
     .orderTotal{
         position: absolute;
-        margin: 16px auto;
-        width: 600px;
+        width: 100%;
         top: 0;
-        margin-left: calc((100% - 600px)/2);
+        /*margin: 16px auto 16px calc((100% - 600px) / 2);*/
         left: 0;
         justify-content: space-between;
+        background-color: #1C1C21;
+        padding: 16px;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    .showOrderMode{
+        position: static;
     }
     .btn{
     display: none;
     }
+
     .btn_type_mobile{
         display: block;
     }
+    .showOrderMode .btn{
+        display: block;
+    }
+    .showOrderMode .btn_type_mobile{
+        display: none;
+    }
 }
 @media screen and (max-width: 640px){
-    .orderTotal{
-        margin: 16px 8px;
-        max-width: calc(100% - 16px);
-    }
+
     .total{
         font-size: 28px;
         line-height: 1;

@@ -10,7 +10,7 @@ import propTypesConfig from "../../utils/propTypesConfig";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
+const OrderTotal = ({ totalIngredients, totalPrice, bun, showOrderMode, setShowOrderMode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const auth = useSelector((store) => store.auth);
@@ -82,7 +82,7 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
   };
 
   return (
-    <div className={`${orderTotalStyles.orderTotal} mt-10`}>
+    <div className={`${orderTotalStyles.orderTotal} mt-10 ${showOrderMode? orderTotalStyles.showOrderMode : ''}`}>
       <p
         className={`${orderTotalStyles.total} text text_type_digits-medium mr-10`}
       >
@@ -92,11 +92,11 @@ const OrderTotal = ({ totalIngredients, totalPrice, bun }) => {
         </span>
       </p>
       <div className={orderTotalStyles.btn}>
-        <Button type="primary" size="medium" onClick={makeOrder}  disabled={isDisabled}>
+        <Button type="primary" size={showOrderMode? 'small' : 'medium'} onClick={makeOrder}  disabled={isDisabled}>
           {buttonText}
         </Button>
       </div>
-      <div className={orderTotalStyles.btn_type_mobile}>
+      <div className={orderTotalStyles.btn_type_mobile} onClick={()=>setShowOrderMode(true)}>
         <Button type="primary" size="small">
           Смотреть заказ
         </Button>

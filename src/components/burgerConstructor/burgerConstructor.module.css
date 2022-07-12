@@ -4,6 +4,13 @@
     display: flex;
     flex-direction: column;
 }
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px 8px;
+    box-sizing: border-box;
+}
 .visible {
     visibility: visible;
 }
@@ -55,4 +62,42 @@
         max-width: 100%;
         margin: 0;
     }
-}
+    .text{
+        font-size: 24px;
+        margin: 0 16px;
+    }
+
+    .active{
+        top: 0;
+        height: 100%;
+    }
+    .list{
+        margin: 0;
+    }
+    .list span:last-of-type {
+        font-size: 14px;
+    }
+    .list span:nth-of-type(2){
+        font-size: 22px;
+    }
+    .list span span:last-child{
+        display: none;
+    }
+    .list div{
+        background: none;
+        padding-left: 0;
+    }
+    .list img {
+        width: 52px;
+        height: auto;
+        margin: 0 0 8px 0;
+    }
+    .bun{
+        margin: 0 0 0 46px;
+    }
+    .bun:last-of-type{
+        margin-left: 46px;
+        padding-top: 0;
+    }
+
+    }

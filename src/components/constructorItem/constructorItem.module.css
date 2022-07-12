@@ -7,3 +7,12 @@
 .dragIcon{
     margin-right: 13.5px;
 }
+
+@media screen and (max-width: 991px){
+    .item{
+        margin: 0;
+    }
+    .dragIcon{
+        margin: 0 10px;
+    }
+}
