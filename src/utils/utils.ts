@@ -29,11 +29,9 @@ export function addScroll(
 // switch tabs
 
 export const getCurrentTab = () => {
-  let tabs;
-  if (body !== null) {
-    tabs = body.querySelector(".tabs");
-  }
-  const triggerLine = tabs ? tabs.getBoundingClientRect().bottom : null;
+  const tabs = body.querySelector(".tabs") as HTMLElement;
+
+  const triggerLine = tabs.getBoundingClientRect().bottom;
   const ingredientsLists = body.querySelectorAll(".ingredients__list");
   let currentList = ingredientsLists[0];
   for (let i = 0; i <= 2; i++) {
