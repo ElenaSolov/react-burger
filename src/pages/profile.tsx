@@ -24,8 +24,7 @@ function Profile(): JSX.Element {
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (
-      document.activeElement !== null &&
-      document.activeElement.textContent === "Отмена"
+      document.activeElement?.textContent === "Отмена"
     ) {
       onCancel();
     } else {
