@@ -32,7 +32,7 @@ const IngredientsList: FC = () => {
     <>
       <ul className={`${ingredientsListStyles.tabs} mt-5 tabs`}>
         <li>
-          <a className={`${ingredientsListStyles.tabLink} tabLink`}>
+          <a href="/#" className={`${ingredientsListStyles.tabLink} tabLink`}>
             <Tab
               value="Булки"
               active={current === "Булки"}
@@ -43,7 +43,7 @@ const IngredientsList: FC = () => {
           </a>
         </li>
         <li>
-          <a className={`${ingredientsListStyles.tabLink} tabLink`}>
+          <a href="/#" className={`${ingredientsListStyles.tabLink} tabLink`}>
             <Tab
               value="Соусы"
               active={current === "Соусы"}
@@ -54,7 +54,7 @@ const IngredientsList: FC = () => {
           </a>
         </li>
         <li>
-          <a className={`${ingredientsListStyles.tabLink} tabLink`}>
+          <a href="/#" className={`${ingredientsListStyles.tabLink} tabLink`}>
             <Tab
               value="Начинки"
               active={current === "Начинки"}

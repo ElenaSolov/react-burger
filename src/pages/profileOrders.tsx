@@ -16,19 +16,20 @@ function ProfileOrders(): JSX.Element {
   const dispatch = useDispatch();
   const orders = useSelector((store) => store.feed.orders.reverse());
   const isError = useSelector((store) => store.feed.wsError);
-  const token = getCookie('accessToken');
+  const token = getCookie("accessToken");
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getUser());
-    if(!token) {
-      navigate("login", {replace: true, state: "/profile/orders"});
+    if (!token) {
+      navigate("login", { replace: true, state: "/profile/orders" });
     } else {
-      dispatch(startConnection(token))
+      dispatch(startConnection(token));
     }
     return () => {
       dispatch(closeConnection());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, user.isAuth]);
 
   useEffect(() => {
