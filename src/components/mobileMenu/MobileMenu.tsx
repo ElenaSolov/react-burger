@@ -7,7 +7,6 @@ import {
   BurgerIcon,
   ListIcon,
   ProfileIcon,
-  ArrowUpIcon,
   ArrowDownIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useLocation, NavLink } from "react-router-dom";

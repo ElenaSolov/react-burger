@@ -23,9 +23,7 @@
 .priceIcon{
     margin-left: 9px;
 }
-.btn {
-    display: none;
-}
+
 @media  screen and (max-width: 1239px){
     .card{
         max-width: 144px;
@@ -41,20 +39,12 @@
     .img{
         height: 120px;
     }
-    .btn {
-        display: flex;
-        background-color: transparent;
-        margin: auto auto 0;
-        color: #4C4CFF;
-        border: none;
-        outline: none;
-        cursor: pointer;
-    }
+
 }
 @media screen and (max-width: 640px){
     .card{
         max-width: 144px;
-        height: 245px;
+        height: 220px;
     }
     .card div{
         width: 24px;

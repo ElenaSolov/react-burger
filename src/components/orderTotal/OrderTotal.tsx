@@ -44,8 +44,8 @@ const OrderTotal: FC<IOrderTotal> = ({ totalIngredients, totalPrice, bun }) => {
     return () => {
       setOpen(false);
       setModalContent(noIngredients);
-      // setDisabled(false);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const openOrderModal = () => {

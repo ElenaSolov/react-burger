@@ -36,6 +36,9 @@
 .tabLink {
     text-decoration: none;
 }
+.btn {
+    display: none;
+}
 @media screen and (max-width: 1239px) {
     .tabLink div {
         min-width: unset;
@@ -47,6 +50,15 @@
 @media screen and (max-width: 991px){
     .tabLink div {
         min-width: 120px;
+    }
+    .btn {
+        display: flex;
+        background-color: transparent;
+        margin: auto auto 0;
+        color: #4C4CFF;
+        border: none;
+        outline: none;
+        cursor: pointer;
     }
 }
 @media screen and (max-width: 640px) {
@@ -76,4 +88,5 @@
 
     }
 }
+
 

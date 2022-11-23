@@ -18,3 +18,8 @@
     color: #8585AD;
     opacity: 0.4;
 }
+@media screen and (max-width: 640px){
+    .profile{
+        display: none;
+    }
+}
