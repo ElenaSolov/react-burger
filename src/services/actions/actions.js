@@ -75,9 +75,10 @@ export function getIngredients() {
       });
   };
 }
-export function sendOrder(ingredients, openOrderModal, totalPrice) {
+export function sendOrder(ingredients, openOrderModal, totalPrice, changeButton) {
   return function (dispatch) {
     dispatch({ type: SEND_ORDER_REQUEST, ingredients });
+    changeButton(true);
     sendOrderRequest(ingredients)
       .then((res) => {
         if (res && res.success) {
@@ -88,7 +89,12 @@ export function sendOrder(ingredients, openOrderModal, totalPrice) {
       .catch((err) => {
         dispatch({ type: SEND_ORDER_FAILED });
         console.log(err);
-      });
+      })
+        .finally(
+            ()=> {
+              changeButton(false)
+            }
+        );
   };
 }
 export function getOrderDetails(number) {

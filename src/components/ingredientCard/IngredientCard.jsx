@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ingredientCardStyles from "./ingredientCard.module.css";
 import {
   Counter,
-  CurrencyIcon,
+  CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import propTypesConfig from "../../utils/propTypesConfig";
 import PropTypes from "prop-types";
@@ -25,7 +25,7 @@ const IngredientCard = ({ ingredient }) => {
     count = 2;
   }
 
-  const [{ isDrag }, dragRef] = useDrag({
+  const [ , dragRef] = useDrag({
     type: "ingredient",
     item: { ...ingredient, start: "ingredientCard" },
     collect: (monitor) => ({
@@ -33,15 +33,16 @@ const IngredientCard = ({ ingredient }) => {
     }),
   });
 
+
+
   return (
-    !isDrag && (
       <li ref={dragRef}>
         <Link
           to={`ingredients/${id}`}
           className={`${ingredientCardStyles.card} mt-6 ml-4 mr-4 mb-10 id={id}`}
           state={{ background: location }}
         >
-          <Counter count={count} />
+          {count>0&&<Counter count={count}/>}
           <img
             className={`${ingredientCardStyles.img} ml-4 mr-4`}
             src={ingredient.image}
@@ -52,7 +53,7 @@ const IngredientCard = ({ ingredient }) => {
           >
             {ingredient.price}
             <span className={ingredientCardStyles.priceIcon}>
-              <CurrencyIcon />
+              <CurrencyIcon type="primary" />
             </span>
           </p>
           <p
@@ -60,15 +61,8 @@ const IngredientCard = ({ ingredient }) => {
           >
             {ingredient.name}
           </p>
-          <button
-            type="button"
-            className={`${ingredientCardStyles.btn} text text_type_main-default`}
-          >
-            Добавить
-          </button>
         </Link>
       </li>
-    )
   );
 };
 

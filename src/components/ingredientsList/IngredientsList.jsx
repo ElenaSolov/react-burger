@@ -6,8 +6,9 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentTab } from "../../services/actions/actions.js";
+import {orderBun, orderIngredient, setCurrentTab} from "../../services/actions/actions.js";
 import { getCurrentTab, addScroll } from "../../utils/utils.js";
+import { v4 as uuidv4 } from "uuid";
 
 const IngredientsList = () => {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
@@ -23,6 +24,15 @@ const IngredientsList = () => {
       inline: "nearest",
     });
     dispatch(setCurrentTab(ref.current.id));
+  };
+
+  const addToConstructor = (ingredient) => {
+    if (ingredient.type === "bun") {
+      dispatch(orderBun(ingredient));
+    }  else {
+      const key = uuidv4();
+      dispatch(orderIngredient({ ...ingredient, key }));
+    }
   };
 
   useEffect(() => {
@@ -85,7 +95,18 @@ const IngredientsList = () => {
             .filter((ingredient) => ingredient["type"] === "bun")
             .map((ingredient) => {
               return (
-                <IngredientCard key={ingredient._id} ingredient={ingredient} />
+                <article key={ingredient._id}>
+                  <IngredientCard
+                    ingredient={ingredient}
+                  />
+                  <button
+                    type="button"
+                    className={`${ingredientsListStyles.btn} text text_type_main-default`}
+                    onClick={()=> addToConstructor(ingredient)}
+                  >
+                    Добавить
+                  </button>
+                </article>
               );
             })}
         </ul>
@@ -101,11 +122,18 @@ const IngredientsList = () => {
             .filter((ingredient) => ingredient["type"] === "sauce")
             .map((ingredient) => {
               return (
-                <IngredientCard
-                  key={ingredient._id}
-                  ingredient={ingredient}
-                  CurrencyIcon={CurrencyIcon}
-                />
+                  <article key={ingredient._id}>
+                    <IngredientCard
+                        ingredient={ingredient}
+                    />
+                    <button
+                        type="button"
+                        className={`${ingredientsListStyles.btn} text text_type_main-default`}
+                        onClick={()=> addToConstructor(ingredient)}
+                    >
+                      Добавить
+                    </button>
+                  </article>
               );
             })}
         </ul>
@@ -121,7 +149,18 @@ const IngredientsList = () => {
             .filter((ingredient) => ingredient["type"] === "main")
             .map((ingredient) => {
               return (
-                <IngredientCard key={ingredient._id} ingredient={ingredient} />
+                  <article key={ingredient._id}>
+                    <IngredientCard
+                        ingredient={ingredient}
+                    />
+                    <button
+                        type="button"
+                        className={`${ingredientsListStyles.btn} text text_type_main-default`}
+                        onClick={()=> addToConstructor(ingredient)}
+                    >
+                      Добавить
+                    </button>
+                  </article>
               );
             })}
         </ul>

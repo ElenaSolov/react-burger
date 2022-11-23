@@ -56,7 +56,7 @@ const OrderFeedDetails = ({ order }) => {
 
               <div className={orderFeedDetailsStyles.total}>
                 <p className="text text_type_digits-default mr-2">
-                  {ing.count} x
+                  {ing.count}&nbsp;x
                 </p>
                 <p className="text text_type_digits-default mr-2">
                   {ing.price}

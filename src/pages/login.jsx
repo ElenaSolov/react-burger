@@ -46,13 +46,13 @@ function LoginPage() {
             </Button>
           </div>
         </form>
-        <p className="text text_type_main-default text_color_inactive mt-20">
+        <p className={`${pagesStyles.centeredText} text text_type_main-default text_color_inactive mt-20`}>
           Вы — новый пользователь?
           <Link to="/register" className={pagesStyles.link}>
             Зарегистрироваться
           </Link>
         </p>
-        <p className="text text_type_main-default text_color_inactive mt-4">
+        <p className={`${pagesStyles.centeredText} text text_type_main-default text_color_inactive mt-4`}>
           Забыли пароль?
           <Link to="/forgot-password" className={pagesStyles.link}>
             Восстановить пароль

@@ -1,173 +1,233 @@
-.page{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 16px 8px;
+
 }
 .main {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 480px;
-    height: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 480px;
+  height: 430px;
 }
 .title {
-    margin: 0 auto;
+  margin: 0 auto;
+}
+.tab {
+  display: none;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-.form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.link {
+  text-decoration: none;
+  margin-left: 7px;
+  color: #4c4cff;
 }
-
-.link{
-    text-decoration: none;
-    margin-left: 7px;
-    color: #4C4CFF;
+.text {
+  color: #8585ad;
+  opacity: 0.4;
 }
-.text{
-    color: #8585AD;
-    opacity: 0.4;
+.buttonBar {
+  display: flex;
+  justify-content: end;
+  width: 100%;
 }
-.buttonBar{
-    display: flex;
-    justify-content: end;
-    width: 100%;
-}
-.ingredientMain{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.ingredientMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .notFoundSection {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 .notFoundTitle {
-    font-size: 170px;
-    margin: 0;
+  font-size: 170px;
+  margin: 0;
 }
-.input, .input div:not(input+div){
-    width: 100%;
+.input,
+.input div:not(input + div) {
+  width: 100%;
 }
-.feedContent{
-    max-width: 1240px;
+.feedContent {
+  max-width: 1240px;
+  display: grid;
+  grid-template-areas: "title title" "tabs tabs" "orders info";
+  grid-template-columns: 50% 50%;
+}
+.feedTitle {
+  grid-area: title;
+  margin: 40px 0 4px;
+  text-align: start;
+}
+
+.error {
+  margin-top: 30%;
+  text-align: center;
+  line-height: 2.5;
+}
+.profileError {
+  margin-top: 0;
+}
+
+.orders {
+  grid-area: orders;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+.info {
+  grid-area: info;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.table {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+.tableColumn {
+  width: 274px;
+}
+.list {
+  list-style-type: none;
+  margin: 24px 0 60px;
+  padding: 0;
+  align-self: start;
+  width: 100%;
+}
+.done {
+  color: #00cccc;
+}
+.item:first-of-type {
+  margin-top: 0;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 100px;
+  border: 2px solid #801ab2;
+  box-sizing: border-box;
+  padding: 2px;
+}
+
+.ingredientsList {
+  list-style-type: none;
+  margin: 24px 0 60px;
+  padding: 0;
+  align-self: start;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-width: 8px;
+  scrollbar-color: #8585ad;
+  max-height: 360px;
+}
+.price {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.myOrders {
+  overflow-y: auto;
+  width: 844px;
+  max-height: 100%;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
+}
+.mobileTitle{
+  display: none;
+}
+@media screen and (max-width: 991px) {
+  .tab {
     display: grid;
-    grid-template-areas: "title title""orders info";
-    grid-template-columns: repeat(2, 1fr);
-}
-.feedTitle{
-    grid-area: title;
-    margin: 40px 0 4px;
-    text-align: start;
-}
-
-.error{
-    margin-top: 30%;
-    text-align: center;
-    line-height: 2.5;
-}
-.profileError{
-    margin-top: 0;
-}
-
-.orders{
-    grid-area: orders;
-    max-width: 600px;
+    grid-template-columns: 1fr 1fr;
+    grid-area: tabs;
+  }
+  .inactive {
+    display: none;
+  }
+  .feedContent {
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    list-style-type: none;
-    padding: 0;
+  }
+  .info {
     margin: 0;
+  }
 }
-.info{
-    grid-area: info;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-}
-.table{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 16px;
-}
-.tableColumn{
-    width: 274px;
-}
-.list{
-    list-style-type: none;
-    margin: 24px 0 60px;
-    padding: 0;
-    align-self: start;
-    width: 100%;
-}
-.done{
-    color: #00CCCC;
-}
-.item:first-of-type{
-    margin-top: 0;
+@media screen and (max-width: 640px) {
+  .page{
+    align-items: baseline;
+  }
+  .tableColumn {
+    width: 140px;
+    margin-right: 35px;
+  }
+  .tableColumn:last-of-type {
+    margin-right: 0;
+  }
+  .formContainer{
+    margin: 0;
+  }
+  .centeredText{
+    text-align: center;
+  }
+  .mobileTitle{
+    display: block;
+  }
+  .myOrders{
+    margin: 0;
+  }
 }
 
-.ingredient{
-    display: flex;
-    align-items: center;
-    width: 100%;
-}
-.img{
-    width: 64px;
-    height: 64px;
-    object-fit: cover;
-    border-radius: 100px;
-    border: 2px solid #801AB2;
-    box-sizing: border-box;
-    padding: 2px;
-}
-/*.orderText{*/
-/*    align-self: start;*/
-/*}*/
-/*.orderTotalContainer{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    width: 100%;*/
-/*}*/
-.ingredientsList{
-    list-style-type: none;
-    margin: 24px 0 60px;
-    padding: 0;
-    align-self: start;
-    width: 100%;
-    overflow-y: auto;
-    scrollbar-width: 8px;
-    scrollbar-color: #8585AD;
-    max-height: 360px;
-}
-.price{
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-}
-.myOrders{
-    overflow-y: auto;
-    width: 844px;
-    max-height: 100%;
-    margin-bottom: 0;
-    margin-top: 0;
-    padding: 0;
+@media screen and (max-width: 414px) {
+  .tab div {
+    min-width: unset;
+  }
+  .orders {
+    overflow: unset;
+  }
+  .tableColumn {
+    margin-right: 24px;
+  }
+  .info {
+    margin: 0 auto;
+    max-width: calc(100% - 16px);
+  }
 }
