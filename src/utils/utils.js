@@ -1,5 +1,3 @@
-import { refreshCookie } from "./api.js";
-
 //vertical scroll
 const body = document.querySelector("body");
 function setElementHeight(el, bottomEl) {
@@ -41,7 +39,7 @@ export const getCurrentTab = () => {
 //email validation
 
 export function validateEmail(mail) {
-  return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail);
+  return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(mail);
 }
 
 // token
@@ -52,9 +50,7 @@ export function setCookie(name, value) {
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)"
+      "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)"
     )
   );
   if (matches) {

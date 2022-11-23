@@ -6,7 +6,6 @@ import {
   sendLogoutRequest,
   sendUserUpdate,
   sendRestorePasswordRequest,
-  refreshToken,
 } from "../../utils/api";
 import { setCookie, deleteCookie } from "../../utils/utils";
 
